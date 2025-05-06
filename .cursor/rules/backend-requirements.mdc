@@ -1,0 +1,80 @@
+
+✅ VR License Management MVP – Backend Requirements
+==================================================
+
+🔐 Auth (Supabase)
+------------------
+- Use Supabase Auth for employee login (email/password only)
+- Supabase JWT tokens should be verified in NestJS via a custom guard
+- Attach req.user from JWT payload to each request
+- Optional: Store user roles (e.g. admin, employee) in a separate Employee table
+
+👥 Roles
+--------
+Employee:
+- Can view available licenses
+- Can activate a license key
+- Can view license usage and total owed per vendor
+
+Vendor:
+- Can upload license keys (via dashboard, or API if extended)
+- Can view how many license keys are: Available, Activated, Canceled
+- Can view how much money the VR company owes them per month
+
+📦 Data Models (Prisma)
+-----------------------
+Vendor
+- id, name, contactEmail, createdAt, updatedAt
+
+Software
+- id, name, vendorId (FK), pricingModel (enum), pricePerUse, monthlyRate, createdAt, updatedAt
+
+LicenseKey
+- id, key (unique), status (enum: available, activated, canceled), vendorId, softwareId, activatedAt,
+  activatedById (FK), canceledAt, createdAt, updatedAt
+
+Employee
+- id, name, email (unique), role (enum: admin, employee), createdAt, updatedAt
+
+Activation
+- id, licenseKeyId (FK), employeeId (FK), vendorId, softwareId, activatedAt, headsetSerialNumber (optional), createdAt
+
+(Optional) MonthlyUsage
+- vendorId, softwareId, month, usageCount, totalOwed, calculatedAt
+
+📊 Key Features / API Endpoints
+-------------------------------
+🔐 Auth
+- POST /auth/login → handled by Supabase client (frontend)
+- Supabase JWTs must be validated by backend guard
+
+👨‍🔧 Employee Routes
+- GET /licenses/available → show grouped available licenses
+- POST /licenses/:id/activate → confirm + mark a license as activated
+- GET /vendors/owed → view total owed per vendor
+
+👨‍💻 Vendor Routes
+- POST /licenses/upload → upload license keys (CSV or JSON array)
+- GET /licenses/status-summary → counts of available / activated / canceled
+- GET /revenue/monthly → see expected monthly revenue based on usage
+
+🛡 Business Logic
+-----------------
+- A license key can only be activated if status is 'available'
+- Activating a key sets:
+  - status → 'activated'
+  - activatedAt → now
+  - activatedById → current employee
+- License keys must not be visible until activated (secure confirmation step)
+- Activated keys count toward vendor’s monthly owed total based on their pricingModel
+- Vendors can cancel keys (optional stretch goal)
+
+🧪 Environment / Setup
+-----------------------
+- NestJS + Prisma + PostgreSQL
+- Supabase Auth (external)
+- Local .env with:
+  - DATABASE_URL
+  - SUPABASE_URL
+  - SUPABASE_SERVICE_ROLE_KEY
+  - SUPABASE_JWT_SECRET

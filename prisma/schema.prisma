@@ -1,0 +1,130 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Vendor {
+  id             String         @id @default(uuid())
+  name           String
+  contactEmail   String
+  billingAddress String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  software       Software[]
+  licenseKeys    LicenseKey[]
+  activations    Activation[]
+  monthlyUsage   MonthlyUsage[]
+
+  @@index([createdAt])
+}
+
+model Software {
+  id           String         @id @default(uuid())
+  name         String
+  vendorId     String
+  pricingModel PricingModel
+  pricePerUse  Float?
+  monthlyRate  Float?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  vendor       Vendor         @relation(fields: [vendorId], references: [id])
+  licenseKeys  LicenseKey[]
+  activations  Activation[]
+  monthlyUsage MonthlyUsage[]
+
+  @@index([vendorId, createdAt, id])
+}
+
+model LicenseKey {
+  id            String        @id @default(uuid())
+  key           String        @unique
+  status        LicenseStatus
+  vendorId      String
+  softwareId    String
+  expiresAt     DateTime?
+  notes         String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  activatedAt   DateTime?
+  activatedById String?
+  activation    Activation?
+  vendor        Vendor        @relation(fields: [vendorId], references: [id])
+  software      Software      @relation(fields: [softwareId], references: [id])
+  activatedBy   Employee?     @relation(fields: [activatedById], references: [id])
+
+  @@index([vendorId, softwareId, createdAt, id])
+  @@index([activatedAt])
+}
+
+model Activation {
+  id                  String     @id @default(uuid())
+  licenseKeyId        String     @unique
+  activatedById       String
+  softwareId          String
+  vendorId            String
+  headsetSerialNumber String?
+  activatedAt         DateTime   @default(now())
+  createdAt           DateTime   @default(now())
+  licenseKey          LicenseKey @relation(fields: [licenseKeyId], references: [id])
+  activatedBy         Employee   @relation(fields: [activatedById], references: [id])
+  software            Software   @relation(fields: [softwareId], references: [id])
+  vendor              Vendor     @relation(fields: [vendorId], references: [id])
+
+  @@index([vendorId, activatedAt, id])
+}
+
+model Employee {
+  id           String       @id @default(uuid())
+  name         String
+  email        String       @unique
+  role         EmployeeRole
+  passwordHash String
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  licenseKeys  LicenseKey[]
+  activations  Activation[]
+
+  @@index([createdAt])
+}
+
+model MonthlyUsage {
+  id           String   @id @default(uuid())
+  vendorId     String
+  softwareId   String
+  month        DateTime
+  usageCount   Int
+  totalOwed    Float
+  calculatedAt DateTime @default(now())
+  vendor       Vendor   @relation(fields: [vendorId], references: [id])
+  software     Software @relation(fields: [softwareId], references: [id])
+
+  @@index([vendorId, softwareId, month])
+}
+
+enum PricingModel {
+  FLAT
+  PER_USE
+  MONTHLY_SUBSCRIPTION
+}
+
+enum LicenseStatus {
+  AVAILABLE
+  ACTIVATED
+  CANCELED
+}
+
+enum EmployeeRole {
+  EMPLOYEE
+  ADMIN
+}

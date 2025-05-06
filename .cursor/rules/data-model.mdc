@@ -1,0 +1,168 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+1. Vendor
+ts
+CopyEdit
+- id: UUID (PK)
+- name: string
+- contactEmail: string
+- billingAddress: string (optional)
+- createdAt: timestamp
+- updatedAt: timestamp
+2. Software
+ts
+CopyEdit
+Optimized Data Model for Cursor-Based Pagination
+------------------------------------------------
+
+1. Vendor
+---------
+- id: UUID (PK)
+- name: string
+- contactEmail: string
+- billingAddress: string (optional)
+- createdAt: timestamp (indexed, for cursor)
+- updatedAt: timestamp
+
+Indexes:
+- createdAt
+
+
+2. Software
+-----------
+- id: UUID (PK)
+- name: string
+- vendorId: UUID (FK → Vendor.id)
+- pricingModel: enum('flat', 'per_use', 'monthly_subscription')
+- pricePerUse: number (nullable)
+- monthlyRate: number (nullable)
+- createdAt: timestamp (indexed)
+- updatedAt: timestamp
+
+Indexes:
+- (vendorId, createdAt, id)
+
+
+3. LicenseKey
+-------------
+- id: UUID (PK)
+- key: string (unique)
+- status: enum('available', 'activated', 'canceled')
+- vendorId: UUID (FK → Vendor.id)
+- softwareId: UUID (FK → Software.id)
+- expiresAt: timestamp (optional)
+- notes: string (optional)
+- createdAt: timestamp (indexed)
+- updatedAt: timestamp
+- activatedAt: timestamp (nullable, indexed)
+- activatedById: UUID (FK → Employee.id, nullable)
+- activationId: UUID (FK → Activation.id, nullable)
+- canceledAt: timestamp (nullable)
+- canceledReason: string (nullable)
+
+Indexes:
+- (vendorId, softwareId, createdAt, id)
+- activatedAt
+
+
+4. Activation
+-------------
+- id: UUID (PK)
+- licenseKeyId: UUID (FK → LicenseKey.id)
+- activatedById: UUID (FK → Employee.id)
+- softwareId: UUID (FK → Software.id)
+- vendorId: UUID (FK → Vendor.id)
+- headsetSerialNumber: string (optional)
+- activatedAt: timestamp (indexed)
+- createdAt: timestamp (indexed)
+
+Indexes:
+- (vendorId, activatedAt, id)
+
+
+5. Employee
+-----------
+- id: UUID (PK)
+- name: string
+- email: string (unique)
+- role: enum('employee', 'admin')
+- passwordHash: string
+- createdAt: timestamp (indexed)
+- updatedAt: timestamp
+
+Indexes:
+- createdAt
+
+
+6. MonthlyUsage (Optional analytics table)
+------------------------------------------
+- id: UUID (PK)
+- vendorId: UUID (FK → Vendor.id)
+- softwareId: UUID (FK → Software.id)
+- month: date (e.g., '2025-05-01')
+- usageCount: number
+- totalOwed: number
+- calculatedAt: timestamp
+
+Indexes:
+- (vendorId, softwareId, month)
+
+- id: UUID (PK)
+- name: string
+- vendorId: UUID (FK → Vendor.id)
+- pricingModel: enum('flat', 'per_use', 'monthly_subscription')
+- pricePerUse: number (nullable)
+- monthlyRate: number (nullable)
+- createdAt: timestamp
+- updatedAt: timestamp
+3. LicenseKey
+ts
+CopyEdit
+- id: UUID (PK)
+- key: string (unique)
+- status: enum('available', 'activated', 'canceled')
+- vendorId: UUID (FK → Vendor.id)
+- softwareId: UUID (FK → Software.id)
+- expiresAt: timestamp (optional, for subscription logic)
+- notes: string (optional)
+- createdAt: timestamp
+- updatedAt: timestamp
+- activatedAt: timestamp (nullable, for quick access)
+- activatedById: UUID (FK → Employee.id, nullable)
+- activationId: UUID (FK → Activation.id, nullable)
+- canceledAt: timestamp (nullable)
+- canceledReason: string (nullable)
+4. Activation
+ts
+CopyEdit
+- id: UUID (PK)
+- licenseKeyId: UUID (FK → LicenseKey.id)
+- activatedById: UUID (FK → Employee.id)
+- softwareId: UUID (FK → Software.id)
+- vendorId: UUID (FK → Vendor.id)
+- headsetSerialNumber: string (optional)
+- activatedAt: timestamp
+- createdAt: timestamp
+5. Employee
+ts
+CopyEdit
+- id: UUID (PK)
+- name: string
+- email: string (unique)
+- role: enum('employee', 'admin')
+- passwordHash: string
+- createdAt: timestamp
+- updatedAt: timestamp
+6. MonthlyUsage (Optional but useful for vendor dashboard precomputation)
+ts
+CopyEdit
+- id: UUID (PK)
+- vendorId: UUID (FK → Vendor.id)
+- softwareId: UUID (FK → Software.id)
+- month: date (e.g., '2025-05-01')
+- usageCount: number
+- totalOwed: number
+- calculatedAt: timestamp
