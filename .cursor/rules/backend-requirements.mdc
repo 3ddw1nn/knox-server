@@ -1,80 +1,75 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+name: VR License Management Backend
+description: MVP backend requirements for a VR license management system using NestJS and Prisma with PostgreSQL
 
-✅ VR License Management MVP – Backend Requirements
-==================================================
+requirements:
+  auth:
+    description: Use Supabase for employee authentication.
+    method: email/password (managed by Supabase)
+    backend_verification:
+      type: JWT
+      method: Supabase JWT verification with NestJS
+      attach_user: true # Decoded Supabase user information will be attached to the request
+    notes: User identities are managed by Supabase. The local 'Employee' table stores application-specific roles and data, and should be linked to Supabase users (e.g., by Supabase User ID or email).
 
-🔐 Auth (Supabase)
-------------------
-- Use Supabase Auth for employee login (email/password only)
-- Supabase JWT tokens should be verified in NestJS via a custom guard
-- Attach req.user from JWT payload to each request
-- Optional: Store user roles (e.g. admin, employee) in a separate Employee table
+  roles:
+    Employee:
+      - View available licenses
+      - Activate a license key
+      - View license usage and total owed per vendor
+    Vendor:
+      - Upload license keys
+      - View license key status summary
+      - View monthly revenue owed
 
-👥 Roles
---------
-Employee:
-- Can view available licenses
-- Can activate a license key
-- Can view license usage and total owed per vendor
+  models:
+    Vendor:
+      fields: [id, name, contactEmail, createdAt, updatedAt]
+    Software:
+      fields: [id, name, vendorId (FK), pricingModel (enum), pricePerUse, monthlyRate, createdAt, updatedAt]
+    LicenseKey:
+      fields: [id, key (unique), status (available|activated|canceled), vendorId, softwareId, activatedAt, activatedById (FK), canceledAt, createdAt, updatedAt]
+    Employee:
+      fields: [id, name, email (unique), passwordHash, role (admin|employee), createdAt, updatedAt]
+    Activation:
+      fields: [id, licenseKeyId (FK), employeeId (FK), vendorId, softwareId, activatedAt, headsetSerialNumber (optional), createdAt]
+    MonthlyUsage (optional):
+      fields: [vendorId, softwareId, month, usageCount, totalOwed, calculatedAt]
 
-Vendor:
-- Can upload license keys (via dashboard, or API if extended)
-- Can view how many license keys are: Available, Activated, Canceled
-- Can view how much money the VR company owes them per month
+  endpoints:
+    auth:
+      - POST /auth/login: validate employee credentials, return JWT
+    employee:
+      - GET /licenses/available
+      - POST /licenses/:id/activate
+      - GET /vendors/owed
+    vendor:
+      - POST /licenses/upload
+      - GET /licenses/status-summary
+      - GET /revenue/monthly
 
-📦 Data Models (Prisma)
------------------------
-Vendor
-- id, name, contactEmail, createdAt, updatedAt
+  logic:
+    - License can only be activated if status is 'available'
+    - Activation sets:
+        - status → activated
+        - activatedAt → current timestamp
+        - activatedById → current employee
+    - License keys hidden until activated
+    - Activated licenses count toward vendor monthly total based on pricingModel
+    - Vendors may cancel keys (optional stretch goal)
 
-Software
-- id, name, vendorId (FK), pricingModel (enum), pricePerUse, monthlyRate, createdAt, updatedAt
+  tech_stack:
+    - NestJS
+    - Prisma
+    - PostgreSQL
 
-LicenseKey
-- id, key (unique), status (enum: available, activated, canceled), vendorId, softwareId, activatedAt,
-  activatedById (FK), canceledAt, createdAt, updatedAt
-
-Employee
-- id, name, email (unique), role (enum: admin, employee), createdAt, updatedAt
-
-Activation
-- id, licenseKeyId (FK), employeeId (FK), vendorId, softwareId, activatedAt, headsetSerialNumber (optional), createdAt
-
-(Optional) MonthlyUsage
-- vendorId, softwareId, month, usageCount, totalOwed, calculatedAt
-
-📊 Key Features / API Endpoints
--------------------------------
-🔐 Auth
-- POST /auth/login → handled by Supabase client (frontend)
-- Supabase JWTs must be validated by backend guard
-
-👨‍🔧 Employee Routes
-- GET /licenses/available → show grouped available licenses
-- POST /licenses/:id/activate → confirm + mark a license as activated
-- GET /vendors/owed → view total owed per vendor
-
-👨‍💻 Vendor Routes
-- POST /licenses/upload → upload license keys (CSV or JSON array)
-- GET /licenses/status-summary → counts of available / activated / canceled
-- GET /revenue/monthly → see expected monthly revenue based on usage
-
-🛡 Business Logic
------------------
-- A license key can only be activated if status is 'available'
-- Activating a key sets:
-  - status → 'activated'
-  - activatedAt → now
-  - activatedById → current employee
-- License keys must not be visible until activated (secure confirmation step)
-- Activated keys count toward vendor’s monthly owed total based on their pricingModel
-- Vendors can cancel keys (optional stretch goal)
-
-🧪 Environment / Setup
------------------------
-- NestJS + Prisma + PostgreSQL
-- Supabase Auth (external)
-- Local .env with:
-  - DATABASE_URL
-  - SUPABASE_URL
-  - SUPABASE_SERVICE_ROLE_KEY
-  - SUPABASE_JWT_SECRET
+  env:
+    required_vars:
+      - DATABASE_URL # For the primary application database (Prisma + PostgreSQL)
+      - SUPABASE_URL # Your Supabase project URL
+      - SUPABASE_ANON_KEY # Your Supabase project anon key
+      # SUPABASE_SERVICE_ROLE_KEY # May be needed if backend needs to perform admin actions on Supabase users

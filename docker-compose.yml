@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:15 # You can choose a specific version or use 'latest'
+    container_name: knox_postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: knox # Replace with your desired username
+      POSTGRES_PASSWORD: 2nefieuf0h2ofnlwih0phfi2ohbf2ioh2iohedco2b # Replace with your desired strong password
+      POSTGRES_DB: knox_dev_db # Replace with your desired database name
+    ports:
+      - '5432:5432' # Maps port 5432 on your machine to port 5432 in the container
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data # Persists data in ./pgdata directory on your host
+
+volumes:
+  pgdata:

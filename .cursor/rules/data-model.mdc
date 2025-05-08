@@ -86,7 +86,7 @@ Indexes:
 5. Employee
 -----------
 - id: UUID (PK)
-- name: string
+- name: string 
 - email: string (unique)
 - role: enum('employee', 'admin')
 - passwordHash: string
