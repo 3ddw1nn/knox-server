@@ -16,8 +16,9 @@ datasource db {
 
 model Vendor {
   id             String         @id @default(uuid())
+  supabaseUserId String?        @unique // Stores the Supabase User ID
   name           String
-  contactEmail   String
+  contactEmail   String         @unique // Assuming contactEmail should also be unique for vendors
   billingAddress String?
   createdAt      DateTime       @default(now()) @db.Timestamp(6)
   updatedAt      DateTime       @updatedAt @db.Timestamp(6)
@@ -27,6 +28,7 @@ model Vendor {
   monthlyUsage   MonthlyUsage[]
 
   @@index([createdAt])
+  @@index([supabaseUserId]) // Index for faster lookups by Supabase ID
 }
 
 model Software {
