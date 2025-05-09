@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from './prisma/prisma.module';
 // Import other feature modules here as they are created
 import { AuthModule } from './auth/auth.module';
-// import { UsersModule } from './users/users.module';
+import { UsersModule } from './users/users.module';
 // import { VendorsModule } from './vendors/vendors.module';
 // import { SoftwareModule } from './software/software.module';
 // import { LicensesModule } from './licenses/licenses.module';
@@ -13,7 +13,7 @@ import { AuthModule } from './auth/auth.module';
     ConfigModule.forRoot({ isGlobal: true }), // For environment variables
     PrismaModule,
     AuthModule,
-    // UsersModule,
+    UsersModule,
     // VendorsModule,
     // SoftwareModule,
     // LicensesModule,

@@ -1,0 +1,142 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Vendor {
+  id             String         @id @default(uuid())
+  supabaseUserId String?        @unique // Stores the Supabase User ID
+  name           String
+  contactEmail   String         @unique // Assuming contactEmail should also be unique for vendors
+  billingAddress String?
+  createdAt      DateTime       @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime       @updatedAt @db.Timestamp(6)
+  software       Software[]
+  licenseKeys    LicenseKey[]
+  activations    Activation[]
+  monthlyUsage   MonthlyUsage[]
+
+  @@index([createdAt])
+  @@index([supabaseUserId]) // Index for faster lookups by Supabase ID
+}
+
+model Software {
+  id           String         @id @default(uuid())
+  name         String
+  vendorId     String
+  pricingModel PricingModel
+  pricePerUse  Float?
+  monthlyRate  Float?
+  createdAt    DateTime       @default(now()) @db.Timestamp(6)
+  updatedAt    DateTime       @updatedAt @db.Timestamp(6)
+  vendor       Vendor         @relation(fields: [vendorId], references: [id])
+  licenseKeys  LicenseKey[]
+  activations  Activation[]
+  monthlyUsage MonthlyUsage[]
+
+  @@index([vendorId, createdAt, id])
+}
+
+model LicenseKey {
+  id             String        @id @default(uuid())
+  key            String        @unique
+  status         LicenseStatus @default(available)
+  vendorId       String
+  softwareId     String
+  expiresAt      DateTime?     @db.Timestamp(6)
+  notes          String?
+  createdAt      DateTime      @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime      @updatedAt @db.Timestamp(6)
+  activatedAt    DateTime?     @db.Timestamp(6)
+  activatedById  String?
+  canceledAt     DateTime?     @db.Timestamp(6)
+  canceledReason String?
+
+  vendor      Vendor      @relation(fields: [vendorId], references: [id])
+  software    Software    @relation(fields: [softwareId], references: [id])
+  activatedBy Employee?   @relation("ActivatedKeys", fields: [activatedById], references: [id])
+  activation  Activation?
+
+  @@index([vendorId, softwareId, createdAt, id])
+  @@index([activatedAt])
+}
+
+model Activation {
+  id                  String   @id @default(uuid())
+  licenseKeyId        String   @unique // Each activation is for one unique license key
+  activatedById       String
+  softwareId          String
+  vendorId            String
+  headsetSerialNumber String?
+  activatedAt         DateTime @default(now()) @db.Timestamp(6)
+  createdAt           DateTime @default(now()) @db.Timestamp(6) // Separate from activatedAt for record creation time
+
+  licenseKey  LicenseKey @relation(fields: [licenseKeyId], references: [id])
+  activatedBy Employee   @relation("PerformedActivations", fields: [activatedById], references: [id])
+  software    Software   @relation(fields: [softwareId], references: [id])
+  vendor      Vendor     @relation(fields: [vendorId], references: [id])
+
+  @@index([vendorId, activatedAt, id])
+  @@index([createdAt]) // Added based on data-model.mdc general indexing pattern
+}
+
+model Employee {
+  id                   String       @id @default(uuid())
+  supabaseUserId       String?      @unique // Stores the Supabase User ID, marked optional for now if existing employees don't have it
+  name                 String // For full_name
+  email                String       @unique // This should match the Supabase email
+  companyName          String? // New field for company name
+  role                 EmployeeRole @default(employee)
+  createdAt            DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt            DateTime     @updatedAt @db.Timestamp(6)
+  activatedKeys        LicenseKey[] @relation("ActivatedKeys")
+  performedActivations Activation[] @relation("PerformedActivations")
+
+  @@index([createdAt])
+  @@index([supabaseUserId]) // Index for faster lookups by Supabase ID
+}
+
+model MonthlyUsage {
+  id           String   @id @default(uuid())
+  vendorId     String
+  softwareId   String
+  month        DateTime @db.Date // Store as YYYY-MM-01
+  usageCount   Int
+  totalOwed    Float
+  calculatedAt DateTime @default(now()) @db.Timestamp(6)
+
+  vendor   Vendor   @relation(fields: [vendorId], references: [id])
+  software Software @relation(fields: [softwareId], references: [id])
+
+  @@unique([vendorId, softwareId, month]) // Ensure one record per software per month for a vendor
+  @@index([vendorId, softwareId, month])
+}
+
+enum PricingModel {
+  flat
+  per_use
+  monthly_subscription
+}
+
+enum LicenseStatus {
+  available
+  activated
+  canceled
+}
+
+enum EmployeeRole {
+  employee
+  admin
+  vendor
+}
