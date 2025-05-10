@@ -49,27 +49,27 @@ export type MonthlyUsage = $Result.DefaultSelection<Prisma.$MonthlyUsagePayload>
  */
 export namespace $Enums {
   export const PricingModel: {
-  flat: 'flat',
-  per_use: 'per_use',
-  monthly_subscription: 'monthly_subscription'
+  FLAT: 'FLAT',
+  PER_USE: 'PER_USE',
+  MONTHLY_SUBSCRIPTION: 'MONTHLY_SUBSCRIPTION'
 };
 
 export type PricingModel = (typeof PricingModel)[keyof typeof PricingModel]
 
 
 export const LicenseStatus: {
-  available: 'available',
-  activated: 'activated',
-  canceled: 'canceled'
+  AVAILABLE: 'AVAILABLE',
+  ACTIVATED: 'ACTIVATED',
+  CANCELED: 'CANCELED'
 };
 
 export type LicenseStatus = (typeof LicenseStatus)[keyof typeof LicenseStatus]
 
 
 export const EmployeeRole: {
-  employee: 'employee',
-  admin: 'admin',
-  vendor: 'vendor'
+  EMPLOYEE: 'EMPLOYEE',
+  ADMIN: 'ADMIN',
+  VENDOR: 'VENDOR'
 };
 
 export type EmployeeRole = (typeof EmployeeRole)[keyof typeof EmployeeRole]
@@ -1368,17 +1368,17 @@ export namespace Prisma {
    */
 
   export type VendorCountOutputType = {
-    software: number
-    licenseKeys: number
     activations: number
+    licenseKeys: number
     monthlyUsage: number
+    software: number
   }
 
   export type VendorCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    software?: boolean | VendorCountOutputTypeCountSoftwareArgs
-    licenseKeys?: boolean | VendorCountOutputTypeCountLicenseKeysArgs
     activations?: boolean | VendorCountOutputTypeCountActivationsArgs
+    licenseKeys?: boolean | VendorCountOutputTypeCountLicenseKeysArgs
     monthlyUsage?: boolean | VendorCountOutputTypeCountMonthlyUsageArgs
+    software?: boolean | VendorCountOutputTypeCountSoftwareArgs
   }
 
   // Custom InputTypes
@@ -1395,8 +1395,8 @@ export namespace Prisma {
   /**
    * VendorCountOutputType without action
    */
-  export type VendorCountOutputTypeCountSoftwareArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SoftwareWhereInput
+  export type VendorCountOutputTypeCountActivationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivationWhereInput
   }
 
   /**
@@ -1409,15 +1409,15 @@ export namespace Prisma {
   /**
    * VendorCountOutputType without action
    */
-  export type VendorCountOutputTypeCountActivationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ActivationWhereInput
+  export type VendorCountOutputTypeCountMonthlyUsageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MonthlyUsageWhereInput
   }
 
   /**
    * VendorCountOutputType without action
    */
-  export type VendorCountOutputTypeCountMonthlyUsageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MonthlyUsageWhereInput
+  export type VendorCountOutputTypeCountSoftwareArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SoftwareWhereInput
   }
 
 
@@ -1426,14 +1426,14 @@ export namespace Prisma {
    */
 
   export type SoftwareCountOutputType = {
-    licenseKeys: number
     activations: number
+    licenseKeys: number
     monthlyUsage: number
   }
 
   export type SoftwareCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    licenseKeys?: boolean | SoftwareCountOutputTypeCountLicenseKeysArgs
     activations?: boolean | SoftwareCountOutputTypeCountActivationsArgs
+    licenseKeys?: boolean | SoftwareCountOutputTypeCountLicenseKeysArgs
     monthlyUsage?: boolean | SoftwareCountOutputTypeCountMonthlyUsageArgs
   }
 
@@ -1451,15 +1451,15 @@ export namespace Prisma {
   /**
    * SoftwareCountOutputType without action
    */
-  export type SoftwareCountOutputTypeCountLicenseKeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: LicenseKeyWhereInput
+  export type SoftwareCountOutputTypeCountActivationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivationWhereInput
   }
 
   /**
    * SoftwareCountOutputType without action
    */
-  export type SoftwareCountOutputTypeCountActivationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ActivationWhereInput
+  export type SoftwareCountOutputTypeCountLicenseKeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LicenseKeyWhereInput
   }
 
   /**
@@ -1475,13 +1475,13 @@ export namespace Prisma {
    */
 
   export type EmployeeCountOutputType = {
-    activatedKeys: number
     performedActivations: number
+    activatedKeys: number
   }
 
   export type EmployeeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    activatedKeys?: boolean | EmployeeCountOutputTypeCountActivatedKeysArgs
     performedActivations?: boolean | EmployeeCountOutputTypeCountPerformedActivationsArgs
+    activatedKeys?: boolean | EmployeeCountOutputTypeCountActivatedKeysArgs
   }
 
   // Custom InputTypes
@@ -1498,15 +1498,15 @@ export namespace Prisma {
   /**
    * EmployeeCountOutputType without action
    */
-  export type EmployeeCountOutputTypeCountActivatedKeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: LicenseKeyWhereInput
+  export type EmployeeCountOutputTypeCountPerformedActivationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivationWhereInput
   }
 
   /**
    * EmployeeCountOutputType without action
    */
-  export type EmployeeCountOutputTypeCountPerformedActivationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ActivationWhereInput
+  export type EmployeeCountOutputTypeCountActivatedKeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LicenseKeyWhereInput
   }
 
 
@@ -1526,64 +1526,64 @@ export namespace Prisma {
 
   export type VendorMinAggregateOutputType = {
     id: string | null
-    supabaseUserId: string | null
     name: string | null
     contactEmail: string | null
     billingAddress: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    supabaseUserId: string | null
   }
 
   export type VendorMaxAggregateOutputType = {
     id: string | null
-    supabaseUserId: string | null
     name: string | null
     contactEmail: string | null
     billingAddress: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    supabaseUserId: string | null
   }
 
   export type VendorCountAggregateOutputType = {
     id: number
-    supabaseUserId: number
     name: number
     contactEmail: number
     billingAddress: number
     createdAt: number
     updatedAt: number
+    supabaseUserId: number
     _all: number
   }
 
 
   export type VendorMinAggregateInputType = {
     id?: true
-    supabaseUserId?: true
     name?: true
     contactEmail?: true
     billingAddress?: true
     createdAt?: true
     updatedAt?: true
+    supabaseUserId?: true
   }
 
   export type VendorMaxAggregateInputType = {
     id?: true
-    supabaseUserId?: true
     name?: true
     contactEmail?: true
     billingAddress?: true
     createdAt?: true
     updatedAt?: true
+    supabaseUserId?: true
   }
 
   export type VendorCountAggregateInputType = {
     id?: true
-    supabaseUserId?: true
     name?: true
     contactEmail?: true
     billingAddress?: true
     createdAt?: true
     updatedAt?: true
+    supabaseUserId?: true
     _all?: true
   }
 
@@ -1661,12 +1661,12 @@ export namespace Prisma {
 
   export type VendorGroupByOutputType = {
     id: string
-    supabaseUserId: string | null
     name: string
     contactEmail: string
     billingAddress: string | null
     createdAt: Date
     updatedAt: Date
+    supabaseUserId: string | null
     _count: VendorCountAggregateOutputType | null
     _min: VendorMinAggregateOutputType | null
     _max: VendorMaxAggregateOutputType | null
@@ -1688,55 +1688,55 @@ export namespace Prisma {
 
   export type VendorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    supabaseUserId?: boolean
     name?: boolean
     contactEmail?: boolean
     billingAddress?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    software?: boolean | Vendor$softwareArgs<ExtArgs>
-    licenseKeys?: boolean | Vendor$licenseKeysArgs<ExtArgs>
+    supabaseUserId?: boolean
     activations?: boolean | Vendor$activationsArgs<ExtArgs>
+    licenseKeys?: boolean | Vendor$licenseKeysArgs<ExtArgs>
     monthlyUsage?: boolean | Vendor$monthlyUsageArgs<ExtArgs>
+    software?: boolean | Vendor$softwareArgs<ExtArgs>
     _count?: boolean | VendorCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["vendor"]>
 
   export type VendorSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    supabaseUserId?: boolean
     name?: boolean
     contactEmail?: boolean
     billingAddress?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    supabaseUserId?: boolean
   }, ExtArgs["result"]["vendor"]>
 
   export type VendorSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    supabaseUserId?: boolean
     name?: boolean
     contactEmail?: boolean
     billingAddress?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    supabaseUserId?: boolean
   }, ExtArgs["result"]["vendor"]>
 
   export type VendorSelectScalar = {
     id?: boolean
-    supabaseUserId?: boolean
     name?: boolean
     contactEmail?: boolean
     billingAddress?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    supabaseUserId?: boolean
   }
 
-  export type VendorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "supabaseUserId" | "name" | "contactEmail" | "billingAddress" | "createdAt" | "updatedAt", ExtArgs["result"]["vendor"]>
+  export type VendorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "contactEmail" | "billingAddress" | "createdAt" | "updatedAt" | "supabaseUserId", ExtArgs["result"]["vendor"]>
   export type VendorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    software?: boolean | Vendor$softwareArgs<ExtArgs>
-    licenseKeys?: boolean | Vendor$licenseKeysArgs<ExtArgs>
     activations?: boolean | Vendor$activationsArgs<ExtArgs>
+    licenseKeys?: boolean | Vendor$licenseKeysArgs<ExtArgs>
     monthlyUsage?: boolean | Vendor$monthlyUsageArgs<ExtArgs>
+    software?: boolean | Vendor$softwareArgs<ExtArgs>
     _count?: boolean | VendorCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type VendorIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1745,19 +1745,19 @@ export namespace Prisma {
   export type $VendorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Vendor"
     objects: {
-      software: Prisma.$SoftwarePayload<ExtArgs>[]
-      licenseKeys: Prisma.$LicenseKeyPayload<ExtArgs>[]
       activations: Prisma.$ActivationPayload<ExtArgs>[]
+      licenseKeys: Prisma.$LicenseKeyPayload<ExtArgs>[]
       monthlyUsage: Prisma.$MonthlyUsagePayload<ExtArgs>[]
+      software: Prisma.$SoftwarePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      supabaseUserId: string | null
       name: string
       contactEmail: string
       billingAddress: string | null
       createdAt: Date
       updatedAt: Date
+      supabaseUserId: string | null
     }, ExtArgs["result"]["vendor"]>
     composites: {}
   }
@@ -2152,10 +2152,10 @@ export namespace Prisma {
    */
   export interface Prisma__VendorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    software<T extends Vendor$softwareArgs<ExtArgs> = {}>(args?: Subset<T, Vendor$softwareArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SoftwarePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    licenseKeys<T extends Vendor$licenseKeysArgs<ExtArgs> = {}>(args?: Subset<T, Vendor$licenseKeysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LicenseKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     activations<T extends Vendor$activationsArgs<ExtArgs> = {}>(args?: Subset<T, Vendor$activationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    licenseKeys<T extends Vendor$licenseKeysArgs<ExtArgs> = {}>(args?: Subset<T, Vendor$licenseKeysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LicenseKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     monthlyUsage<T extends Vendor$monthlyUsageArgs<ExtArgs> = {}>(args?: Subset<T, Vendor$monthlyUsageArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MonthlyUsagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    software<T extends Vendor$softwareArgs<ExtArgs> = {}>(args?: Subset<T, Vendor$softwareArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SoftwarePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2186,12 +2186,12 @@ export namespace Prisma {
    */
   interface VendorFieldRefs {
     readonly id: FieldRef<"Vendor", 'String'>
-    readonly supabaseUserId: FieldRef<"Vendor", 'String'>
     readonly name: FieldRef<"Vendor", 'String'>
     readonly contactEmail: FieldRef<"Vendor", 'String'>
     readonly billingAddress: FieldRef<"Vendor", 'String'>
     readonly createdAt: FieldRef<"Vendor", 'DateTime'>
     readonly updatedAt: FieldRef<"Vendor", 'DateTime'>
+    readonly supabaseUserId: FieldRef<"Vendor", 'String'>
   }
     
 
@@ -2580,27 +2580,27 @@ export namespace Prisma {
   }
 
   /**
-   * Vendor.software
+   * Vendor.activations
    */
-  export type Vendor$softwareArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Vendor$activationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Software
+     * Select specific fields to fetch from the Activation
      */
-    select?: SoftwareSelect<ExtArgs> | null
+    select?: ActivationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Software
+     * Omit specific fields from the Activation
      */
-    omit?: SoftwareOmit<ExtArgs> | null
+    omit?: ActivationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SoftwareInclude<ExtArgs> | null
-    where?: SoftwareWhereInput
-    orderBy?: SoftwareOrderByWithRelationInput | SoftwareOrderByWithRelationInput[]
-    cursor?: SoftwareWhereUniqueInput
+    include?: ActivationInclude<ExtArgs> | null
+    where?: ActivationWhereInput
+    orderBy?: ActivationOrderByWithRelationInput | ActivationOrderByWithRelationInput[]
+    cursor?: ActivationWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: SoftwareScalarFieldEnum | SoftwareScalarFieldEnum[]
+    distinct?: ActivationScalarFieldEnum | ActivationScalarFieldEnum[]
   }
 
   /**
@@ -2628,30 +2628,6 @@ export namespace Prisma {
   }
 
   /**
-   * Vendor.activations
-   */
-  export type Vendor$activationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Activation
-     */
-    select?: ActivationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Activation
-     */
-    omit?: ActivationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ActivationInclude<ExtArgs> | null
-    where?: ActivationWhereInput
-    orderBy?: ActivationOrderByWithRelationInput | ActivationOrderByWithRelationInput[]
-    cursor?: ActivationWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ActivationScalarFieldEnum | ActivationScalarFieldEnum[]
-  }
-
-  /**
    * Vendor.monthlyUsage
    */
   export type Vendor$monthlyUsageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2673,6 +2649,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MonthlyUsageScalarFieldEnum | MonthlyUsageScalarFieldEnum[]
+  }
+
+  /**
+   * Vendor.software
+   */
+  export type Vendor$softwareArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Software
+     */
+    select?: SoftwareSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Software
+     */
+    omit?: SoftwareOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SoftwareInclude<ExtArgs> | null
+    where?: SoftwareWhereInput
+    orderBy?: SoftwareOrderByWithRelationInput | SoftwareOrderByWithRelationInput[]
+    cursor?: SoftwareWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SoftwareScalarFieldEnum | SoftwareScalarFieldEnum[]
   }
 
   /**
@@ -2920,10 +2920,10 @@ export namespace Prisma {
     monthlyRate?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    vendor?: boolean | VendorDefaultArgs<ExtArgs>
-    licenseKeys?: boolean | Software$licenseKeysArgs<ExtArgs>
     activations?: boolean | Software$activationsArgs<ExtArgs>
+    licenseKeys?: boolean | Software$licenseKeysArgs<ExtArgs>
     monthlyUsage?: boolean | Software$monthlyUsageArgs<ExtArgs>
+    vendor?: boolean | VendorDefaultArgs<ExtArgs>
     _count?: boolean | SoftwareCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["software"]>
 
@@ -2964,10 +2964,10 @@ export namespace Prisma {
 
   export type SoftwareOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "vendorId" | "pricingModel" | "pricePerUse" | "monthlyRate" | "createdAt" | "updatedAt", ExtArgs["result"]["software"]>
   export type SoftwareInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    vendor?: boolean | VendorDefaultArgs<ExtArgs>
-    licenseKeys?: boolean | Software$licenseKeysArgs<ExtArgs>
     activations?: boolean | Software$activationsArgs<ExtArgs>
+    licenseKeys?: boolean | Software$licenseKeysArgs<ExtArgs>
     monthlyUsage?: boolean | Software$monthlyUsageArgs<ExtArgs>
+    vendor?: boolean | VendorDefaultArgs<ExtArgs>
     _count?: boolean | SoftwareCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SoftwareIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2980,10 +2980,10 @@ export namespace Prisma {
   export type $SoftwarePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Software"
     objects: {
-      vendor: Prisma.$VendorPayload<ExtArgs>
-      licenseKeys: Prisma.$LicenseKeyPayload<ExtArgs>[]
       activations: Prisma.$ActivationPayload<ExtArgs>[]
+      licenseKeys: Prisma.$LicenseKeyPayload<ExtArgs>[]
       monthlyUsage: Prisma.$MonthlyUsagePayload<ExtArgs>[]
+      vendor: Prisma.$VendorPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3388,10 +3388,10 @@ export namespace Prisma {
    */
   export interface Prisma__SoftwareClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    vendor<T extends VendorDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VendorDefaultArgs<ExtArgs>>): Prisma__VendorClient<$Result.GetResult<Prisma.$VendorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    licenseKeys<T extends Software$licenseKeysArgs<ExtArgs> = {}>(args?: Subset<T, Software$licenseKeysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LicenseKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     activations<T extends Software$activationsArgs<ExtArgs> = {}>(args?: Subset<T, Software$activationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    licenseKeys<T extends Software$licenseKeysArgs<ExtArgs> = {}>(args?: Subset<T, Software$licenseKeysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LicenseKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     monthlyUsage<T extends Software$monthlyUsageArgs<ExtArgs> = {}>(args?: Subset<T, Software$monthlyUsageArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MonthlyUsagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    vendor<T extends VendorDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VendorDefaultArgs<ExtArgs>>): Prisma__VendorClient<$Result.GetResult<Prisma.$VendorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3825,30 +3825,6 @@ export namespace Prisma {
   }
 
   /**
-   * Software.licenseKeys
-   */
-  export type Software$licenseKeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LicenseKey
-     */
-    select?: LicenseKeySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LicenseKey
-     */
-    omit?: LicenseKeyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LicenseKeyInclude<ExtArgs> | null
-    where?: LicenseKeyWhereInput
-    orderBy?: LicenseKeyOrderByWithRelationInput | LicenseKeyOrderByWithRelationInput[]
-    cursor?: LicenseKeyWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: LicenseKeyScalarFieldEnum | LicenseKeyScalarFieldEnum[]
-  }
-
-  /**
    * Software.activations
    */
   export type Software$activationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3870,6 +3846,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ActivationScalarFieldEnum | ActivationScalarFieldEnum[]
+  }
+
+  /**
+   * Software.licenseKeys
+   */
+  export type Software$licenseKeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LicenseKey
+     */
+    select?: LicenseKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LicenseKey
+     */
+    omit?: LicenseKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LicenseKeyInclude<ExtArgs> | null
+    where?: LicenseKeyWhereInput
+    orderBy?: LicenseKeyOrderByWithRelationInput | LicenseKeyOrderByWithRelationInput[]
+    cursor?: LicenseKeyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LicenseKeyScalarFieldEnum | LicenseKeyScalarFieldEnum[]
   }
 
   /**
@@ -4143,10 +4143,10 @@ export namespace Prisma {
     activatedById?: boolean
     canceledAt?: boolean
     canceledReason?: boolean
-    vendor?: boolean | VendorDefaultArgs<ExtArgs>
-    software?: boolean | SoftwareDefaultArgs<ExtArgs>
-    activatedBy?: boolean | LicenseKey$activatedByArgs<ExtArgs>
     activation?: boolean | LicenseKey$activationArgs<ExtArgs>
+    activatedBy?: boolean | LicenseKey$activatedByArgs<ExtArgs>
+    software?: boolean | SoftwareDefaultArgs<ExtArgs>
+    vendor?: boolean | VendorDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["licenseKey"]>
 
   export type LicenseKeySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4163,9 +4163,9 @@ export namespace Prisma {
     activatedById?: boolean
     canceledAt?: boolean
     canceledReason?: boolean
-    vendor?: boolean | VendorDefaultArgs<ExtArgs>
-    software?: boolean | SoftwareDefaultArgs<ExtArgs>
     activatedBy?: boolean | LicenseKey$activatedByArgs<ExtArgs>
+    software?: boolean | SoftwareDefaultArgs<ExtArgs>
+    vendor?: boolean | VendorDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["licenseKey"]>
 
   export type LicenseKeySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4182,9 +4182,9 @@ export namespace Prisma {
     activatedById?: boolean
     canceledAt?: boolean
     canceledReason?: boolean
-    vendor?: boolean | VendorDefaultArgs<ExtArgs>
-    software?: boolean | SoftwareDefaultArgs<ExtArgs>
     activatedBy?: boolean | LicenseKey$activatedByArgs<ExtArgs>
+    software?: boolean | SoftwareDefaultArgs<ExtArgs>
+    vendor?: boolean | VendorDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["licenseKey"]>
 
   export type LicenseKeySelectScalar = {
@@ -4205,29 +4205,29 @@ export namespace Prisma {
 
   export type LicenseKeyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "key" | "status" | "vendorId" | "softwareId" | "expiresAt" | "notes" | "createdAt" | "updatedAt" | "activatedAt" | "activatedById" | "canceledAt" | "canceledReason", ExtArgs["result"]["licenseKey"]>
   export type LicenseKeyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    vendor?: boolean | VendorDefaultArgs<ExtArgs>
-    software?: boolean | SoftwareDefaultArgs<ExtArgs>
-    activatedBy?: boolean | LicenseKey$activatedByArgs<ExtArgs>
     activation?: boolean | LicenseKey$activationArgs<ExtArgs>
+    activatedBy?: boolean | LicenseKey$activatedByArgs<ExtArgs>
+    software?: boolean | SoftwareDefaultArgs<ExtArgs>
+    vendor?: boolean | VendorDefaultArgs<ExtArgs>
   }
   export type LicenseKeyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    vendor?: boolean | VendorDefaultArgs<ExtArgs>
-    software?: boolean | SoftwareDefaultArgs<ExtArgs>
     activatedBy?: boolean | LicenseKey$activatedByArgs<ExtArgs>
+    software?: boolean | SoftwareDefaultArgs<ExtArgs>
+    vendor?: boolean | VendorDefaultArgs<ExtArgs>
   }
   export type LicenseKeyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    vendor?: boolean | VendorDefaultArgs<ExtArgs>
-    software?: boolean | SoftwareDefaultArgs<ExtArgs>
     activatedBy?: boolean | LicenseKey$activatedByArgs<ExtArgs>
+    software?: boolean | SoftwareDefaultArgs<ExtArgs>
+    vendor?: boolean | VendorDefaultArgs<ExtArgs>
   }
 
   export type $LicenseKeyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "LicenseKey"
     objects: {
-      vendor: Prisma.$VendorPayload<ExtArgs>
-      software: Prisma.$SoftwarePayload<ExtArgs>
-      activatedBy: Prisma.$EmployeePayload<ExtArgs> | null
       activation: Prisma.$ActivationPayload<ExtArgs> | null
+      activatedBy: Prisma.$EmployeePayload<ExtArgs> | null
+      software: Prisma.$SoftwarePayload<ExtArgs>
+      vendor: Prisma.$VendorPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4637,10 +4637,10 @@ export namespace Prisma {
    */
   export interface Prisma__LicenseKeyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    vendor<T extends VendorDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VendorDefaultArgs<ExtArgs>>): Prisma__VendorClient<$Result.GetResult<Prisma.$VendorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    software<T extends SoftwareDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SoftwareDefaultArgs<ExtArgs>>): Prisma__SoftwareClient<$Result.GetResult<Prisma.$SoftwarePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    activatedBy<T extends LicenseKey$activatedByArgs<ExtArgs> = {}>(args?: Subset<T, LicenseKey$activatedByArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     activation<T extends LicenseKey$activationArgs<ExtArgs> = {}>(args?: Subset<T, LicenseKey$activationArgs<ExtArgs>>): Prisma__ActivationClient<$Result.GetResult<Prisma.$ActivationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    activatedBy<T extends LicenseKey$activatedByArgs<ExtArgs> = {}>(args?: Subset<T, LicenseKey$activatedByArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    software<T extends SoftwareDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SoftwareDefaultArgs<ExtArgs>>): Prisma__SoftwareClient<$Result.GetResult<Prisma.$SoftwarePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    vendor<T extends VendorDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VendorDefaultArgs<ExtArgs>>): Prisma__VendorClient<$Result.GetResult<Prisma.$VendorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5079,25 +5079,6 @@ export namespace Prisma {
   }
 
   /**
-   * LicenseKey.activatedBy
-   */
-  export type LicenseKey$activatedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Employee
-     */
-    select?: EmployeeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Employee
-     */
-    omit?: EmployeeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmployeeInclude<ExtArgs> | null
-    where?: EmployeeWhereInput
-  }
-
-  /**
    * LicenseKey.activation
    */
   export type LicenseKey$activationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5114,6 +5095,25 @@ export namespace Prisma {
      */
     include?: ActivationInclude<ExtArgs> | null
     where?: ActivationWhereInput
+  }
+
+  /**
+   * LicenseKey.activatedBy
+   */
+  export type LicenseKey$activatedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    where?: EmployeeWhereInput
   }
 
   /**
@@ -5323,8 +5323,8 @@ export namespace Prisma {
     headsetSerialNumber?: boolean
     activatedAt?: boolean
     createdAt?: boolean
-    licenseKey?: boolean | LicenseKeyDefaultArgs<ExtArgs>
     activatedBy?: boolean | EmployeeDefaultArgs<ExtArgs>
+    licenseKey?: boolean | LicenseKeyDefaultArgs<ExtArgs>
     software?: boolean | SoftwareDefaultArgs<ExtArgs>
     vendor?: boolean | VendorDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["activation"]>
@@ -5338,8 +5338,8 @@ export namespace Prisma {
     headsetSerialNumber?: boolean
     activatedAt?: boolean
     createdAt?: boolean
-    licenseKey?: boolean | LicenseKeyDefaultArgs<ExtArgs>
     activatedBy?: boolean | EmployeeDefaultArgs<ExtArgs>
+    licenseKey?: boolean | LicenseKeyDefaultArgs<ExtArgs>
     software?: boolean | SoftwareDefaultArgs<ExtArgs>
     vendor?: boolean | VendorDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["activation"]>
@@ -5353,8 +5353,8 @@ export namespace Prisma {
     headsetSerialNumber?: boolean
     activatedAt?: boolean
     createdAt?: boolean
-    licenseKey?: boolean | LicenseKeyDefaultArgs<ExtArgs>
     activatedBy?: boolean | EmployeeDefaultArgs<ExtArgs>
+    licenseKey?: boolean | LicenseKeyDefaultArgs<ExtArgs>
     software?: boolean | SoftwareDefaultArgs<ExtArgs>
     vendor?: boolean | VendorDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["activation"]>
@@ -5372,20 +5372,20 @@ export namespace Prisma {
 
   export type ActivationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "licenseKeyId" | "activatedById" | "softwareId" | "vendorId" | "headsetSerialNumber" | "activatedAt" | "createdAt", ExtArgs["result"]["activation"]>
   export type ActivationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    licenseKey?: boolean | LicenseKeyDefaultArgs<ExtArgs>
     activatedBy?: boolean | EmployeeDefaultArgs<ExtArgs>
+    licenseKey?: boolean | LicenseKeyDefaultArgs<ExtArgs>
     software?: boolean | SoftwareDefaultArgs<ExtArgs>
     vendor?: boolean | VendorDefaultArgs<ExtArgs>
   }
   export type ActivationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    licenseKey?: boolean | LicenseKeyDefaultArgs<ExtArgs>
     activatedBy?: boolean | EmployeeDefaultArgs<ExtArgs>
+    licenseKey?: boolean | LicenseKeyDefaultArgs<ExtArgs>
     software?: boolean | SoftwareDefaultArgs<ExtArgs>
     vendor?: boolean | VendorDefaultArgs<ExtArgs>
   }
   export type ActivationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    licenseKey?: boolean | LicenseKeyDefaultArgs<ExtArgs>
     activatedBy?: boolean | EmployeeDefaultArgs<ExtArgs>
+    licenseKey?: boolean | LicenseKeyDefaultArgs<ExtArgs>
     software?: boolean | SoftwareDefaultArgs<ExtArgs>
     vendor?: boolean | VendorDefaultArgs<ExtArgs>
   }
@@ -5393,8 +5393,8 @@ export namespace Prisma {
   export type $ActivationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Activation"
     objects: {
-      licenseKey: Prisma.$LicenseKeyPayload<ExtArgs>
       activatedBy: Prisma.$EmployeePayload<ExtArgs>
+      licenseKey: Prisma.$LicenseKeyPayload<ExtArgs>
       software: Prisma.$SoftwarePayload<ExtArgs>
       vendor: Prisma.$VendorPayload<ExtArgs>
     }
@@ -5801,8 +5801,8 @@ export namespace Prisma {
    */
   export interface Prisma__ActivationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    licenseKey<T extends LicenseKeyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LicenseKeyDefaultArgs<ExtArgs>>): Prisma__LicenseKeyClient<$Result.GetResult<Prisma.$LicenseKeyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     activatedBy<T extends EmployeeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmployeeDefaultArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    licenseKey<T extends LicenseKeyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LicenseKeyDefaultArgs<ExtArgs>>): Prisma__LicenseKeyClient<$Result.GetResult<Prisma.$LicenseKeyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     software<T extends SoftwareDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SoftwareDefaultArgs<ExtArgs>>): Prisma__SoftwareClient<$Result.GetResult<Prisma.$SoftwarePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     vendor<T extends VendorDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VendorDefaultArgs<ExtArgs>>): Prisma__VendorClient<$Result.GetResult<Prisma.$VendorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
@@ -6268,70 +6268,70 @@ export namespace Prisma {
 
   export type EmployeeMinAggregateOutputType = {
     id: string | null
-    supabaseUserId: string | null
     name: string | null
     email: string | null
-    companyName: string | null
     role: $Enums.EmployeeRole | null
     createdAt: Date | null
     updatedAt: Date | null
+    companyName: string | null
+    supabaseUserId: string | null
   }
 
   export type EmployeeMaxAggregateOutputType = {
     id: string | null
-    supabaseUserId: string | null
     name: string | null
     email: string | null
-    companyName: string | null
     role: $Enums.EmployeeRole | null
     createdAt: Date | null
     updatedAt: Date | null
+    companyName: string | null
+    supabaseUserId: string | null
   }
 
   export type EmployeeCountAggregateOutputType = {
     id: number
-    supabaseUserId: number
     name: number
     email: number
-    companyName: number
     role: number
     createdAt: number
     updatedAt: number
+    companyName: number
+    supabaseUserId: number
     _all: number
   }
 
 
   export type EmployeeMinAggregateInputType = {
     id?: true
-    supabaseUserId?: true
     name?: true
     email?: true
-    companyName?: true
     role?: true
     createdAt?: true
     updatedAt?: true
+    companyName?: true
+    supabaseUserId?: true
   }
 
   export type EmployeeMaxAggregateInputType = {
     id?: true
-    supabaseUserId?: true
     name?: true
     email?: true
-    companyName?: true
     role?: true
     createdAt?: true
     updatedAt?: true
+    companyName?: true
+    supabaseUserId?: true
   }
 
   export type EmployeeCountAggregateInputType = {
     id?: true
-    supabaseUserId?: true
     name?: true
     email?: true
-    companyName?: true
     role?: true
     createdAt?: true
     updatedAt?: true
+    companyName?: true
+    supabaseUserId?: true
     _all?: true
   }
 
@@ -6409,13 +6409,13 @@ export namespace Prisma {
 
   export type EmployeeGroupByOutputType = {
     id: string
-    supabaseUserId: string | null
     name: string
     email: string
-    companyName: string | null
     role: $Enums.EmployeeRole
     createdAt: Date
     updatedAt: Date
+    companyName: string | null
+    supabaseUserId: string | null
     _count: EmployeeCountAggregateOutputType | null
     _min: EmployeeMinAggregateOutputType | null
     _max: EmployeeMaxAggregateOutputType | null
@@ -6437,55 +6437,55 @@ export namespace Prisma {
 
   export type EmployeeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    supabaseUserId?: boolean
     name?: boolean
     email?: boolean
-    companyName?: boolean
     role?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    activatedKeys?: boolean | Employee$activatedKeysArgs<ExtArgs>
+    companyName?: boolean
+    supabaseUserId?: boolean
     performedActivations?: boolean | Employee$performedActivationsArgs<ExtArgs>
+    activatedKeys?: boolean | Employee$activatedKeysArgs<ExtArgs>
     _count?: boolean | EmployeeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["employee"]>
 
   export type EmployeeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    supabaseUserId?: boolean
     name?: boolean
     email?: boolean
-    companyName?: boolean
     role?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    companyName?: boolean
+    supabaseUserId?: boolean
   }, ExtArgs["result"]["employee"]>
 
   export type EmployeeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    supabaseUserId?: boolean
     name?: boolean
     email?: boolean
-    companyName?: boolean
     role?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    companyName?: boolean
+    supabaseUserId?: boolean
   }, ExtArgs["result"]["employee"]>
 
   export type EmployeeSelectScalar = {
     id?: boolean
-    supabaseUserId?: boolean
     name?: boolean
     email?: boolean
-    companyName?: boolean
     role?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    companyName?: boolean
+    supabaseUserId?: boolean
   }
 
-  export type EmployeeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "supabaseUserId" | "name" | "email" | "companyName" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["employee"]>
+  export type EmployeeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "role" | "createdAt" | "updatedAt" | "companyName" | "supabaseUserId", ExtArgs["result"]["employee"]>
   export type EmployeeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    activatedKeys?: boolean | Employee$activatedKeysArgs<ExtArgs>
     performedActivations?: boolean | Employee$performedActivationsArgs<ExtArgs>
+    activatedKeys?: boolean | Employee$activatedKeysArgs<ExtArgs>
     _count?: boolean | EmployeeCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type EmployeeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -6494,18 +6494,18 @@ export namespace Prisma {
   export type $EmployeePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Employee"
     objects: {
-      activatedKeys: Prisma.$LicenseKeyPayload<ExtArgs>[]
       performedActivations: Prisma.$ActivationPayload<ExtArgs>[]
+      activatedKeys: Prisma.$LicenseKeyPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      supabaseUserId: string | null
       name: string
       email: string
-      companyName: string | null
       role: $Enums.EmployeeRole
       createdAt: Date
       updatedAt: Date
+      companyName: string | null
+      supabaseUserId: string | null
     }, ExtArgs["result"]["employee"]>
     composites: {}
   }
@@ -6900,8 +6900,8 @@ export namespace Prisma {
    */
   export interface Prisma__EmployeeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    activatedKeys<T extends Employee$activatedKeysArgs<ExtArgs> = {}>(args?: Subset<T, Employee$activatedKeysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LicenseKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     performedActivations<T extends Employee$performedActivationsArgs<ExtArgs> = {}>(args?: Subset<T, Employee$performedActivationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    activatedKeys<T extends Employee$activatedKeysArgs<ExtArgs> = {}>(args?: Subset<T, Employee$activatedKeysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LicenseKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6932,13 +6932,13 @@ export namespace Prisma {
    */
   interface EmployeeFieldRefs {
     readonly id: FieldRef<"Employee", 'String'>
-    readonly supabaseUserId: FieldRef<"Employee", 'String'>
     readonly name: FieldRef<"Employee", 'String'>
     readonly email: FieldRef<"Employee", 'String'>
-    readonly companyName: FieldRef<"Employee", 'String'>
     readonly role: FieldRef<"Employee", 'EmployeeRole'>
     readonly createdAt: FieldRef<"Employee", 'DateTime'>
     readonly updatedAt: FieldRef<"Employee", 'DateTime'>
+    readonly companyName: FieldRef<"Employee", 'String'>
+    readonly supabaseUserId: FieldRef<"Employee", 'String'>
   }
     
 
@@ -7327,30 +7327,6 @@ export namespace Prisma {
   }
 
   /**
-   * Employee.activatedKeys
-   */
-  export type Employee$activatedKeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LicenseKey
-     */
-    select?: LicenseKeySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LicenseKey
-     */
-    omit?: LicenseKeyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LicenseKeyInclude<ExtArgs> | null
-    where?: LicenseKeyWhereInput
-    orderBy?: LicenseKeyOrderByWithRelationInput | LicenseKeyOrderByWithRelationInput[]
-    cursor?: LicenseKeyWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: LicenseKeyScalarFieldEnum | LicenseKeyScalarFieldEnum[]
-  }
-
-  /**
    * Employee.performedActivations
    */
   export type Employee$performedActivationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7372,6 +7348,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ActivationScalarFieldEnum | ActivationScalarFieldEnum[]
+  }
+
+  /**
+   * Employee.activatedKeys
+   */
+  export type Employee$activatedKeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LicenseKey
+     */
+    select?: LicenseKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LicenseKey
+     */
+    omit?: LicenseKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LicenseKeyInclude<ExtArgs> | null
+    where?: LicenseKeyWhereInput
+    orderBy?: LicenseKeyOrderByWithRelationInput | LicenseKeyOrderByWithRelationInput[]
+    cursor?: LicenseKeyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LicenseKeyScalarFieldEnum | LicenseKeyScalarFieldEnum[]
   }
 
   /**
@@ -7611,8 +7611,8 @@ export namespace Prisma {
     usageCount?: boolean
     totalOwed?: boolean
     calculatedAt?: boolean
-    vendor?: boolean | VendorDefaultArgs<ExtArgs>
     software?: boolean | SoftwareDefaultArgs<ExtArgs>
+    vendor?: boolean | VendorDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["monthlyUsage"]>
 
   export type MonthlyUsageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7623,8 +7623,8 @@ export namespace Prisma {
     usageCount?: boolean
     totalOwed?: boolean
     calculatedAt?: boolean
-    vendor?: boolean | VendorDefaultArgs<ExtArgs>
     software?: boolean | SoftwareDefaultArgs<ExtArgs>
+    vendor?: boolean | VendorDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["monthlyUsage"]>
 
   export type MonthlyUsageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7635,8 +7635,8 @@ export namespace Prisma {
     usageCount?: boolean
     totalOwed?: boolean
     calculatedAt?: boolean
-    vendor?: boolean | VendorDefaultArgs<ExtArgs>
     software?: boolean | SoftwareDefaultArgs<ExtArgs>
+    vendor?: boolean | VendorDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["monthlyUsage"]>
 
   export type MonthlyUsageSelectScalar = {
@@ -7651,23 +7651,23 @@ export namespace Prisma {
 
   export type MonthlyUsageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "vendorId" | "softwareId" | "month" | "usageCount" | "totalOwed" | "calculatedAt", ExtArgs["result"]["monthlyUsage"]>
   export type MonthlyUsageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    vendor?: boolean | VendorDefaultArgs<ExtArgs>
     software?: boolean | SoftwareDefaultArgs<ExtArgs>
+    vendor?: boolean | VendorDefaultArgs<ExtArgs>
   }
   export type MonthlyUsageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    vendor?: boolean | VendorDefaultArgs<ExtArgs>
     software?: boolean | SoftwareDefaultArgs<ExtArgs>
+    vendor?: boolean | VendorDefaultArgs<ExtArgs>
   }
   export type MonthlyUsageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    vendor?: boolean | VendorDefaultArgs<ExtArgs>
     software?: boolean | SoftwareDefaultArgs<ExtArgs>
+    vendor?: boolean | VendorDefaultArgs<ExtArgs>
   }
 
   export type $MonthlyUsagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "MonthlyUsage"
     objects: {
-      vendor: Prisma.$VendorPayload<ExtArgs>
       software: Prisma.$SoftwarePayload<ExtArgs>
+      vendor: Prisma.$VendorPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8071,8 +8071,8 @@ export namespace Prisma {
    */
   export interface Prisma__MonthlyUsageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    vendor<T extends VendorDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VendorDefaultArgs<ExtArgs>>): Prisma__VendorClient<$Result.GetResult<Prisma.$VendorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     software<T extends SoftwareDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SoftwareDefaultArgs<ExtArgs>>): Prisma__SoftwareClient<$Result.GetResult<Prisma.$SoftwarePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    vendor<T extends VendorDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VendorDefaultArgs<ExtArgs>>): Prisma__VendorClient<$Result.GetResult<Prisma.$VendorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8539,12 +8539,12 @@ export namespace Prisma {
 
   export const VendorScalarFieldEnum: {
     id: 'id',
-    supabaseUserId: 'supabaseUserId',
     name: 'name',
     contactEmail: 'contactEmail',
     billingAddress: 'billingAddress',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    supabaseUserId: 'supabaseUserId'
   };
 
   export type VendorScalarFieldEnum = (typeof VendorScalarFieldEnum)[keyof typeof VendorScalarFieldEnum]
@@ -8599,13 +8599,13 @@ export namespace Prisma {
 
   export const EmployeeScalarFieldEnum: {
     id: 'id',
-    supabaseUserId: 'supabaseUserId',
     name: 'name',
     email: 'email',
-    companyName: 'companyName',
     role: 'role',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    companyName: 'companyName',
+    supabaseUserId: 'supabaseUserId'
   };
 
   export type EmployeeScalarFieldEnum = (typeof EmployeeScalarFieldEnum)[keyof typeof EmployeeScalarFieldEnum]
@@ -8759,36 +8759,36 @@ export namespace Prisma {
     OR?: VendorWhereInput[]
     NOT?: VendorWhereInput | VendorWhereInput[]
     id?: StringFilter<"Vendor"> | string
-    supabaseUserId?: StringNullableFilter<"Vendor"> | string | null
     name?: StringFilter<"Vendor"> | string
     contactEmail?: StringFilter<"Vendor"> | string
     billingAddress?: StringNullableFilter<"Vendor"> | string | null
     createdAt?: DateTimeFilter<"Vendor"> | Date | string
     updatedAt?: DateTimeFilter<"Vendor"> | Date | string
-    software?: SoftwareListRelationFilter
-    licenseKeys?: LicenseKeyListRelationFilter
+    supabaseUserId?: StringNullableFilter<"Vendor"> | string | null
     activations?: ActivationListRelationFilter
+    licenseKeys?: LicenseKeyListRelationFilter
     monthlyUsage?: MonthlyUsageListRelationFilter
+    software?: SoftwareListRelationFilter
   }
 
   export type VendorOrderByWithRelationInput = {
     id?: SortOrder
-    supabaseUserId?: SortOrderInput | SortOrder
     name?: SortOrder
     contactEmail?: SortOrder
     billingAddress?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    software?: SoftwareOrderByRelationAggregateInput
-    licenseKeys?: LicenseKeyOrderByRelationAggregateInput
+    supabaseUserId?: SortOrderInput | SortOrder
     activations?: ActivationOrderByRelationAggregateInput
+    licenseKeys?: LicenseKeyOrderByRelationAggregateInput
     monthlyUsage?: MonthlyUsageOrderByRelationAggregateInput
+    software?: SoftwareOrderByRelationAggregateInput
   }
 
   export type VendorWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    supabaseUserId?: string
     contactEmail?: string
+    supabaseUserId?: string
     AND?: VendorWhereInput | VendorWhereInput[]
     OR?: VendorWhereInput[]
     NOT?: VendorWhereInput | VendorWhereInput[]
@@ -8796,20 +8796,20 @@ export namespace Prisma {
     billingAddress?: StringNullableFilter<"Vendor"> | string | null
     createdAt?: DateTimeFilter<"Vendor"> | Date | string
     updatedAt?: DateTimeFilter<"Vendor"> | Date | string
-    software?: SoftwareListRelationFilter
-    licenseKeys?: LicenseKeyListRelationFilter
     activations?: ActivationListRelationFilter
+    licenseKeys?: LicenseKeyListRelationFilter
     monthlyUsage?: MonthlyUsageListRelationFilter
-  }, "id" | "supabaseUserId" | "contactEmail">
+    software?: SoftwareListRelationFilter
+  }, "id" | "contactEmail" | "supabaseUserId">
 
   export type VendorOrderByWithAggregationInput = {
     id?: SortOrder
-    supabaseUserId?: SortOrderInput | SortOrder
     name?: SortOrder
     contactEmail?: SortOrder
     billingAddress?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    supabaseUserId?: SortOrderInput | SortOrder
     _count?: VendorCountOrderByAggregateInput
     _max?: VendorMaxOrderByAggregateInput
     _min?: VendorMinOrderByAggregateInput
@@ -8820,12 +8820,12 @@ export namespace Prisma {
     OR?: VendorScalarWhereWithAggregatesInput[]
     NOT?: VendorScalarWhereWithAggregatesInput | VendorScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Vendor"> | string
-    supabaseUserId?: StringNullableWithAggregatesFilter<"Vendor"> | string | null
     name?: StringWithAggregatesFilter<"Vendor"> | string
     contactEmail?: StringWithAggregatesFilter<"Vendor"> | string
     billingAddress?: StringNullableWithAggregatesFilter<"Vendor"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Vendor"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Vendor"> | Date | string
+    supabaseUserId?: StringNullableWithAggregatesFilter<"Vendor"> | string | null
   }
 
   export type SoftwareWhereInput = {
@@ -8840,10 +8840,10 @@ export namespace Prisma {
     monthlyRate?: FloatNullableFilter<"Software"> | number | null
     createdAt?: DateTimeFilter<"Software"> | Date | string
     updatedAt?: DateTimeFilter<"Software"> | Date | string
-    vendor?: XOR<VendorScalarRelationFilter, VendorWhereInput>
-    licenseKeys?: LicenseKeyListRelationFilter
     activations?: ActivationListRelationFilter
+    licenseKeys?: LicenseKeyListRelationFilter
     monthlyUsage?: MonthlyUsageListRelationFilter
+    vendor?: XOR<VendorScalarRelationFilter, VendorWhereInput>
   }
 
   export type SoftwareOrderByWithRelationInput = {
@@ -8855,10 +8855,10 @@ export namespace Prisma {
     monthlyRate?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    vendor?: VendorOrderByWithRelationInput
-    licenseKeys?: LicenseKeyOrderByRelationAggregateInput
     activations?: ActivationOrderByRelationAggregateInput
+    licenseKeys?: LicenseKeyOrderByRelationAggregateInput
     monthlyUsage?: MonthlyUsageOrderByRelationAggregateInput
+    vendor?: VendorOrderByWithRelationInput
   }
 
   export type SoftwareWhereUniqueInput = Prisma.AtLeast<{
@@ -8873,10 +8873,10 @@ export namespace Prisma {
     monthlyRate?: FloatNullableFilter<"Software"> | number | null
     createdAt?: DateTimeFilter<"Software"> | Date | string
     updatedAt?: DateTimeFilter<"Software"> | Date | string
-    vendor?: XOR<VendorScalarRelationFilter, VendorWhereInput>
-    licenseKeys?: LicenseKeyListRelationFilter
     activations?: ActivationListRelationFilter
+    licenseKeys?: LicenseKeyListRelationFilter
     monthlyUsage?: MonthlyUsageListRelationFilter
+    vendor?: XOR<VendorScalarRelationFilter, VendorWhereInput>
   }, "id">
 
   export type SoftwareOrderByWithAggregationInput = {
@@ -8926,10 +8926,10 @@ export namespace Prisma {
     activatedById?: StringNullableFilter<"LicenseKey"> | string | null
     canceledAt?: DateTimeNullableFilter<"LicenseKey"> | Date | string | null
     canceledReason?: StringNullableFilter<"LicenseKey"> | string | null
-    vendor?: XOR<VendorScalarRelationFilter, VendorWhereInput>
-    software?: XOR<SoftwareScalarRelationFilter, SoftwareWhereInput>
-    activatedBy?: XOR<EmployeeNullableScalarRelationFilter, EmployeeWhereInput> | null
     activation?: XOR<ActivationNullableScalarRelationFilter, ActivationWhereInput> | null
+    activatedBy?: XOR<EmployeeNullableScalarRelationFilter, EmployeeWhereInput> | null
+    software?: XOR<SoftwareScalarRelationFilter, SoftwareWhereInput>
+    vendor?: XOR<VendorScalarRelationFilter, VendorWhereInput>
   }
 
   export type LicenseKeyOrderByWithRelationInput = {
@@ -8946,10 +8946,10 @@ export namespace Prisma {
     activatedById?: SortOrderInput | SortOrder
     canceledAt?: SortOrderInput | SortOrder
     canceledReason?: SortOrderInput | SortOrder
-    vendor?: VendorOrderByWithRelationInput
-    software?: SoftwareOrderByWithRelationInput
-    activatedBy?: EmployeeOrderByWithRelationInput
     activation?: ActivationOrderByWithRelationInput
+    activatedBy?: EmployeeOrderByWithRelationInput
+    software?: SoftwareOrderByWithRelationInput
+    vendor?: VendorOrderByWithRelationInput
   }
 
   export type LicenseKeyWhereUniqueInput = Prisma.AtLeast<{
@@ -8969,10 +8969,10 @@ export namespace Prisma {
     activatedById?: StringNullableFilter<"LicenseKey"> | string | null
     canceledAt?: DateTimeNullableFilter<"LicenseKey"> | Date | string | null
     canceledReason?: StringNullableFilter<"LicenseKey"> | string | null
-    vendor?: XOR<VendorScalarRelationFilter, VendorWhereInput>
-    software?: XOR<SoftwareScalarRelationFilter, SoftwareWhereInput>
-    activatedBy?: XOR<EmployeeNullableScalarRelationFilter, EmployeeWhereInput> | null
     activation?: XOR<ActivationNullableScalarRelationFilter, ActivationWhereInput> | null
+    activatedBy?: XOR<EmployeeNullableScalarRelationFilter, EmployeeWhereInput> | null
+    software?: XOR<SoftwareScalarRelationFilter, SoftwareWhereInput>
+    vendor?: XOR<VendorScalarRelationFilter, VendorWhereInput>
   }, "id" | "key">
 
   export type LicenseKeyOrderByWithAggregationInput = {
@@ -9025,8 +9025,8 @@ export namespace Prisma {
     headsetSerialNumber?: StringNullableFilter<"Activation"> | string | null
     activatedAt?: DateTimeFilter<"Activation"> | Date | string
     createdAt?: DateTimeFilter<"Activation"> | Date | string
-    licenseKey?: XOR<LicenseKeyScalarRelationFilter, LicenseKeyWhereInput>
     activatedBy?: XOR<EmployeeScalarRelationFilter, EmployeeWhereInput>
+    licenseKey?: XOR<LicenseKeyScalarRelationFilter, LicenseKeyWhereInput>
     software?: XOR<SoftwareScalarRelationFilter, SoftwareWhereInput>
     vendor?: XOR<VendorScalarRelationFilter, VendorWhereInput>
   }
@@ -9040,8 +9040,8 @@ export namespace Prisma {
     headsetSerialNumber?: SortOrderInput | SortOrder
     activatedAt?: SortOrder
     createdAt?: SortOrder
-    licenseKey?: LicenseKeyOrderByWithRelationInput
     activatedBy?: EmployeeOrderByWithRelationInput
+    licenseKey?: LicenseKeyOrderByWithRelationInput
     software?: SoftwareOrderByWithRelationInput
     vendor?: VendorOrderByWithRelationInput
   }
@@ -9058,8 +9058,8 @@ export namespace Prisma {
     headsetSerialNumber?: StringNullableFilter<"Activation"> | string | null
     activatedAt?: DateTimeFilter<"Activation"> | Date | string
     createdAt?: DateTimeFilter<"Activation"> | Date | string
-    licenseKey?: XOR<LicenseKeyScalarRelationFilter, LicenseKeyWhereInput>
     activatedBy?: XOR<EmployeeScalarRelationFilter, EmployeeWhereInput>
+    licenseKey?: XOR<LicenseKeyScalarRelationFilter, LicenseKeyWhereInput>
     software?: XOR<SoftwareScalarRelationFilter, SoftwareWhereInput>
     vendor?: XOR<VendorScalarRelationFilter, VendorWhereInput>
   }, "id" | "licenseKeyId">
@@ -9097,55 +9097,55 @@ export namespace Prisma {
     OR?: EmployeeWhereInput[]
     NOT?: EmployeeWhereInput | EmployeeWhereInput[]
     id?: StringFilter<"Employee"> | string
-    supabaseUserId?: StringNullableFilter<"Employee"> | string | null
     name?: StringFilter<"Employee"> | string
     email?: StringFilter<"Employee"> | string
-    companyName?: StringNullableFilter<"Employee"> | string | null
     role?: EnumEmployeeRoleFilter<"Employee"> | $Enums.EmployeeRole
     createdAt?: DateTimeFilter<"Employee"> | Date | string
     updatedAt?: DateTimeFilter<"Employee"> | Date | string
-    activatedKeys?: LicenseKeyListRelationFilter
+    companyName?: StringNullableFilter<"Employee"> | string | null
+    supabaseUserId?: StringNullableFilter<"Employee"> | string | null
     performedActivations?: ActivationListRelationFilter
+    activatedKeys?: LicenseKeyListRelationFilter
   }
 
   export type EmployeeOrderByWithRelationInput = {
     id?: SortOrder
-    supabaseUserId?: SortOrderInput | SortOrder
     name?: SortOrder
     email?: SortOrder
-    companyName?: SortOrderInput | SortOrder
     role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    activatedKeys?: LicenseKeyOrderByRelationAggregateInput
+    companyName?: SortOrderInput | SortOrder
+    supabaseUserId?: SortOrderInput | SortOrder
     performedActivations?: ActivationOrderByRelationAggregateInput
+    activatedKeys?: LicenseKeyOrderByRelationAggregateInput
   }
 
   export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    supabaseUserId?: string
     email?: string
+    supabaseUserId?: string
     AND?: EmployeeWhereInput | EmployeeWhereInput[]
     OR?: EmployeeWhereInput[]
     NOT?: EmployeeWhereInput | EmployeeWhereInput[]
     name?: StringFilter<"Employee"> | string
-    companyName?: StringNullableFilter<"Employee"> | string | null
     role?: EnumEmployeeRoleFilter<"Employee"> | $Enums.EmployeeRole
     createdAt?: DateTimeFilter<"Employee"> | Date | string
     updatedAt?: DateTimeFilter<"Employee"> | Date | string
-    activatedKeys?: LicenseKeyListRelationFilter
+    companyName?: StringNullableFilter<"Employee"> | string | null
     performedActivations?: ActivationListRelationFilter
-  }, "id" | "supabaseUserId" | "email">
+    activatedKeys?: LicenseKeyListRelationFilter
+  }, "id" | "email" | "supabaseUserId">
 
   export type EmployeeOrderByWithAggregationInput = {
     id?: SortOrder
-    supabaseUserId?: SortOrderInput | SortOrder
     name?: SortOrder
     email?: SortOrder
-    companyName?: SortOrderInput | SortOrder
     role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    companyName?: SortOrderInput | SortOrder
+    supabaseUserId?: SortOrderInput | SortOrder
     _count?: EmployeeCountOrderByAggregateInput
     _max?: EmployeeMaxOrderByAggregateInput
     _min?: EmployeeMinOrderByAggregateInput
@@ -9156,13 +9156,13 @@ export namespace Prisma {
     OR?: EmployeeScalarWhereWithAggregatesInput[]
     NOT?: EmployeeScalarWhereWithAggregatesInput | EmployeeScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Employee"> | string
-    supabaseUserId?: StringNullableWithAggregatesFilter<"Employee"> | string | null
     name?: StringWithAggregatesFilter<"Employee"> | string
     email?: StringWithAggregatesFilter<"Employee"> | string
-    companyName?: StringNullableWithAggregatesFilter<"Employee"> | string | null
     role?: EnumEmployeeRoleWithAggregatesFilter<"Employee"> | $Enums.EmployeeRole
     createdAt?: DateTimeWithAggregatesFilter<"Employee"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Employee"> | Date | string
+    companyName?: StringNullableWithAggregatesFilter<"Employee"> | string | null
+    supabaseUserId?: StringNullableWithAggregatesFilter<"Employee"> | string | null
   }
 
   export type MonthlyUsageWhereInput = {
@@ -9176,8 +9176,8 @@ export namespace Prisma {
     usageCount?: IntFilter<"MonthlyUsage"> | number
     totalOwed?: FloatFilter<"MonthlyUsage"> | number
     calculatedAt?: DateTimeFilter<"MonthlyUsage"> | Date | string
-    vendor?: XOR<VendorScalarRelationFilter, VendorWhereInput>
     software?: XOR<SoftwareScalarRelationFilter, SoftwareWhereInput>
+    vendor?: XOR<VendorScalarRelationFilter, VendorWhereInput>
   }
 
   export type MonthlyUsageOrderByWithRelationInput = {
@@ -9188,8 +9188,8 @@ export namespace Prisma {
     usageCount?: SortOrder
     totalOwed?: SortOrder
     calculatedAt?: SortOrder
-    vendor?: VendorOrderByWithRelationInput
     software?: SoftwareOrderByWithRelationInput
+    vendor?: VendorOrderByWithRelationInput
   }
 
   export type MonthlyUsageWhereUniqueInput = Prisma.AtLeast<{
@@ -9204,8 +9204,8 @@ export namespace Prisma {
     usageCount?: IntFilter<"MonthlyUsage"> | number
     totalOwed?: FloatFilter<"MonthlyUsage"> | number
     calculatedAt?: DateTimeFilter<"MonthlyUsage"> | Date | string
-    vendor?: XOR<VendorScalarRelationFilter, VendorWhereInput>
     software?: XOR<SoftwareScalarRelationFilter, SoftwareWhereInput>
+    vendor?: XOR<VendorScalarRelationFilter, VendorWhereInput>
   }, "id" | "vendorId_softwareId_month">
 
   export type MonthlyUsageOrderByWithAggregationInput = {
@@ -9238,88 +9238,88 @@ export namespace Prisma {
 
   export type VendorCreateInput = {
     id?: string
-    supabaseUserId?: string | null
     name: string
     contactEmail: string
     billingAddress?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    software?: SoftwareCreateNestedManyWithoutVendorInput
-    licenseKeys?: LicenseKeyCreateNestedManyWithoutVendorInput
+    supabaseUserId?: string | null
     activations?: ActivationCreateNestedManyWithoutVendorInput
+    licenseKeys?: LicenseKeyCreateNestedManyWithoutVendorInput
     monthlyUsage?: MonthlyUsageCreateNestedManyWithoutVendorInput
+    software?: SoftwareCreateNestedManyWithoutVendorInput
   }
 
   export type VendorUncheckedCreateInput = {
     id?: string
-    supabaseUserId?: string | null
     name: string
     contactEmail: string
     billingAddress?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    software?: SoftwareUncheckedCreateNestedManyWithoutVendorInput
-    licenseKeys?: LicenseKeyUncheckedCreateNestedManyWithoutVendorInput
+    supabaseUserId?: string | null
     activations?: ActivationUncheckedCreateNestedManyWithoutVendorInput
+    licenseKeys?: LicenseKeyUncheckedCreateNestedManyWithoutVendorInput
     monthlyUsage?: MonthlyUsageUncheckedCreateNestedManyWithoutVendorInput
+    software?: SoftwareUncheckedCreateNestedManyWithoutVendorInput
   }
 
   export type VendorUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     contactEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    software?: SoftwareUpdateManyWithoutVendorNestedInput
-    licenseKeys?: LicenseKeyUpdateManyWithoutVendorNestedInput
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
     activations?: ActivationUpdateManyWithoutVendorNestedInput
+    licenseKeys?: LicenseKeyUpdateManyWithoutVendorNestedInput
     monthlyUsage?: MonthlyUsageUpdateManyWithoutVendorNestedInput
+    software?: SoftwareUpdateManyWithoutVendorNestedInput
   }
 
   export type VendorUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     contactEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    software?: SoftwareUncheckedUpdateManyWithoutVendorNestedInput
-    licenseKeys?: LicenseKeyUncheckedUpdateManyWithoutVendorNestedInput
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
     activations?: ActivationUncheckedUpdateManyWithoutVendorNestedInput
+    licenseKeys?: LicenseKeyUncheckedUpdateManyWithoutVendorNestedInput
     monthlyUsage?: MonthlyUsageUncheckedUpdateManyWithoutVendorNestedInput
+    software?: SoftwareUncheckedUpdateManyWithoutVendorNestedInput
   }
 
   export type VendorCreateManyInput = {
     id?: string
-    supabaseUserId?: string | null
     name: string
     contactEmail: string
     billingAddress?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    supabaseUserId?: string | null
   }
 
   export type VendorUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     contactEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type VendorUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     contactEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SoftwareCreateInput = {
@@ -9330,10 +9330,10 @@ export namespace Prisma {
     monthlyRate?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    vendor: VendorCreateNestedOneWithoutSoftwareInput
-    licenseKeys?: LicenseKeyCreateNestedManyWithoutSoftwareInput
     activations?: ActivationCreateNestedManyWithoutSoftwareInput
+    licenseKeys?: LicenseKeyCreateNestedManyWithoutSoftwareInput
     monthlyUsage?: MonthlyUsageCreateNestedManyWithoutSoftwareInput
+    vendor: VendorCreateNestedOneWithoutSoftwareInput
   }
 
   export type SoftwareUncheckedCreateInput = {
@@ -9345,8 +9345,8 @@ export namespace Prisma {
     monthlyRate?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    licenseKeys?: LicenseKeyUncheckedCreateNestedManyWithoutSoftwareInput
     activations?: ActivationUncheckedCreateNestedManyWithoutSoftwareInput
+    licenseKeys?: LicenseKeyUncheckedCreateNestedManyWithoutSoftwareInput
     monthlyUsage?: MonthlyUsageUncheckedCreateNestedManyWithoutSoftwareInput
   }
 
@@ -9358,10 +9358,10 @@ export namespace Prisma {
     monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    vendor?: VendorUpdateOneRequiredWithoutSoftwareNestedInput
-    licenseKeys?: LicenseKeyUpdateManyWithoutSoftwareNestedInput
     activations?: ActivationUpdateManyWithoutSoftwareNestedInput
+    licenseKeys?: LicenseKeyUpdateManyWithoutSoftwareNestedInput
     monthlyUsage?: MonthlyUsageUpdateManyWithoutSoftwareNestedInput
+    vendor?: VendorUpdateOneRequiredWithoutSoftwareNestedInput
   }
 
   export type SoftwareUncheckedUpdateInput = {
@@ -9373,8 +9373,8 @@ export namespace Prisma {
     monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    licenseKeys?: LicenseKeyUncheckedUpdateManyWithoutSoftwareNestedInput
     activations?: ActivationUncheckedUpdateManyWithoutSoftwareNestedInput
+    licenseKeys?: LicenseKeyUncheckedUpdateManyWithoutSoftwareNestedInput
     monthlyUsage?: MonthlyUsageUncheckedUpdateManyWithoutSoftwareNestedInput
   }
 
@@ -9421,10 +9421,10 @@ export namespace Prisma {
     activatedAt?: Date | string | null
     canceledAt?: Date | string | null
     canceledReason?: string | null
-    vendor: VendorCreateNestedOneWithoutLicenseKeysInput
-    software: SoftwareCreateNestedOneWithoutLicenseKeysInput
-    activatedBy?: EmployeeCreateNestedOneWithoutActivatedKeysInput
     activation?: ActivationCreateNestedOneWithoutLicenseKeyInput
+    activatedBy?: EmployeeCreateNestedOneWithoutActivatedKeysInput
+    software: SoftwareCreateNestedOneWithoutLicenseKeysInput
+    vendor: VendorCreateNestedOneWithoutLicenseKeysInput
   }
 
   export type LicenseKeyUncheckedCreateInput = {
@@ -9455,10 +9455,10 @@ export namespace Prisma {
     activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     canceledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     canceledReason?: NullableStringFieldUpdateOperationsInput | string | null
-    vendor?: VendorUpdateOneRequiredWithoutLicenseKeysNestedInput
-    software?: SoftwareUpdateOneRequiredWithoutLicenseKeysNestedInput
-    activatedBy?: EmployeeUpdateOneWithoutActivatedKeysNestedInput
     activation?: ActivationUpdateOneWithoutLicenseKeyNestedInput
+    activatedBy?: EmployeeUpdateOneWithoutActivatedKeysNestedInput
+    software?: SoftwareUpdateOneRequiredWithoutLicenseKeysNestedInput
+    vendor?: VendorUpdateOneRequiredWithoutLicenseKeysNestedInput
   }
 
   export type LicenseKeyUncheckedUpdateInput = {
@@ -9528,8 +9528,8 @@ export namespace Prisma {
     headsetSerialNumber?: string | null
     activatedAt?: Date | string
     createdAt?: Date | string
-    licenseKey: LicenseKeyCreateNestedOneWithoutActivationInput
     activatedBy: EmployeeCreateNestedOneWithoutPerformedActivationsInput
+    licenseKey: LicenseKeyCreateNestedOneWithoutActivationInput
     software: SoftwareCreateNestedOneWithoutActivationsInput
     vendor: VendorCreateNestedOneWithoutActivationsInput
   }
@@ -9550,8 +9550,8 @@ export namespace Prisma {
     headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
     activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    licenseKey?: LicenseKeyUpdateOneRequiredWithoutActivationNestedInput
     activatedBy?: EmployeeUpdateOneRequiredWithoutPerformedActivationsNestedInput
+    licenseKey?: LicenseKeyUpdateOneRequiredWithoutActivationNestedInput
     software?: SoftwareUpdateOneRequiredWithoutActivationsNestedInput
     vendor?: VendorUpdateOneRequiredWithoutActivationsNestedInput
   }
@@ -9598,87 +9598,87 @@ export namespace Prisma {
 
   export type EmployeeCreateInput = {
     id?: string
-    supabaseUserId?: string | null
     name: string
     email: string
-    companyName?: string | null
     role?: $Enums.EmployeeRole
     createdAt?: Date | string
     updatedAt?: Date | string
-    activatedKeys?: LicenseKeyCreateNestedManyWithoutActivatedByInput
+    companyName?: string | null
+    supabaseUserId?: string | null
     performedActivations?: ActivationCreateNestedManyWithoutActivatedByInput
+    activatedKeys?: LicenseKeyCreateNestedManyWithoutActivatedByInput
   }
 
   export type EmployeeUncheckedCreateInput = {
     id?: string
-    supabaseUserId?: string | null
     name: string
     email: string
-    companyName?: string | null
     role?: $Enums.EmployeeRole
     createdAt?: Date | string
     updatedAt?: Date | string
-    activatedKeys?: LicenseKeyUncheckedCreateNestedManyWithoutActivatedByInput
+    companyName?: string | null
+    supabaseUserId?: string | null
     performedActivations?: ActivationUncheckedCreateNestedManyWithoutActivatedByInput
+    activatedKeys?: LicenseKeyUncheckedCreateNestedManyWithoutActivatedByInput
   }
 
   export type EmployeeUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    companyName?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    activatedKeys?: LicenseKeyUpdateManyWithoutActivatedByNestedInput
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
     performedActivations?: ActivationUpdateManyWithoutActivatedByNestedInput
+    activatedKeys?: LicenseKeyUpdateManyWithoutActivatedByNestedInput
   }
 
   export type EmployeeUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    companyName?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    activatedKeys?: LicenseKeyUncheckedUpdateManyWithoutActivatedByNestedInput
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
     performedActivations?: ActivationUncheckedUpdateManyWithoutActivatedByNestedInput
+    activatedKeys?: LicenseKeyUncheckedUpdateManyWithoutActivatedByNestedInput
   }
 
   export type EmployeeCreateManyInput = {
     id?: string
-    supabaseUserId?: string | null
     name: string
     email: string
-    companyName?: string | null
     role?: $Enums.EmployeeRole
     createdAt?: Date | string
     updatedAt?: Date | string
+    companyName?: string | null
+    supabaseUserId?: string | null
   }
 
   export type EmployeeUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    companyName?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EmployeeUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    companyName?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MonthlyUsageCreateInput = {
@@ -9687,8 +9687,8 @@ export namespace Prisma {
     usageCount: number
     totalOwed: number
     calculatedAt?: Date | string
-    vendor: VendorCreateNestedOneWithoutMonthlyUsageInput
     software: SoftwareCreateNestedOneWithoutMonthlyUsageInput
+    vendor: VendorCreateNestedOneWithoutMonthlyUsageInput
   }
 
   export type MonthlyUsageUncheckedCreateInput = {
@@ -9707,8 +9707,8 @@ export namespace Prisma {
     usageCount?: IntFieldUpdateOperationsInput | number
     totalOwed?: FloatFieldUpdateOperationsInput | number
     calculatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    vendor?: VendorUpdateOneRequiredWithoutMonthlyUsageNestedInput
     software?: SoftwareUpdateOneRequiredWithoutMonthlyUsageNestedInput
+    vendor?: VendorUpdateOneRequiredWithoutMonthlyUsageNestedInput
   }
 
   export type MonthlyUsageUncheckedUpdateInput = {
@@ -9790,10 +9790,10 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type SoftwareListRelationFilter = {
-    every?: SoftwareWhereInput
-    some?: SoftwareWhereInput
-    none?: SoftwareWhereInput
+  export type ActivationListRelationFilter = {
+    every?: ActivationWhereInput
+    some?: ActivationWhereInput
+    none?: ActivationWhereInput
   }
 
   export type LicenseKeyListRelationFilter = {
@@ -9802,16 +9802,16 @@ export namespace Prisma {
     none?: LicenseKeyWhereInput
   }
 
-  export type ActivationListRelationFilter = {
-    every?: ActivationWhereInput
-    some?: ActivationWhereInput
-    none?: ActivationWhereInput
-  }
-
   export type MonthlyUsageListRelationFilter = {
     every?: MonthlyUsageWhereInput
     some?: MonthlyUsageWhereInput
     none?: MonthlyUsageWhereInput
+  }
+
+  export type SoftwareListRelationFilter = {
+    every?: SoftwareWhereInput
+    some?: SoftwareWhereInput
+    none?: SoftwareWhereInput
   }
 
   export type SortOrderInput = {
@@ -9819,7 +9819,7 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
-  export type SoftwareOrderByRelationAggregateInput = {
+  export type ActivationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -9827,42 +9827,42 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type ActivationOrderByRelationAggregateInput = {
+  export type MonthlyUsageOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type MonthlyUsageOrderByRelationAggregateInput = {
+  export type SoftwareOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type VendorCountOrderByAggregateInput = {
     id?: SortOrder
-    supabaseUserId?: SortOrder
     name?: SortOrder
     contactEmail?: SortOrder
     billingAddress?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    supabaseUserId?: SortOrder
   }
 
   export type VendorMaxOrderByAggregateInput = {
     id?: SortOrder
-    supabaseUserId?: SortOrder
     name?: SortOrder
     contactEmail?: SortOrder
     billingAddress?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    supabaseUserId?: SortOrder
   }
 
   export type VendorMinOrderByAggregateInput = {
     id?: SortOrder
-    supabaseUserId?: SortOrder
     name?: SortOrder
     contactEmail?: SortOrder
     billingAddress?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    supabaseUserId?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -10025,9 +10025,9 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type SoftwareScalarRelationFilter = {
-    is?: SoftwareWhereInput
-    isNot?: SoftwareWhereInput
+  export type ActivationNullableScalarRelationFilter = {
+    is?: ActivationWhereInput | null
+    isNot?: ActivationWhereInput | null
   }
 
   export type EmployeeNullableScalarRelationFilter = {
@@ -10035,9 +10035,9 @@ export namespace Prisma {
     isNot?: EmployeeWhereInput | null
   }
 
-  export type ActivationNullableScalarRelationFilter = {
-    is?: ActivationWhereInput | null
-    isNot?: ActivationWhereInput | null
+  export type SoftwareScalarRelationFilter = {
+    is?: SoftwareWhereInput
+    isNot?: SoftwareWhereInput
   }
 
   export type LicenseKeyCountOrderByAggregateInput = {
@@ -10112,14 +10112,14 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type LicenseKeyScalarRelationFilter = {
-    is?: LicenseKeyWhereInput
-    isNot?: LicenseKeyWhereInput
-  }
-
   export type EmployeeScalarRelationFilter = {
     is?: EmployeeWhereInput
     isNot?: EmployeeWhereInput
+  }
+
+  export type LicenseKeyScalarRelationFilter = {
+    is?: LicenseKeyWhereInput
+    isNot?: LicenseKeyWhereInput
   }
 
   export type ActivationCountOrderByAggregateInput = {
@@ -10164,35 +10164,35 @@ export namespace Prisma {
 
   export type EmployeeCountOrderByAggregateInput = {
     id?: SortOrder
-    supabaseUserId?: SortOrder
     name?: SortOrder
     email?: SortOrder
-    companyName?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    companyName?: SortOrder
+    supabaseUserId?: SortOrder
   }
 
   export type EmployeeMaxOrderByAggregateInput = {
     id?: SortOrder
-    supabaseUserId?: SortOrder
     name?: SortOrder
     email?: SortOrder
-    companyName?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    companyName?: SortOrder
+    supabaseUserId?: SortOrder
   }
 
   export type EmployeeMinOrderByAggregateInput = {
     id?: SortOrder
-    supabaseUserId?: SortOrder
     name?: SortOrder
     email?: SortOrder
-    companyName?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    companyName?: SortOrder
+    supabaseUserId?: SortOrder
   }
 
   export type EnumEmployeeRoleWithAggregatesFilter<$PrismaModel = never> = {
@@ -10305,11 +10305,11 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type SoftwareCreateNestedManyWithoutVendorInput = {
-    create?: XOR<SoftwareCreateWithoutVendorInput, SoftwareUncheckedCreateWithoutVendorInput> | SoftwareCreateWithoutVendorInput[] | SoftwareUncheckedCreateWithoutVendorInput[]
-    connectOrCreate?: SoftwareCreateOrConnectWithoutVendorInput | SoftwareCreateOrConnectWithoutVendorInput[]
-    createMany?: SoftwareCreateManyVendorInputEnvelope
-    connect?: SoftwareWhereUniqueInput | SoftwareWhereUniqueInput[]
+  export type ActivationCreateNestedManyWithoutVendorInput = {
+    create?: XOR<ActivationCreateWithoutVendorInput, ActivationUncheckedCreateWithoutVendorInput> | ActivationCreateWithoutVendorInput[] | ActivationUncheckedCreateWithoutVendorInput[]
+    connectOrCreate?: ActivationCreateOrConnectWithoutVendorInput | ActivationCreateOrConnectWithoutVendorInput[]
+    createMany?: ActivationCreateManyVendorInputEnvelope
+    connect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
   }
 
   export type LicenseKeyCreateNestedManyWithoutVendorInput = {
@@ -10319,14 +10319,35 @@ export namespace Prisma {
     connect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
   }
 
-  export type ActivationCreateNestedManyWithoutVendorInput = {
+  export type MonthlyUsageCreateNestedManyWithoutVendorInput = {
+    create?: XOR<MonthlyUsageCreateWithoutVendorInput, MonthlyUsageUncheckedCreateWithoutVendorInput> | MonthlyUsageCreateWithoutVendorInput[] | MonthlyUsageUncheckedCreateWithoutVendorInput[]
+    connectOrCreate?: MonthlyUsageCreateOrConnectWithoutVendorInput | MonthlyUsageCreateOrConnectWithoutVendorInput[]
+    createMany?: MonthlyUsageCreateManyVendorInputEnvelope
+    connect?: MonthlyUsageWhereUniqueInput | MonthlyUsageWhereUniqueInput[]
+  }
+
+  export type SoftwareCreateNestedManyWithoutVendorInput = {
+    create?: XOR<SoftwareCreateWithoutVendorInput, SoftwareUncheckedCreateWithoutVendorInput> | SoftwareCreateWithoutVendorInput[] | SoftwareUncheckedCreateWithoutVendorInput[]
+    connectOrCreate?: SoftwareCreateOrConnectWithoutVendorInput | SoftwareCreateOrConnectWithoutVendorInput[]
+    createMany?: SoftwareCreateManyVendorInputEnvelope
+    connect?: SoftwareWhereUniqueInput | SoftwareWhereUniqueInput[]
+  }
+
+  export type ActivationUncheckedCreateNestedManyWithoutVendorInput = {
     create?: XOR<ActivationCreateWithoutVendorInput, ActivationUncheckedCreateWithoutVendorInput> | ActivationCreateWithoutVendorInput[] | ActivationUncheckedCreateWithoutVendorInput[]
     connectOrCreate?: ActivationCreateOrConnectWithoutVendorInput | ActivationCreateOrConnectWithoutVendorInput[]
     createMany?: ActivationCreateManyVendorInputEnvelope
     connect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
   }
 
-  export type MonthlyUsageCreateNestedManyWithoutVendorInput = {
+  export type LicenseKeyUncheckedCreateNestedManyWithoutVendorInput = {
+    create?: XOR<LicenseKeyCreateWithoutVendorInput, LicenseKeyUncheckedCreateWithoutVendorInput> | LicenseKeyCreateWithoutVendorInput[] | LicenseKeyUncheckedCreateWithoutVendorInput[]
+    connectOrCreate?: LicenseKeyCreateOrConnectWithoutVendorInput | LicenseKeyCreateOrConnectWithoutVendorInput[]
+    createMany?: LicenseKeyCreateManyVendorInputEnvelope
+    connect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+  }
+
+  export type MonthlyUsageUncheckedCreateNestedManyWithoutVendorInput = {
     create?: XOR<MonthlyUsageCreateWithoutVendorInput, MonthlyUsageUncheckedCreateWithoutVendorInput> | MonthlyUsageCreateWithoutVendorInput[] | MonthlyUsageUncheckedCreateWithoutVendorInput[]
     connectOrCreate?: MonthlyUsageCreateOrConnectWithoutVendorInput | MonthlyUsageCreateOrConnectWithoutVendorInput[]
     createMany?: MonthlyUsageCreateManyVendorInputEnvelope
@@ -10340,27 +10361,6 @@ export namespace Prisma {
     connect?: SoftwareWhereUniqueInput | SoftwareWhereUniqueInput[]
   }
 
-  export type LicenseKeyUncheckedCreateNestedManyWithoutVendorInput = {
-    create?: XOR<LicenseKeyCreateWithoutVendorInput, LicenseKeyUncheckedCreateWithoutVendorInput> | LicenseKeyCreateWithoutVendorInput[] | LicenseKeyUncheckedCreateWithoutVendorInput[]
-    connectOrCreate?: LicenseKeyCreateOrConnectWithoutVendorInput | LicenseKeyCreateOrConnectWithoutVendorInput[]
-    createMany?: LicenseKeyCreateManyVendorInputEnvelope
-    connect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-  }
-
-  export type ActivationUncheckedCreateNestedManyWithoutVendorInput = {
-    create?: XOR<ActivationCreateWithoutVendorInput, ActivationUncheckedCreateWithoutVendorInput> | ActivationCreateWithoutVendorInput[] | ActivationUncheckedCreateWithoutVendorInput[]
-    connectOrCreate?: ActivationCreateOrConnectWithoutVendorInput | ActivationCreateOrConnectWithoutVendorInput[]
-    createMany?: ActivationCreateManyVendorInputEnvelope
-    connect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
-  }
-
-  export type MonthlyUsageUncheckedCreateNestedManyWithoutVendorInput = {
-    create?: XOR<MonthlyUsageCreateWithoutVendorInput, MonthlyUsageUncheckedCreateWithoutVendorInput> | MonthlyUsageCreateWithoutVendorInput[] | MonthlyUsageUncheckedCreateWithoutVendorInput[]
-    connectOrCreate?: MonthlyUsageCreateOrConnectWithoutVendorInput | MonthlyUsageCreateOrConnectWithoutVendorInput[]
-    createMany?: MonthlyUsageCreateManyVendorInputEnvelope
-    connect?: MonthlyUsageWhereUniqueInput | MonthlyUsageWhereUniqueInput[]
-  }
-
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -10371,34 +10371,6 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
-  }
-
-  export type SoftwareUpdateManyWithoutVendorNestedInput = {
-    create?: XOR<SoftwareCreateWithoutVendorInput, SoftwareUncheckedCreateWithoutVendorInput> | SoftwareCreateWithoutVendorInput[] | SoftwareUncheckedCreateWithoutVendorInput[]
-    connectOrCreate?: SoftwareCreateOrConnectWithoutVendorInput | SoftwareCreateOrConnectWithoutVendorInput[]
-    upsert?: SoftwareUpsertWithWhereUniqueWithoutVendorInput | SoftwareUpsertWithWhereUniqueWithoutVendorInput[]
-    createMany?: SoftwareCreateManyVendorInputEnvelope
-    set?: SoftwareWhereUniqueInput | SoftwareWhereUniqueInput[]
-    disconnect?: SoftwareWhereUniqueInput | SoftwareWhereUniqueInput[]
-    delete?: SoftwareWhereUniqueInput | SoftwareWhereUniqueInput[]
-    connect?: SoftwareWhereUniqueInput | SoftwareWhereUniqueInput[]
-    update?: SoftwareUpdateWithWhereUniqueWithoutVendorInput | SoftwareUpdateWithWhereUniqueWithoutVendorInput[]
-    updateMany?: SoftwareUpdateManyWithWhereWithoutVendorInput | SoftwareUpdateManyWithWhereWithoutVendorInput[]
-    deleteMany?: SoftwareScalarWhereInput | SoftwareScalarWhereInput[]
-  }
-
-  export type LicenseKeyUpdateManyWithoutVendorNestedInput = {
-    create?: XOR<LicenseKeyCreateWithoutVendorInput, LicenseKeyUncheckedCreateWithoutVendorInput> | LicenseKeyCreateWithoutVendorInput[] | LicenseKeyUncheckedCreateWithoutVendorInput[]
-    connectOrCreate?: LicenseKeyCreateOrConnectWithoutVendorInput | LicenseKeyCreateOrConnectWithoutVendorInput[]
-    upsert?: LicenseKeyUpsertWithWhereUniqueWithoutVendorInput | LicenseKeyUpsertWithWhereUniqueWithoutVendorInput[]
-    createMany?: LicenseKeyCreateManyVendorInputEnvelope
-    set?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-    disconnect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-    delete?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-    connect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-    update?: LicenseKeyUpdateWithWhereUniqueWithoutVendorInput | LicenseKeyUpdateWithWhereUniqueWithoutVendorInput[]
-    updateMany?: LicenseKeyUpdateManyWithWhereWithoutVendorInput | LicenseKeyUpdateManyWithWhereWithoutVendorInput[]
-    deleteMany?: LicenseKeyScalarWhereInput | LicenseKeyScalarWhereInput[]
   }
 
   export type ActivationUpdateManyWithoutVendorNestedInput = {
@@ -10415,7 +10387,77 @@ export namespace Prisma {
     deleteMany?: ActivationScalarWhereInput | ActivationScalarWhereInput[]
   }
 
+  export type LicenseKeyUpdateManyWithoutVendorNestedInput = {
+    create?: XOR<LicenseKeyCreateWithoutVendorInput, LicenseKeyUncheckedCreateWithoutVendorInput> | LicenseKeyCreateWithoutVendorInput[] | LicenseKeyUncheckedCreateWithoutVendorInput[]
+    connectOrCreate?: LicenseKeyCreateOrConnectWithoutVendorInput | LicenseKeyCreateOrConnectWithoutVendorInput[]
+    upsert?: LicenseKeyUpsertWithWhereUniqueWithoutVendorInput | LicenseKeyUpsertWithWhereUniqueWithoutVendorInput[]
+    createMany?: LicenseKeyCreateManyVendorInputEnvelope
+    set?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    disconnect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    delete?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    connect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    update?: LicenseKeyUpdateWithWhereUniqueWithoutVendorInput | LicenseKeyUpdateWithWhereUniqueWithoutVendorInput[]
+    updateMany?: LicenseKeyUpdateManyWithWhereWithoutVendorInput | LicenseKeyUpdateManyWithWhereWithoutVendorInput[]
+    deleteMany?: LicenseKeyScalarWhereInput | LicenseKeyScalarWhereInput[]
+  }
+
   export type MonthlyUsageUpdateManyWithoutVendorNestedInput = {
+    create?: XOR<MonthlyUsageCreateWithoutVendorInput, MonthlyUsageUncheckedCreateWithoutVendorInput> | MonthlyUsageCreateWithoutVendorInput[] | MonthlyUsageUncheckedCreateWithoutVendorInput[]
+    connectOrCreate?: MonthlyUsageCreateOrConnectWithoutVendorInput | MonthlyUsageCreateOrConnectWithoutVendorInput[]
+    upsert?: MonthlyUsageUpsertWithWhereUniqueWithoutVendorInput | MonthlyUsageUpsertWithWhereUniqueWithoutVendorInput[]
+    createMany?: MonthlyUsageCreateManyVendorInputEnvelope
+    set?: MonthlyUsageWhereUniqueInput | MonthlyUsageWhereUniqueInput[]
+    disconnect?: MonthlyUsageWhereUniqueInput | MonthlyUsageWhereUniqueInput[]
+    delete?: MonthlyUsageWhereUniqueInput | MonthlyUsageWhereUniqueInput[]
+    connect?: MonthlyUsageWhereUniqueInput | MonthlyUsageWhereUniqueInput[]
+    update?: MonthlyUsageUpdateWithWhereUniqueWithoutVendorInput | MonthlyUsageUpdateWithWhereUniqueWithoutVendorInput[]
+    updateMany?: MonthlyUsageUpdateManyWithWhereWithoutVendorInput | MonthlyUsageUpdateManyWithWhereWithoutVendorInput[]
+    deleteMany?: MonthlyUsageScalarWhereInput | MonthlyUsageScalarWhereInput[]
+  }
+
+  export type SoftwareUpdateManyWithoutVendorNestedInput = {
+    create?: XOR<SoftwareCreateWithoutVendorInput, SoftwareUncheckedCreateWithoutVendorInput> | SoftwareCreateWithoutVendorInput[] | SoftwareUncheckedCreateWithoutVendorInput[]
+    connectOrCreate?: SoftwareCreateOrConnectWithoutVendorInput | SoftwareCreateOrConnectWithoutVendorInput[]
+    upsert?: SoftwareUpsertWithWhereUniqueWithoutVendorInput | SoftwareUpsertWithWhereUniqueWithoutVendorInput[]
+    createMany?: SoftwareCreateManyVendorInputEnvelope
+    set?: SoftwareWhereUniqueInput | SoftwareWhereUniqueInput[]
+    disconnect?: SoftwareWhereUniqueInput | SoftwareWhereUniqueInput[]
+    delete?: SoftwareWhereUniqueInput | SoftwareWhereUniqueInput[]
+    connect?: SoftwareWhereUniqueInput | SoftwareWhereUniqueInput[]
+    update?: SoftwareUpdateWithWhereUniqueWithoutVendorInput | SoftwareUpdateWithWhereUniqueWithoutVendorInput[]
+    updateMany?: SoftwareUpdateManyWithWhereWithoutVendorInput | SoftwareUpdateManyWithWhereWithoutVendorInput[]
+    deleteMany?: SoftwareScalarWhereInput | SoftwareScalarWhereInput[]
+  }
+
+  export type ActivationUncheckedUpdateManyWithoutVendorNestedInput = {
+    create?: XOR<ActivationCreateWithoutVendorInput, ActivationUncheckedCreateWithoutVendorInput> | ActivationCreateWithoutVendorInput[] | ActivationUncheckedCreateWithoutVendorInput[]
+    connectOrCreate?: ActivationCreateOrConnectWithoutVendorInput | ActivationCreateOrConnectWithoutVendorInput[]
+    upsert?: ActivationUpsertWithWhereUniqueWithoutVendorInput | ActivationUpsertWithWhereUniqueWithoutVendorInput[]
+    createMany?: ActivationCreateManyVendorInputEnvelope
+    set?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
+    disconnect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
+    delete?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
+    connect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
+    update?: ActivationUpdateWithWhereUniqueWithoutVendorInput | ActivationUpdateWithWhereUniqueWithoutVendorInput[]
+    updateMany?: ActivationUpdateManyWithWhereWithoutVendorInput | ActivationUpdateManyWithWhereWithoutVendorInput[]
+    deleteMany?: ActivationScalarWhereInput | ActivationScalarWhereInput[]
+  }
+
+  export type LicenseKeyUncheckedUpdateManyWithoutVendorNestedInput = {
+    create?: XOR<LicenseKeyCreateWithoutVendorInput, LicenseKeyUncheckedCreateWithoutVendorInput> | LicenseKeyCreateWithoutVendorInput[] | LicenseKeyUncheckedCreateWithoutVendorInput[]
+    connectOrCreate?: LicenseKeyCreateOrConnectWithoutVendorInput | LicenseKeyCreateOrConnectWithoutVendorInput[]
+    upsert?: LicenseKeyUpsertWithWhereUniqueWithoutVendorInput | LicenseKeyUpsertWithWhereUniqueWithoutVendorInput[]
+    createMany?: LicenseKeyCreateManyVendorInputEnvelope
+    set?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    disconnect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    delete?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    connect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    update?: LicenseKeyUpdateWithWhereUniqueWithoutVendorInput | LicenseKeyUpdateWithWhereUniqueWithoutVendorInput[]
+    updateMany?: LicenseKeyUpdateManyWithWhereWithoutVendorInput | LicenseKeyUpdateManyWithWhereWithoutVendorInput[]
+    deleteMany?: LicenseKeyScalarWhereInput | LicenseKeyScalarWhereInput[]
+  }
+
+  export type MonthlyUsageUncheckedUpdateManyWithoutVendorNestedInput = {
     create?: XOR<MonthlyUsageCreateWithoutVendorInput, MonthlyUsageUncheckedCreateWithoutVendorInput> | MonthlyUsageCreateWithoutVendorInput[] | MonthlyUsageUncheckedCreateWithoutVendorInput[]
     connectOrCreate?: MonthlyUsageCreateOrConnectWithoutVendorInput | MonthlyUsageCreateOrConnectWithoutVendorInput[]
     upsert?: MonthlyUsageUpsertWithWhereUniqueWithoutVendorInput | MonthlyUsageUpsertWithWhereUniqueWithoutVendorInput[]
@@ -10443,52 +10485,11 @@ export namespace Prisma {
     deleteMany?: SoftwareScalarWhereInput | SoftwareScalarWhereInput[]
   }
 
-  export type LicenseKeyUncheckedUpdateManyWithoutVendorNestedInput = {
-    create?: XOR<LicenseKeyCreateWithoutVendorInput, LicenseKeyUncheckedCreateWithoutVendorInput> | LicenseKeyCreateWithoutVendorInput[] | LicenseKeyUncheckedCreateWithoutVendorInput[]
-    connectOrCreate?: LicenseKeyCreateOrConnectWithoutVendorInput | LicenseKeyCreateOrConnectWithoutVendorInput[]
-    upsert?: LicenseKeyUpsertWithWhereUniqueWithoutVendorInput | LicenseKeyUpsertWithWhereUniqueWithoutVendorInput[]
-    createMany?: LicenseKeyCreateManyVendorInputEnvelope
-    set?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-    disconnect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-    delete?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-    connect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-    update?: LicenseKeyUpdateWithWhereUniqueWithoutVendorInput | LicenseKeyUpdateWithWhereUniqueWithoutVendorInput[]
-    updateMany?: LicenseKeyUpdateManyWithWhereWithoutVendorInput | LicenseKeyUpdateManyWithWhereWithoutVendorInput[]
-    deleteMany?: LicenseKeyScalarWhereInput | LicenseKeyScalarWhereInput[]
-  }
-
-  export type ActivationUncheckedUpdateManyWithoutVendorNestedInput = {
-    create?: XOR<ActivationCreateWithoutVendorInput, ActivationUncheckedCreateWithoutVendorInput> | ActivationCreateWithoutVendorInput[] | ActivationUncheckedCreateWithoutVendorInput[]
-    connectOrCreate?: ActivationCreateOrConnectWithoutVendorInput | ActivationCreateOrConnectWithoutVendorInput[]
-    upsert?: ActivationUpsertWithWhereUniqueWithoutVendorInput | ActivationUpsertWithWhereUniqueWithoutVendorInput[]
-    createMany?: ActivationCreateManyVendorInputEnvelope
-    set?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
-    disconnect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
-    delete?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
+  export type ActivationCreateNestedManyWithoutSoftwareInput = {
+    create?: XOR<ActivationCreateWithoutSoftwareInput, ActivationUncheckedCreateWithoutSoftwareInput> | ActivationCreateWithoutSoftwareInput[] | ActivationUncheckedCreateWithoutSoftwareInput[]
+    connectOrCreate?: ActivationCreateOrConnectWithoutSoftwareInput | ActivationCreateOrConnectWithoutSoftwareInput[]
+    createMany?: ActivationCreateManySoftwareInputEnvelope
     connect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
-    update?: ActivationUpdateWithWhereUniqueWithoutVendorInput | ActivationUpdateWithWhereUniqueWithoutVendorInput[]
-    updateMany?: ActivationUpdateManyWithWhereWithoutVendorInput | ActivationUpdateManyWithWhereWithoutVendorInput[]
-    deleteMany?: ActivationScalarWhereInput | ActivationScalarWhereInput[]
-  }
-
-  export type MonthlyUsageUncheckedUpdateManyWithoutVendorNestedInput = {
-    create?: XOR<MonthlyUsageCreateWithoutVendorInput, MonthlyUsageUncheckedCreateWithoutVendorInput> | MonthlyUsageCreateWithoutVendorInput[] | MonthlyUsageUncheckedCreateWithoutVendorInput[]
-    connectOrCreate?: MonthlyUsageCreateOrConnectWithoutVendorInput | MonthlyUsageCreateOrConnectWithoutVendorInput[]
-    upsert?: MonthlyUsageUpsertWithWhereUniqueWithoutVendorInput | MonthlyUsageUpsertWithWhereUniqueWithoutVendorInput[]
-    createMany?: MonthlyUsageCreateManyVendorInputEnvelope
-    set?: MonthlyUsageWhereUniqueInput | MonthlyUsageWhereUniqueInput[]
-    disconnect?: MonthlyUsageWhereUniqueInput | MonthlyUsageWhereUniqueInput[]
-    delete?: MonthlyUsageWhereUniqueInput | MonthlyUsageWhereUniqueInput[]
-    connect?: MonthlyUsageWhereUniqueInput | MonthlyUsageWhereUniqueInput[]
-    update?: MonthlyUsageUpdateWithWhereUniqueWithoutVendorInput | MonthlyUsageUpdateWithWhereUniqueWithoutVendorInput[]
-    updateMany?: MonthlyUsageUpdateManyWithWhereWithoutVendorInput | MonthlyUsageUpdateManyWithWhereWithoutVendorInput[]
-    deleteMany?: MonthlyUsageScalarWhereInput | MonthlyUsageScalarWhereInput[]
-  }
-
-  export type VendorCreateNestedOneWithoutSoftwareInput = {
-    create?: XOR<VendorCreateWithoutSoftwareInput, VendorUncheckedCreateWithoutSoftwareInput>
-    connectOrCreate?: VendorCreateOrConnectWithoutSoftwareInput
-    connect?: VendorWhereUniqueInput
   }
 
   export type LicenseKeyCreateNestedManyWithoutSoftwareInput = {
@@ -10498,13 +10499,6 @@ export namespace Prisma {
     connect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
   }
 
-  export type ActivationCreateNestedManyWithoutSoftwareInput = {
-    create?: XOR<ActivationCreateWithoutSoftwareInput, ActivationUncheckedCreateWithoutSoftwareInput> | ActivationCreateWithoutSoftwareInput[] | ActivationUncheckedCreateWithoutSoftwareInput[]
-    connectOrCreate?: ActivationCreateOrConnectWithoutSoftwareInput | ActivationCreateOrConnectWithoutSoftwareInput[]
-    createMany?: ActivationCreateManySoftwareInputEnvelope
-    connect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
-  }
-
   export type MonthlyUsageCreateNestedManyWithoutSoftwareInput = {
     create?: XOR<MonthlyUsageCreateWithoutSoftwareInput, MonthlyUsageUncheckedCreateWithoutSoftwareInput> | MonthlyUsageCreateWithoutSoftwareInput[] | MonthlyUsageUncheckedCreateWithoutSoftwareInput[]
     connectOrCreate?: MonthlyUsageCreateOrConnectWithoutSoftwareInput | MonthlyUsageCreateOrConnectWithoutSoftwareInput[]
@@ -10512,11 +10506,10 @@ export namespace Prisma {
     connect?: MonthlyUsageWhereUniqueInput | MonthlyUsageWhereUniqueInput[]
   }
 
-  export type LicenseKeyUncheckedCreateNestedManyWithoutSoftwareInput = {
-    create?: XOR<LicenseKeyCreateWithoutSoftwareInput, LicenseKeyUncheckedCreateWithoutSoftwareInput> | LicenseKeyCreateWithoutSoftwareInput[] | LicenseKeyUncheckedCreateWithoutSoftwareInput[]
-    connectOrCreate?: LicenseKeyCreateOrConnectWithoutSoftwareInput | LicenseKeyCreateOrConnectWithoutSoftwareInput[]
-    createMany?: LicenseKeyCreateManySoftwareInputEnvelope
-    connect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+  export type VendorCreateNestedOneWithoutSoftwareInput = {
+    create?: XOR<VendorCreateWithoutSoftwareInput, VendorUncheckedCreateWithoutSoftwareInput>
+    connectOrCreate?: VendorCreateOrConnectWithoutSoftwareInput
+    connect?: VendorWhereUniqueInput
   }
 
   export type ActivationUncheckedCreateNestedManyWithoutSoftwareInput = {
@@ -10524,6 +10517,13 @@ export namespace Prisma {
     connectOrCreate?: ActivationCreateOrConnectWithoutSoftwareInput | ActivationCreateOrConnectWithoutSoftwareInput[]
     createMany?: ActivationCreateManySoftwareInputEnvelope
     connect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
+  }
+
+  export type LicenseKeyUncheckedCreateNestedManyWithoutSoftwareInput = {
+    create?: XOR<LicenseKeyCreateWithoutSoftwareInput, LicenseKeyUncheckedCreateWithoutSoftwareInput> | LicenseKeyCreateWithoutSoftwareInput[] | LicenseKeyUncheckedCreateWithoutSoftwareInput[]
+    connectOrCreate?: LicenseKeyCreateOrConnectWithoutSoftwareInput | LicenseKeyCreateOrConnectWithoutSoftwareInput[]
+    createMany?: LicenseKeyCreateManySoftwareInputEnvelope
+    connect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
   }
 
   export type MonthlyUsageUncheckedCreateNestedManyWithoutSoftwareInput = {
@@ -10545,12 +10545,18 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type VendorUpdateOneRequiredWithoutSoftwareNestedInput = {
-    create?: XOR<VendorCreateWithoutSoftwareInput, VendorUncheckedCreateWithoutSoftwareInput>
-    connectOrCreate?: VendorCreateOrConnectWithoutSoftwareInput
-    upsert?: VendorUpsertWithoutSoftwareInput
-    connect?: VendorWhereUniqueInput
-    update?: XOR<XOR<VendorUpdateToOneWithWhereWithoutSoftwareInput, VendorUpdateWithoutSoftwareInput>, VendorUncheckedUpdateWithoutSoftwareInput>
+  export type ActivationUpdateManyWithoutSoftwareNestedInput = {
+    create?: XOR<ActivationCreateWithoutSoftwareInput, ActivationUncheckedCreateWithoutSoftwareInput> | ActivationCreateWithoutSoftwareInput[] | ActivationUncheckedCreateWithoutSoftwareInput[]
+    connectOrCreate?: ActivationCreateOrConnectWithoutSoftwareInput | ActivationCreateOrConnectWithoutSoftwareInput[]
+    upsert?: ActivationUpsertWithWhereUniqueWithoutSoftwareInput | ActivationUpsertWithWhereUniqueWithoutSoftwareInput[]
+    createMany?: ActivationCreateManySoftwareInputEnvelope
+    set?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
+    disconnect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
+    delete?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
+    connect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
+    update?: ActivationUpdateWithWhereUniqueWithoutSoftwareInput | ActivationUpdateWithWhereUniqueWithoutSoftwareInput[]
+    updateMany?: ActivationUpdateManyWithWhereWithoutSoftwareInput | ActivationUpdateManyWithWhereWithoutSoftwareInput[]
+    deleteMany?: ActivationScalarWhereInput | ActivationScalarWhereInput[]
   }
 
   export type LicenseKeyUpdateManyWithoutSoftwareNestedInput = {
@@ -10567,20 +10573,6 @@ export namespace Prisma {
     deleteMany?: LicenseKeyScalarWhereInput | LicenseKeyScalarWhereInput[]
   }
 
-  export type ActivationUpdateManyWithoutSoftwareNestedInput = {
-    create?: XOR<ActivationCreateWithoutSoftwareInput, ActivationUncheckedCreateWithoutSoftwareInput> | ActivationCreateWithoutSoftwareInput[] | ActivationUncheckedCreateWithoutSoftwareInput[]
-    connectOrCreate?: ActivationCreateOrConnectWithoutSoftwareInput | ActivationCreateOrConnectWithoutSoftwareInput[]
-    upsert?: ActivationUpsertWithWhereUniqueWithoutSoftwareInput | ActivationUpsertWithWhereUniqueWithoutSoftwareInput[]
-    createMany?: ActivationCreateManySoftwareInputEnvelope
-    set?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
-    disconnect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
-    delete?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
-    connect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
-    update?: ActivationUpdateWithWhereUniqueWithoutSoftwareInput | ActivationUpdateWithWhereUniqueWithoutSoftwareInput[]
-    updateMany?: ActivationUpdateManyWithWhereWithoutSoftwareInput | ActivationUpdateManyWithWhereWithoutSoftwareInput[]
-    deleteMany?: ActivationScalarWhereInput | ActivationScalarWhereInput[]
-  }
-
   export type MonthlyUsageUpdateManyWithoutSoftwareNestedInput = {
     create?: XOR<MonthlyUsageCreateWithoutSoftwareInput, MonthlyUsageUncheckedCreateWithoutSoftwareInput> | MonthlyUsageCreateWithoutSoftwareInput[] | MonthlyUsageUncheckedCreateWithoutSoftwareInput[]
     connectOrCreate?: MonthlyUsageCreateOrConnectWithoutSoftwareInput | MonthlyUsageCreateOrConnectWithoutSoftwareInput[]
@@ -10595,18 +10587,12 @@ export namespace Prisma {
     deleteMany?: MonthlyUsageScalarWhereInput | MonthlyUsageScalarWhereInput[]
   }
 
-  export type LicenseKeyUncheckedUpdateManyWithoutSoftwareNestedInput = {
-    create?: XOR<LicenseKeyCreateWithoutSoftwareInput, LicenseKeyUncheckedCreateWithoutSoftwareInput> | LicenseKeyCreateWithoutSoftwareInput[] | LicenseKeyUncheckedCreateWithoutSoftwareInput[]
-    connectOrCreate?: LicenseKeyCreateOrConnectWithoutSoftwareInput | LicenseKeyCreateOrConnectWithoutSoftwareInput[]
-    upsert?: LicenseKeyUpsertWithWhereUniqueWithoutSoftwareInput | LicenseKeyUpsertWithWhereUniqueWithoutSoftwareInput[]
-    createMany?: LicenseKeyCreateManySoftwareInputEnvelope
-    set?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-    disconnect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-    delete?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-    connect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-    update?: LicenseKeyUpdateWithWhereUniqueWithoutSoftwareInput | LicenseKeyUpdateWithWhereUniqueWithoutSoftwareInput[]
-    updateMany?: LicenseKeyUpdateManyWithWhereWithoutSoftwareInput | LicenseKeyUpdateManyWithWhereWithoutSoftwareInput[]
-    deleteMany?: LicenseKeyScalarWhereInput | LicenseKeyScalarWhereInput[]
+  export type VendorUpdateOneRequiredWithoutSoftwareNestedInput = {
+    create?: XOR<VendorCreateWithoutSoftwareInput, VendorUncheckedCreateWithoutSoftwareInput>
+    connectOrCreate?: VendorCreateOrConnectWithoutSoftwareInput
+    upsert?: VendorUpsertWithoutSoftwareInput
+    connect?: VendorWhereUniqueInput
+    update?: XOR<XOR<VendorUpdateToOneWithWhereWithoutSoftwareInput, VendorUpdateWithoutSoftwareInput>, VendorUncheckedUpdateWithoutSoftwareInput>
   }
 
   export type ActivationUncheckedUpdateManyWithoutSoftwareNestedInput = {
@@ -10623,6 +10609,20 @@ export namespace Prisma {
     deleteMany?: ActivationScalarWhereInput | ActivationScalarWhereInput[]
   }
 
+  export type LicenseKeyUncheckedUpdateManyWithoutSoftwareNestedInput = {
+    create?: XOR<LicenseKeyCreateWithoutSoftwareInput, LicenseKeyUncheckedCreateWithoutSoftwareInput> | LicenseKeyCreateWithoutSoftwareInput[] | LicenseKeyUncheckedCreateWithoutSoftwareInput[]
+    connectOrCreate?: LicenseKeyCreateOrConnectWithoutSoftwareInput | LicenseKeyCreateOrConnectWithoutSoftwareInput[]
+    upsert?: LicenseKeyUpsertWithWhereUniqueWithoutSoftwareInput | LicenseKeyUpsertWithWhereUniqueWithoutSoftwareInput[]
+    createMany?: LicenseKeyCreateManySoftwareInputEnvelope
+    set?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    disconnect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    delete?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    connect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    update?: LicenseKeyUpdateWithWhereUniqueWithoutSoftwareInput | LicenseKeyUpdateWithWhereUniqueWithoutSoftwareInput[]
+    updateMany?: LicenseKeyUpdateManyWithWhereWithoutSoftwareInput | LicenseKeyUpdateManyWithWhereWithoutSoftwareInput[]
+    deleteMany?: LicenseKeyScalarWhereInput | LicenseKeyScalarWhereInput[]
+  }
+
   export type MonthlyUsageUncheckedUpdateManyWithoutSoftwareNestedInput = {
     create?: XOR<MonthlyUsageCreateWithoutSoftwareInput, MonthlyUsageUncheckedCreateWithoutSoftwareInput> | MonthlyUsageCreateWithoutSoftwareInput[] | MonthlyUsageUncheckedCreateWithoutSoftwareInput[]
     connectOrCreate?: MonthlyUsageCreateOrConnectWithoutSoftwareInput | MonthlyUsageCreateOrConnectWithoutSoftwareInput[]
@@ -10637,16 +10637,10 @@ export namespace Prisma {
     deleteMany?: MonthlyUsageScalarWhereInput | MonthlyUsageScalarWhereInput[]
   }
 
-  export type VendorCreateNestedOneWithoutLicenseKeysInput = {
-    create?: XOR<VendorCreateWithoutLicenseKeysInput, VendorUncheckedCreateWithoutLicenseKeysInput>
-    connectOrCreate?: VendorCreateOrConnectWithoutLicenseKeysInput
-    connect?: VendorWhereUniqueInput
-  }
-
-  export type SoftwareCreateNestedOneWithoutLicenseKeysInput = {
-    create?: XOR<SoftwareCreateWithoutLicenseKeysInput, SoftwareUncheckedCreateWithoutLicenseKeysInput>
-    connectOrCreate?: SoftwareCreateOrConnectWithoutLicenseKeysInput
-    connect?: SoftwareWhereUniqueInput
+  export type ActivationCreateNestedOneWithoutLicenseKeyInput = {
+    create?: XOR<ActivationCreateWithoutLicenseKeyInput, ActivationUncheckedCreateWithoutLicenseKeyInput>
+    connectOrCreate?: ActivationCreateOrConnectWithoutLicenseKeyInput
+    connect?: ActivationWhereUniqueInput
   }
 
   export type EmployeeCreateNestedOneWithoutActivatedKeysInput = {
@@ -10655,10 +10649,16 @@ export namespace Prisma {
     connect?: EmployeeWhereUniqueInput
   }
 
-  export type ActivationCreateNestedOneWithoutLicenseKeyInput = {
-    create?: XOR<ActivationCreateWithoutLicenseKeyInput, ActivationUncheckedCreateWithoutLicenseKeyInput>
-    connectOrCreate?: ActivationCreateOrConnectWithoutLicenseKeyInput
-    connect?: ActivationWhereUniqueInput
+  export type SoftwareCreateNestedOneWithoutLicenseKeysInput = {
+    create?: XOR<SoftwareCreateWithoutLicenseKeysInput, SoftwareUncheckedCreateWithoutLicenseKeysInput>
+    connectOrCreate?: SoftwareCreateOrConnectWithoutLicenseKeysInput
+    connect?: SoftwareWhereUniqueInput
+  }
+
+  export type VendorCreateNestedOneWithoutLicenseKeysInput = {
+    create?: XOR<VendorCreateWithoutLicenseKeysInput, VendorUncheckedCreateWithoutLicenseKeysInput>
+    connectOrCreate?: VendorCreateOrConnectWithoutLicenseKeysInput
+    connect?: VendorWhereUniqueInput
   }
 
   export type ActivationUncheckedCreateNestedOneWithoutLicenseKeyInput = {
@@ -10675,20 +10675,14 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
-  export type VendorUpdateOneRequiredWithoutLicenseKeysNestedInput = {
-    create?: XOR<VendorCreateWithoutLicenseKeysInput, VendorUncheckedCreateWithoutLicenseKeysInput>
-    connectOrCreate?: VendorCreateOrConnectWithoutLicenseKeysInput
-    upsert?: VendorUpsertWithoutLicenseKeysInput
-    connect?: VendorWhereUniqueInput
-    update?: XOR<XOR<VendorUpdateToOneWithWhereWithoutLicenseKeysInput, VendorUpdateWithoutLicenseKeysInput>, VendorUncheckedUpdateWithoutLicenseKeysInput>
-  }
-
-  export type SoftwareUpdateOneRequiredWithoutLicenseKeysNestedInput = {
-    create?: XOR<SoftwareCreateWithoutLicenseKeysInput, SoftwareUncheckedCreateWithoutLicenseKeysInput>
-    connectOrCreate?: SoftwareCreateOrConnectWithoutLicenseKeysInput
-    upsert?: SoftwareUpsertWithoutLicenseKeysInput
-    connect?: SoftwareWhereUniqueInput
-    update?: XOR<XOR<SoftwareUpdateToOneWithWhereWithoutLicenseKeysInput, SoftwareUpdateWithoutLicenseKeysInput>, SoftwareUncheckedUpdateWithoutLicenseKeysInput>
+  export type ActivationUpdateOneWithoutLicenseKeyNestedInput = {
+    create?: XOR<ActivationCreateWithoutLicenseKeyInput, ActivationUncheckedCreateWithoutLicenseKeyInput>
+    connectOrCreate?: ActivationCreateOrConnectWithoutLicenseKeyInput
+    upsert?: ActivationUpsertWithoutLicenseKeyInput
+    disconnect?: ActivationWhereInput | boolean
+    delete?: ActivationWhereInput | boolean
+    connect?: ActivationWhereUniqueInput
+    update?: XOR<XOR<ActivationUpdateToOneWithWhereWithoutLicenseKeyInput, ActivationUpdateWithoutLicenseKeyInput>, ActivationUncheckedUpdateWithoutLicenseKeyInput>
   }
 
   export type EmployeeUpdateOneWithoutActivatedKeysNestedInput = {
@@ -10701,14 +10695,20 @@ export namespace Prisma {
     update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutActivatedKeysInput, EmployeeUpdateWithoutActivatedKeysInput>, EmployeeUncheckedUpdateWithoutActivatedKeysInput>
   }
 
-  export type ActivationUpdateOneWithoutLicenseKeyNestedInput = {
-    create?: XOR<ActivationCreateWithoutLicenseKeyInput, ActivationUncheckedCreateWithoutLicenseKeyInput>
-    connectOrCreate?: ActivationCreateOrConnectWithoutLicenseKeyInput
-    upsert?: ActivationUpsertWithoutLicenseKeyInput
-    disconnect?: ActivationWhereInput | boolean
-    delete?: ActivationWhereInput | boolean
-    connect?: ActivationWhereUniqueInput
-    update?: XOR<XOR<ActivationUpdateToOneWithWhereWithoutLicenseKeyInput, ActivationUpdateWithoutLicenseKeyInput>, ActivationUncheckedUpdateWithoutLicenseKeyInput>
+  export type SoftwareUpdateOneRequiredWithoutLicenseKeysNestedInput = {
+    create?: XOR<SoftwareCreateWithoutLicenseKeysInput, SoftwareUncheckedCreateWithoutLicenseKeysInput>
+    connectOrCreate?: SoftwareCreateOrConnectWithoutLicenseKeysInput
+    upsert?: SoftwareUpsertWithoutLicenseKeysInput
+    connect?: SoftwareWhereUniqueInput
+    update?: XOR<XOR<SoftwareUpdateToOneWithWhereWithoutLicenseKeysInput, SoftwareUpdateWithoutLicenseKeysInput>, SoftwareUncheckedUpdateWithoutLicenseKeysInput>
+  }
+
+  export type VendorUpdateOneRequiredWithoutLicenseKeysNestedInput = {
+    create?: XOR<VendorCreateWithoutLicenseKeysInput, VendorUncheckedCreateWithoutLicenseKeysInput>
+    connectOrCreate?: VendorCreateOrConnectWithoutLicenseKeysInput
+    upsert?: VendorUpsertWithoutLicenseKeysInput
+    connect?: VendorWhereUniqueInput
+    update?: XOR<XOR<VendorUpdateToOneWithWhereWithoutLicenseKeysInput, VendorUpdateWithoutLicenseKeysInput>, VendorUncheckedUpdateWithoutLicenseKeysInput>
   }
 
   export type ActivationUncheckedUpdateOneWithoutLicenseKeyNestedInput = {
@@ -10721,16 +10721,16 @@ export namespace Prisma {
     update?: XOR<XOR<ActivationUpdateToOneWithWhereWithoutLicenseKeyInput, ActivationUpdateWithoutLicenseKeyInput>, ActivationUncheckedUpdateWithoutLicenseKeyInput>
   }
 
-  export type LicenseKeyCreateNestedOneWithoutActivationInput = {
-    create?: XOR<LicenseKeyCreateWithoutActivationInput, LicenseKeyUncheckedCreateWithoutActivationInput>
-    connectOrCreate?: LicenseKeyCreateOrConnectWithoutActivationInput
-    connect?: LicenseKeyWhereUniqueInput
-  }
-
   export type EmployeeCreateNestedOneWithoutPerformedActivationsInput = {
     create?: XOR<EmployeeCreateWithoutPerformedActivationsInput, EmployeeUncheckedCreateWithoutPerformedActivationsInput>
     connectOrCreate?: EmployeeCreateOrConnectWithoutPerformedActivationsInput
     connect?: EmployeeWhereUniqueInput
+  }
+
+  export type LicenseKeyCreateNestedOneWithoutActivationInput = {
+    create?: XOR<LicenseKeyCreateWithoutActivationInput, LicenseKeyUncheckedCreateWithoutActivationInput>
+    connectOrCreate?: LicenseKeyCreateOrConnectWithoutActivationInput
+    connect?: LicenseKeyWhereUniqueInput
   }
 
   export type SoftwareCreateNestedOneWithoutActivationsInput = {
@@ -10745,20 +10745,20 @@ export namespace Prisma {
     connect?: VendorWhereUniqueInput
   }
 
-  export type LicenseKeyUpdateOneRequiredWithoutActivationNestedInput = {
-    create?: XOR<LicenseKeyCreateWithoutActivationInput, LicenseKeyUncheckedCreateWithoutActivationInput>
-    connectOrCreate?: LicenseKeyCreateOrConnectWithoutActivationInput
-    upsert?: LicenseKeyUpsertWithoutActivationInput
-    connect?: LicenseKeyWhereUniqueInput
-    update?: XOR<XOR<LicenseKeyUpdateToOneWithWhereWithoutActivationInput, LicenseKeyUpdateWithoutActivationInput>, LicenseKeyUncheckedUpdateWithoutActivationInput>
-  }
-
   export type EmployeeUpdateOneRequiredWithoutPerformedActivationsNestedInput = {
     create?: XOR<EmployeeCreateWithoutPerformedActivationsInput, EmployeeUncheckedCreateWithoutPerformedActivationsInput>
     connectOrCreate?: EmployeeCreateOrConnectWithoutPerformedActivationsInput
     upsert?: EmployeeUpsertWithoutPerformedActivationsInput
     connect?: EmployeeWhereUniqueInput
     update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutPerformedActivationsInput, EmployeeUpdateWithoutPerformedActivationsInput>, EmployeeUncheckedUpdateWithoutPerformedActivationsInput>
+  }
+
+  export type LicenseKeyUpdateOneRequiredWithoutActivationNestedInput = {
+    create?: XOR<LicenseKeyCreateWithoutActivationInput, LicenseKeyUncheckedCreateWithoutActivationInput>
+    connectOrCreate?: LicenseKeyCreateOrConnectWithoutActivationInput
+    upsert?: LicenseKeyUpsertWithoutActivationInput
+    connect?: LicenseKeyWhereUniqueInput
+    update?: XOR<XOR<LicenseKeyUpdateToOneWithWhereWithoutActivationInput, LicenseKeyUpdateWithoutActivationInput>, LicenseKeyUncheckedUpdateWithoutActivationInput>
   }
 
   export type SoftwareUpdateOneRequiredWithoutActivationsNestedInput = {
@@ -10777,13 +10777,6 @@ export namespace Prisma {
     update?: XOR<XOR<VendorUpdateToOneWithWhereWithoutActivationsInput, VendorUpdateWithoutActivationsInput>, VendorUncheckedUpdateWithoutActivationsInput>
   }
 
-  export type LicenseKeyCreateNestedManyWithoutActivatedByInput = {
-    create?: XOR<LicenseKeyCreateWithoutActivatedByInput, LicenseKeyUncheckedCreateWithoutActivatedByInput> | LicenseKeyCreateWithoutActivatedByInput[] | LicenseKeyUncheckedCreateWithoutActivatedByInput[]
-    connectOrCreate?: LicenseKeyCreateOrConnectWithoutActivatedByInput | LicenseKeyCreateOrConnectWithoutActivatedByInput[]
-    createMany?: LicenseKeyCreateManyActivatedByInputEnvelope
-    connect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-  }
-
   export type ActivationCreateNestedManyWithoutActivatedByInput = {
     create?: XOR<ActivationCreateWithoutActivatedByInput, ActivationUncheckedCreateWithoutActivatedByInput> | ActivationCreateWithoutActivatedByInput[] | ActivationUncheckedCreateWithoutActivatedByInput[]
     connectOrCreate?: ActivationCreateOrConnectWithoutActivatedByInput | ActivationCreateOrConnectWithoutActivatedByInput[]
@@ -10791,7 +10784,7 @@ export namespace Prisma {
     connect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
   }
 
-  export type LicenseKeyUncheckedCreateNestedManyWithoutActivatedByInput = {
+  export type LicenseKeyCreateNestedManyWithoutActivatedByInput = {
     create?: XOR<LicenseKeyCreateWithoutActivatedByInput, LicenseKeyUncheckedCreateWithoutActivatedByInput> | LicenseKeyCreateWithoutActivatedByInput[] | LicenseKeyUncheckedCreateWithoutActivatedByInput[]
     connectOrCreate?: LicenseKeyCreateOrConnectWithoutActivatedByInput | LicenseKeyCreateOrConnectWithoutActivatedByInput[]
     createMany?: LicenseKeyCreateManyActivatedByInputEnvelope
@@ -10805,22 +10798,15 @@ export namespace Prisma {
     connect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
   }
 
-  export type EnumEmployeeRoleFieldUpdateOperationsInput = {
-    set?: $Enums.EmployeeRole
-  }
-
-  export type LicenseKeyUpdateManyWithoutActivatedByNestedInput = {
+  export type LicenseKeyUncheckedCreateNestedManyWithoutActivatedByInput = {
     create?: XOR<LicenseKeyCreateWithoutActivatedByInput, LicenseKeyUncheckedCreateWithoutActivatedByInput> | LicenseKeyCreateWithoutActivatedByInput[] | LicenseKeyUncheckedCreateWithoutActivatedByInput[]
     connectOrCreate?: LicenseKeyCreateOrConnectWithoutActivatedByInput | LicenseKeyCreateOrConnectWithoutActivatedByInput[]
-    upsert?: LicenseKeyUpsertWithWhereUniqueWithoutActivatedByInput | LicenseKeyUpsertWithWhereUniqueWithoutActivatedByInput[]
     createMany?: LicenseKeyCreateManyActivatedByInputEnvelope
-    set?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-    disconnect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-    delete?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
     connect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-    update?: LicenseKeyUpdateWithWhereUniqueWithoutActivatedByInput | LicenseKeyUpdateWithWhereUniqueWithoutActivatedByInput[]
-    updateMany?: LicenseKeyUpdateManyWithWhereWithoutActivatedByInput | LicenseKeyUpdateManyWithWhereWithoutActivatedByInput[]
-    deleteMany?: LicenseKeyScalarWhereInput | LicenseKeyScalarWhereInput[]
+  }
+
+  export type EnumEmployeeRoleFieldUpdateOperationsInput = {
+    set?: $Enums.EmployeeRole
   }
 
   export type ActivationUpdateManyWithoutActivatedByNestedInput = {
@@ -10837,7 +10823,7 @@ export namespace Prisma {
     deleteMany?: ActivationScalarWhereInput | ActivationScalarWhereInput[]
   }
 
-  export type LicenseKeyUncheckedUpdateManyWithoutActivatedByNestedInput = {
+  export type LicenseKeyUpdateManyWithoutActivatedByNestedInput = {
     create?: XOR<LicenseKeyCreateWithoutActivatedByInput, LicenseKeyUncheckedCreateWithoutActivatedByInput> | LicenseKeyCreateWithoutActivatedByInput[] | LicenseKeyUncheckedCreateWithoutActivatedByInput[]
     connectOrCreate?: LicenseKeyCreateOrConnectWithoutActivatedByInput | LicenseKeyCreateOrConnectWithoutActivatedByInput[]
     upsert?: LicenseKeyUpsertWithWhereUniqueWithoutActivatedByInput | LicenseKeyUpsertWithWhereUniqueWithoutActivatedByInput[]
@@ -10865,16 +10851,30 @@ export namespace Prisma {
     deleteMany?: ActivationScalarWhereInput | ActivationScalarWhereInput[]
   }
 
-  export type VendorCreateNestedOneWithoutMonthlyUsageInput = {
-    create?: XOR<VendorCreateWithoutMonthlyUsageInput, VendorUncheckedCreateWithoutMonthlyUsageInput>
-    connectOrCreate?: VendorCreateOrConnectWithoutMonthlyUsageInput
-    connect?: VendorWhereUniqueInput
+  export type LicenseKeyUncheckedUpdateManyWithoutActivatedByNestedInput = {
+    create?: XOR<LicenseKeyCreateWithoutActivatedByInput, LicenseKeyUncheckedCreateWithoutActivatedByInput> | LicenseKeyCreateWithoutActivatedByInput[] | LicenseKeyUncheckedCreateWithoutActivatedByInput[]
+    connectOrCreate?: LicenseKeyCreateOrConnectWithoutActivatedByInput | LicenseKeyCreateOrConnectWithoutActivatedByInput[]
+    upsert?: LicenseKeyUpsertWithWhereUniqueWithoutActivatedByInput | LicenseKeyUpsertWithWhereUniqueWithoutActivatedByInput[]
+    createMany?: LicenseKeyCreateManyActivatedByInputEnvelope
+    set?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    disconnect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    delete?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    connect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    update?: LicenseKeyUpdateWithWhereUniqueWithoutActivatedByInput | LicenseKeyUpdateWithWhereUniqueWithoutActivatedByInput[]
+    updateMany?: LicenseKeyUpdateManyWithWhereWithoutActivatedByInput | LicenseKeyUpdateManyWithWhereWithoutActivatedByInput[]
+    deleteMany?: LicenseKeyScalarWhereInput | LicenseKeyScalarWhereInput[]
   }
 
   export type SoftwareCreateNestedOneWithoutMonthlyUsageInput = {
     create?: XOR<SoftwareCreateWithoutMonthlyUsageInput, SoftwareUncheckedCreateWithoutMonthlyUsageInput>
     connectOrCreate?: SoftwareCreateOrConnectWithoutMonthlyUsageInput
     connect?: SoftwareWhereUniqueInput
+  }
+
+  export type VendorCreateNestedOneWithoutMonthlyUsageInput = {
+    create?: XOR<VendorCreateWithoutMonthlyUsageInput, VendorUncheckedCreateWithoutMonthlyUsageInput>
+    connectOrCreate?: VendorCreateOrConnectWithoutMonthlyUsageInput
+    connect?: VendorWhereUniqueInput
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -10893,20 +10893,20 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type VendorUpdateOneRequiredWithoutMonthlyUsageNestedInput = {
-    create?: XOR<VendorCreateWithoutMonthlyUsageInput, VendorUncheckedCreateWithoutMonthlyUsageInput>
-    connectOrCreate?: VendorCreateOrConnectWithoutMonthlyUsageInput
-    upsert?: VendorUpsertWithoutMonthlyUsageInput
-    connect?: VendorWhereUniqueInput
-    update?: XOR<XOR<VendorUpdateToOneWithWhereWithoutMonthlyUsageInput, VendorUpdateWithoutMonthlyUsageInput>, VendorUncheckedUpdateWithoutMonthlyUsageInput>
-  }
-
   export type SoftwareUpdateOneRequiredWithoutMonthlyUsageNestedInput = {
     create?: XOR<SoftwareCreateWithoutMonthlyUsageInput, SoftwareUncheckedCreateWithoutMonthlyUsageInput>
     connectOrCreate?: SoftwareCreateOrConnectWithoutMonthlyUsageInput
     upsert?: SoftwareUpsertWithoutMonthlyUsageInput
     connect?: SoftwareWhereUniqueInput
     update?: XOR<XOR<SoftwareUpdateToOneWithWhereWithoutMonthlyUsageInput, SoftwareUpdateWithoutMonthlyUsageInput>, SoftwareUncheckedUpdateWithoutMonthlyUsageInput>
+  }
+
+  export type VendorUpdateOneRequiredWithoutMonthlyUsageNestedInput = {
+    create?: XOR<VendorCreateWithoutMonthlyUsageInput, VendorUncheckedCreateWithoutMonthlyUsageInput>
+    connectOrCreate?: VendorCreateOrConnectWithoutMonthlyUsageInput
+    upsert?: VendorUpsertWithoutMonthlyUsageInput
+    connect?: VendorWhereUniqueInput
+    update?: XOR<XOR<VendorUpdateToOneWithWhereWithoutMonthlyUsageInput, VendorUpdateWithoutMonthlyUsageInput>, VendorUncheckedUpdateWithoutMonthlyUsageInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -11164,39 +11164,33 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type SoftwareCreateWithoutVendorInput = {
+  export type ActivationCreateWithoutVendorInput = {
     id?: string
-    name: string
-    pricingModel: $Enums.PricingModel
-    pricePerUse?: number | null
-    monthlyRate?: number | null
+    headsetSerialNumber?: string | null
+    activatedAt?: Date | string
     createdAt?: Date | string
-    updatedAt?: Date | string
-    licenseKeys?: LicenseKeyCreateNestedManyWithoutSoftwareInput
-    activations?: ActivationCreateNestedManyWithoutSoftwareInput
-    monthlyUsage?: MonthlyUsageCreateNestedManyWithoutSoftwareInput
+    activatedBy: EmployeeCreateNestedOneWithoutPerformedActivationsInput
+    licenseKey: LicenseKeyCreateNestedOneWithoutActivationInput
+    software: SoftwareCreateNestedOneWithoutActivationsInput
   }
 
-  export type SoftwareUncheckedCreateWithoutVendorInput = {
+  export type ActivationUncheckedCreateWithoutVendorInput = {
     id?: string
-    name: string
-    pricingModel: $Enums.PricingModel
-    pricePerUse?: number | null
-    monthlyRate?: number | null
+    licenseKeyId: string
+    activatedById: string
+    softwareId: string
+    headsetSerialNumber?: string | null
+    activatedAt?: Date | string
     createdAt?: Date | string
-    updatedAt?: Date | string
-    licenseKeys?: LicenseKeyUncheckedCreateNestedManyWithoutSoftwareInput
-    activations?: ActivationUncheckedCreateNestedManyWithoutSoftwareInput
-    monthlyUsage?: MonthlyUsageUncheckedCreateNestedManyWithoutSoftwareInput
   }
 
-  export type SoftwareCreateOrConnectWithoutVendorInput = {
-    where: SoftwareWhereUniqueInput
-    create: XOR<SoftwareCreateWithoutVendorInput, SoftwareUncheckedCreateWithoutVendorInput>
+  export type ActivationCreateOrConnectWithoutVendorInput = {
+    where: ActivationWhereUniqueInput
+    create: XOR<ActivationCreateWithoutVendorInput, ActivationUncheckedCreateWithoutVendorInput>
   }
 
-  export type SoftwareCreateManyVendorInputEnvelope = {
-    data: SoftwareCreateManyVendorInput | SoftwareCreateManyVendorInput[]
+  export type ActivationCreateManyVendorInputEnvelope = {
+    data: ActivationCreateManyVendorInput | ActivationCreateManyVendorInput[]
     skipDuplicates?: boolean
   }
 
@@ -11211,9 +11205,9 @@ export namespace Prisma {
     activatedAt?: Date | string | null
     canceledAt?: Date | string | null
     canceledReason?: string | null
-    software: SoftwareCreateNestedOneWithoutLicenseKeysInput
-    activatedBy?: EmployeeCreateNestedOneWithoutActivatedKeysInput
     activation?: ActivationCreateNestedOneWithoutLicenseKeyInput
+    activatedBy?: EmployeeCreateNestedOneWithoutActivatedKeysInput
+    software: SoftwareCreateNestedOneWithoutLicenseKeysInput
   }
 
   export type LicenseKeyUncheckedCreateWithoutVendorInput = {
@@ -11239,36 +11233,6 @@ export namespace Prisma {
 
   export type LicenseKeyCreateManyVendorInputEnvelope = {
     data: LicenseKeyCreateManyVendorInput | LicenseKeyCreateManyVendorInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ActivationCreateWithoutVendorInput = {
-    id?: string
-    headsetSerialNumber?: string | null
-    activatedAt?: Date | string
-    createdAt?: Date | string
-    licenseKey: LicenseKeyCreateNestedOneWithoutActivationInput
-    activatedBy: EmployeeCreateNestedOneWithoutPerformedActivationsInput
-    software: SoftwareCreateNestedOneWithoutActivationsInput
-  }
-
-  export type ActivationUncheckedCreateWithoutVendorInput = {
-    id?: string
-    licenseKeyId: string
-    activatedById: string
-    softwareId: string
-    headsetSerialNumber?: string | null
-    activatedAt?: Date | string
-    createdAt?: Date | string
-  }
-
-  export type ActivationCreateOrConnectWithoutVendorInput = {
-    where: ActivationWhereUniqueInput
-    create: XOR<ActivationCreateWithoutVendorInput, ActivationUncheckedCreateWithoutVendorInput>
-  }
-
-  export type ActivationCreateManyVendorInputEnvelope = {
-    data: ActivationCreateManyVendorInput | ActivationCreateManyVendorInput[]
     skipDuplicates?: boolean
   }
 
@@ -11300,34 +11264,70 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type SoftwareUpsertWithWhereUniqueWithoutVendorInput = {
+  export type SoftwareCreateWithoutVendorInput = {
+    id?: string
+    name: string
+    pricingModel: $Enums.PricingModel
+    pricePerUse?: number | null
+    monthlyRate?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    activations?: ActivationCreateNestedManyWithoutSoftwareInput
+    licenseKeys?: LicenseKeyCreateNestedManyWithoutSoftwareInput
+    monthlyUsage?: MonthlyUsageCreateNestedManyWithoutSoftwareInput
+  }
+
+  export type SoftwareUncheckedCreateWithoutVendorInput = {
+    id?: string
+    name: string
+    pricingModel: $Enums.PricingModel
+    pricePerUse?: number | null
+    monthlyRate?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    activations?: ActivationUncheckedCreateNestedManyWithoutSoftwareInput
+    licenseKeys?: LicenseKeyUncheckedCreateNestedManyWithoutSoftwareInput
+    monthlyUsage?: MonthlyUsageUncheckedCreateNestedManyWithoutSoftwareInput
+  }
+
+  export type SoftwareCreateOrConnectWithoutVendorInput = {
     where: SoftwareWhereUniqueInput
-    update: XOR<SoftwareUpdateWithoutVendorInput, SoftwareUncheckedUpdateWithoutVendorInput>
     create: XOR<SoftwareCreateWithoutVendorInput, SoftwareUncheckedCreateWithoutVendorInput>
   }
 
-  export type SoftwareUpdateWithWhereUniqueWithoutVendorInput = {
-    where: SoftwareWhereUniqueInput
-    data: XOR<SoftwareUpdateWithoutVendorInput, SoftwareUncheckedUpdateWithoutVendorInput>
+  export type SoftwareCreateManyVendorInputEnvelope = {
+    data: SoftwareCreateManyVendorInput | SoftwareCreateManyVendorInput[]
+    skipDuplicates?: boolean
   }
 
-  export type SoftwareUpdateManyWithWhereWithoutVendorInput = {
-    where: SoftwareScalarWhereInput
-    data: XOR<SoftwareUpdateManyMutationInput, SoftwareUncheckedUpdateManyWithoutVendorInput>
+  export type ActivationUpsertWithWhereUniqueWithoutVendorInput = {
+    where: ActivationWhereUniqueInput
+    update: XOR<ActivationUpdateWithoutVendorInput, ActivationUncheckedUpdateWithoutVendorInput>
+    create: XOR<ActivationCreateWithoutVendorInput, ActivationUncheckedCreateWithoutVendorInput>
   }
 
-  export type SoftwareScalarWhereInput = {
-    AND?: SoftwareScalarWhereInput | SoftwareScalarWhereInput[]
-    OR?: SoftwareScalarWhereInput[]
-    NOT?: SoftwareScalarWhereInput | SoftwareScalarWhereInput[]
-    id?: StringFilter<"Software"> | string
-    name?: StringFilter<"Software"> | string
-    vendorId?: StringFilter<"Software"> | string
-    pricingModel?: EnumPricingModelFilter<"Software"> | $Enums.PricingModel
-    pricePerUse?: FloatNullableFilter<"Software"> | number | null
-    monthlyRate?: FloatNullableFilter<"Software"> | number | null
-    createdAt?: DateTimeFilter<"Software"> | Date | string
-    updatedAt?: DateTimeFilter<"Software"> | Date | string
+  export type ActivationUpdateWithWhereUniqueWithoutVendorInput = {
+    where: ActivationWhereUniqueInput
+    data: XOR<ActivationUpdateWithoutVendorInput, ActivationUncheckedUpdateWithoutVendorInput>
+  }
+
+  export type ActivationUpdateManyWithWhereWithoutVendorInput = {
+    where: ActivationScalarWhereInput
+    data: XOR<ActivationUpdateManyMutationInput, ActivationUncheckedUpdateManyWithoutVendorInput>
+  }
+
+  export type ActivationScalarWhereInput = {
+    AND?: ActivationScalarWhereInput | ActivationScalarWhereInput[]
+    OR?: ActivationScalarWhereInput[]
+    NOT?: ActivationScalarWhereInput | ActivationScalarWhereInput[]
+    id?: StringFilter<"Activation"> | string
+    licenseKeyId?: StringFilter<"Activation"> | string
+    activatedById?: StringFilter<"Activation"> | string
+    softwareId?: StringFilter<"Activation"> | string
+    vendorId?: StringFilter<"Activation"> | string
+    headsetSerialNumber?: StringNullableFilter<"Activation"> | string | null
+    activatedAt?: DateTimeFilter<"Activation"> | Date | string
+    createdAt?: DateTimeFilter<"Activation"> | Date | string
   }
 
   export type LicenseKeyUpsertWithWhereUniqueWithoutVendorInput = {
@@ -11365,36 +11365,6 @@ export namespace Prisma {
     canceledReason?: StringNullableFilter<"LicenseKey"> | string | null
   }
 
-  export type ActivationUpsertWithWhereUniqueWithoutVendorInput = {
-    where: ActivationWhereUniqueInput
-    update: XOR<ActivationUpdateWithoutVendorInput, ActivationUncheckedUpdateWithoutVendorInput>
-    create: XOR<ActivationCreateWithoutVendorInput, ActivationUncheckedCreateWithoutVendorInput>
-  }
-
-  export type ActivationUpdateWithWhereUniqueWithoutVendorInput = {
-    where: ActivationWhereUniqueInput
-    data: XOR<ActivationUpdateWithoutVendorInput, ActivationUncheckedUpdateWithoutVendorInput>
-  }
-
-  export type ActivationUpdateManyWithWhereWithoutVendorInput = {
-    where: ActivationScalarWhereInput
-    data: XOR<ActivationUpdateManyMutationInput, ActivationUncheckedUpdateManyWithoutVendorInput>
-  }
-
-  export type ActivationScalarWhereInput = {
-    AND?: ActivationScalarWhereInput | ActivationScalarWhereInput[]
-    OR?: ActivationScalarWhereInput[]
-    NOT?: ActivationScalarWhereInput | ActivationScalarWhereInput[]
-    id?: StringFilter<"Activation"> | string
-    licenseKeyId?: StringFilter<"Activation"> | string
-    activatedById?: StringFilter<"Activation"> | string
-    softwareId?: StringFilter<"Activation"> | string
-    vendorId?: StringFilter<"Activation"> | string
-    headsetSerialNumber?: StringNullableFilter<"Activation"> | string | null
-    activatedAt?: DateTimeFilter<"Activation"> | Date | string
-    createdAt?: DateTimeFilter<"Activation"> | Date | string
-  }
-
   export type MonthlyUsageUpsertWithWhereUniqueWithoutVendorInput = {
     where: MonthlyUsageWhereUniqueInput
     update: XOR<MonthlyUsageUpdateWithoutVendorInput, MonthlyUsageUncheckedUpdateWithoutVendorInput>
@@ -11424,35 +11394,64 @@ export namespace Prisma {
     calculatedAt?: DateTimeFilter<"MonthlyUsage"> | Date | string
   }
 
-  export type VendorCreateWithoutSoftwareInput = {
-    id?: string
-    supabaseUserId?: string | null
-    name: string
-    contactEmail: string
-    billingAddress?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    licenseKeys?: LicenseKeyCreateNestedManyWithoutVendorInput
-    activations?: ActivationCreateNestedManyWithoutVendorInput
-    monthlyUsage?: MonthlyUsageCreateNestedManyWithoutVendorInput
+  export type SoftwareUpsertWithWhereUniqueWithoutVendorInput = {
+    where: SoftwareWhereUniqueInput
+    update: XOR<SoftwareUpdateWithoutVendorInput, SoftwareUncheckedUpdateWithoutVendorInput>
+    create: XOR<SoftwareCreateWithoutVendorInput, SoftwareUncheckedCreateWithoutVendorInput>
   }
 
-  export type VendorUncheckedCreateWithoutSoftwareInput = {
-    id?: string
-    supabaseUserId?: string | null
-    name: string
-    contactEmail: string
-    billingAddress?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    licenseKeys?: LicenseKeyUncheckedCreateNestedManyWithoutVendorInput
-    activations?: ActivationUncheckedCreateNestedManyWithoutVendorInput
-    monthlyUsage?: MonthlyUsageUncheckedCreateNestedManyWithoutVendorInput
+  export type SoftwareUpdateWithWhereUniqueWithoutVendorInput = {
+    where: SoftwareWhereUniqueInput
+    data: XOR<SoftwareUpdateWithoutVendorInput, SoftwareUncheckedUpdateWithoutVendorInput>
   }
 
-  export type VendorCreateOrConnectWithoutSoftwareInput = {
-    where: VendorWhereUniqueInput
-    create: XOR<VendorCreateWithoutSoftwareInput, VendorUncheckedCreateWithoutSoftwareInput>
+  export type SoftwareUpdateManyWithWhereWithoutVendorInput = {
+    where: SoftwareScalarWhereInput
+    data: XOR<SoftwareUpdateManyMutationInput, SoftwareUncheckedUpdateManyWithoutVendorInput>
+  }
+
+  export type SoftwareScalarWhereInput = {
+    AND?: SoftwareScalarWhereInput | SoftwareScalarWhereInput[]
+    OR?: SoftwareScalarWhereInput[]
+    NOT?: SoftwareScalarWhereInput | SoftwareScalarWhereInput[]
+    id?: StringFilter<"Software"> | string
+    name?: StringFilter<"Software"> | string
+    vendorId?: StringFilter<"Software"> | string
+    pricingModel?: EnumPricingModelFilter<"Software"> | $Enums.PricingModel
+    pricePerUse?: FloatNullableFilter<"Software"> | number | null
+    monthlyRate?: FloatNullableFilter<"Software"> | number | null
+    createdAt?: DateTimeFilter<"Software"> | Date | string
+    updatedAt?: DateTimeFilter<"Software"> | Date | string
+  }
+
+  export type ActivationCreateWithoutSoftwareInput = {
+    id?: string
+    headsetSerialNumber?: string | null
+    activatedAt?: Date | string
+    createdAt?: Date | string
+    activatedBy: EmployeeCreateNestedOneWithoutPerformedActivationsInput
+    licenseKey: LicenseKeyCreateNestedOneWithoutActivationInput
+    vendor: VendorCreateNestedOneWithoutActivationsInput
+  }
+
+  export type ActivationUncheckedCreateWithoutSoftwareInput = {
+    id?: string
+    licenseKeyId: string
+    activatedById: string
+    vendorId: string
+    headsetSerialNumber?: string | null
+    activatedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type ActivationCreateOrConnectWithoutSoftwareInput = {
+    where: ActivationWhereUniqueInput
+    create: XOR<ActivationCreateWithoutSoftwareInput, ActivationUncheckedCreateWithoutSoftwareInput>
+  }
+
+  export type ActivationCreateManySoftwareInputEnvelope = {
+    data: ActivationCreateManySoftwareInput | ActivationCreateManySoftwareInput[]
+    skipDuplicates?: boolean
   }
 
   export type LicenseKeyCreateWithoutSoftwareInput = {
@@ -11466,9 +11465,9 @@ export namespace Prisma {
     activatedAt?: Date | string | null
     canceledAt?: Date | string | null
     canceledReason?: string | null
-    vendor: VendorCreateNestedOneWithoutLicenseKeysInput
-    activatedBy?: EmployeeCreateNestedOneWithoutActivatedKeysInput
     activation?: ActivationCreateNestedOneWithoutLicenseKeyInput
+    activatedBy?: EmployeeCreateNestedOneWithoutActivatedKeysInput
+    vendor: VendorCreateNestedOneWithoutLicenseKeysInput
   }
 
   export type LicenseKeyUncheckedCreateWithoutSoftwareInput = {
@@ -11494,36 +11493,6 @@ export namespace Prisma {
 
   export type LicenseKeyCreateManySoftwareInputEnvelope = {
     data: LicenseKeyCreateManySoftwareInput | LicenseKeyCreateManySoftwareInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ActivationCreateWithoutSoftwareInput = {
-    id?: string
-    headsetSerialNumber?: string | null
-    activatedAt?: Date | string
-    createdAt?: Date | string
-    licenseKey: LicenseKeyCreateNestedOneWithoutActivationInput
-    activatedBy: EmployeeCreateNestedOneWithoutPerformedActivationsInput
-    vendor: VendorCreateNestedOneWithoutActivationsInput
-  }
-
-  export type ActivationUncheckedCreateWithoutSoftwareInput = {
-    id?: string
-    licenseKeyId: string
-    activatedById: string
-    vendorId: string
-    headsetSerialNumber?: string | null
-    activatedAt?: Date | string
-    createdAt?: Date | string
-  }
-
-  export type ActivationCreateOrConnectWithoutSoftwareInput = {
-    where: ActivationWhereUniqueInput
-    create: XOR<ActivationCreateWithoutSoftwareInput, ActivationUncheckedCreateWithoutSoftwareInput>
-  }
-
-  export type ActivationCreateManySoftwareInputEnvelope = {
-    data: ActivationCreateManySoftwareInput | ActivationCreateManySoftwareInput[]
     skipDuplicates?: boolean
   }
 
@@ -11555,57 +11524,35 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type VendorUpsertWithoutSoftwareInput = {
-    update: XOR<VendorUpdateWithoutSoftwareInput, VendorUncheckedUpdateWithoutSoftwareInput>
+  export type VendorCreateWithoutSoftwareInput = {
+    id?: string
+    name: string
+    contactEmail: string
+    billingAddress?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    supabaseUserId?: string | null
+    activations?: ActivationCreateNestedManyWithoutVendorInput
+    licenseKeys?: LicenseKeyCreateNestedManyWithoutVendorInput
+    monthlyUsage?: MonthlyUsageCreateNestedManyWithoutVendorInput
+  }
+
+  export type VendorUncheckedCreateWithoutSoftwareInput = {
+    id?: string
+    name: string
+    contactEmail: string
+    billingAddress?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    supabaseUserId?: string | null
+    activations?: ActivationUncheckedCreateNestedManyWithoutVendorInput
+    licenseKeys?: LicenseKeyUncheckedCreateNestedManyWithoutVendorInput
+    monthlyUsage?: MonthlyUsageUncheckedCreateNestedManyWithoutVendorInput
+  }
+
+  export type VendorCreateOrConnectWithoutSoftwareInput = {
+    where: VendorWhereUniqueInput
     create: XOR<VendorCreateWithoutSoftwareInput, VendorUncheckedCreateWithoutSoftwareInput>
-    where?: VendorWhereInput
-  }
-
-  export type VendorUpdateToOneWithWhereWithoutSoftwareInput = {
-    where?: VendorWhereInput
-    data: XOR<VendorUpdateWithoutSoftwareInput, VendorUncheckedUpdateWithoutSoftwareInput>
-  }
-
-  export type VendorUpdateWithoutSoftwareInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    contactEmail?: StringFieldUpdateOperationsInput | string
-    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    licenseKeys?: LicenseKeyUpdateManyWithoutVendorNestedInput
-    activations?: ActivationUpdateManyWithoutVendorNestedInput
-    monthlyUsage?: MonthlyUsageUpdateManyWithoutVendorNestedInput
-  }
-
-  export type VendorUncheckedUpdateWithoutSoftwareInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    contactEmail?: StringFieldUpdateOperationsInput | string
-    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    licenseKeys?: LicenseKeyUncheckedUpdateManyWithoutVendorNestedInput
-    activations?: ActivationUncheckedUpdateManyWithoutVendorNestedInput
-    monthlyUsage?: MonthlyUsageUncheckedUpdateManyWithoutVendorNestedInput
-  }
-
-  export type LicenseKeyUpsertWithWhereUniqueWithoutSoftwareInput = {
-    where: LicenseKeyWhereUniqueInput
-    update: XOR<LicenseKeyUpdateWithoutSoftwareInput, LicenseKeyUncheckedUpdateWithoutSoftwareInput>
-    create: XOR<LicenseKeyCreateWithoutSoftwareInput, LicenseKeyUncheckedCreateWithoutSoftwareInput>
-  }
-
-  export type LicenseKeyUpdateWithWhereUniqueWithoutSoftwareInput = {
-    where: LicenseKeyWhereUniqueInput
-    data: XOR<LicenseKeyUpdateWithoutSoftwareInput, LicenseKeyUncheckedUpdateWithoutSoftwareInput>
-  }
-
-  export type LicenseKeyUpdateManyWithWhereWithoutSoftwareInput = {
-    where: LicenseKeyScalarWhereInput
-    data: XOR<LicenseKeyUpdateManyMutationInput, LicenseKeyUncheckedUpdateManyWithoutSoftwareInput>
   }
 
   export type ActivationUpsertWithWhereUniqueWithoutSoftwareInput = {
@@ -11624,6 +11571,22 @@ export namespace Prisma {
     data: XOR<ActivationUpdateManyMutationInput, ActivationUncheckedUpdateManyWithoutSoftwareInput>
   }
 
+  export type LicenseKeyUpsertWithWhereUniqueWithoutSoftwareInput = {
+    where: LicenseKeyWhereUniqueInput
+    update: XOR<LicenseKeyUpdateWithoutSoftwareInput, LicenseKeyUncheckedUpdateWithoutSoftwareInput>
+    create: XOR<LicenseKeyCreateWithoutSoftwareInput, LicenseKeyUncheckedCreateWithoutSoftwareInput>
+  }
+
+  export type LicenseKeyUpdateWithWhereUniqueWithoutSoftwareInput = {
+    where: LicenseKeyWhereUniqueInput
+    data: XOR<LicenseKeyUpdateWithoutSoftwareInput, LicenseKeyUncheckedUpdateWithoutSoftwareInput>
+  }
+
+  export type LicenseKeyUpdateManyWithWhereWithoutSoftwareInput = {
+    where: LicenseKeyScalarWhereInput
+    data: XOR<LicenseKeyUpdateManyMutationInput, LicenseKeyUncheckedUpdateManyWithoutSoftwareInput>
+  }
+
   export type MonthlyUsageUpsertWithWhereUniqueWithoutSoftwareInput = {
     where: MonthlyUsageWhereUniqueInput
     update: XOR<MonthlyUsageUpdateWithoutSoftwareInput, MonthlyUsageUncheckedUpdateWithoutSoftwareInput>
@@ -11640,95 +11603,41 @@ export namespace Prisma {
     data: XOR<MonthlyUsageUpdateManyMutationInput, MonthlyUsageUncheckedUpdateManyWithoutSoftwareInput>
   }
 
-  export type VendorCreateWithoutLicenseKeysInput = {
-    id?: string
-    supabaseUserId?: string | null
-    name: string
-    contactEmail: string
-    billingAddress?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    software?: SoftwareCreateNestedManyWithoutVendorInput
-    activations?: ActivationCreateNestedManyWithoutVendorInput
-    monthlyUsage?: MonthlyUsageCreateNestedManyWithoutVendorInput
+  export type VendorUpsertWithoutSoftwareInput = {
+    update: XOR<VendorUpdateWithoutSoftwareInput, VendorUncheckedUpdateWithoutSoftwareInput>
+    create: XOR<VendorCreateWithoutSoftwareInput, VendorUncheckedCreateWithoutSoftwareInput>
+    where?: VendorWhereInput
   }
 
-  export type VendorUncheckedCreateWithoutLicenseKeysInput = {
-    id?: string
-    supabaseUserId?: string | null
-    name: string
-    contactEmail: string
-    billingAddress?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    software?: SoftwareUncheckedCreateNestedManyWithoutVendorInput
-    activations?: ActivationUncheckedCreateNestedManyWithoutVendorInput
-    monthlyUsage?: MonthlyUsageUncheckedCreateNestedManyWithoutVendorInput
+  export type VendorUpdateToOneWithWhereWithoutSoftwareInput = {
+    where?: VendorWhereInput
+    data: XOR<VendorUpdateWithoutSoftwareInput, VendorUncheckedUpdateWithoutSoftwareInput>
   }
 
-  export type VendorCreateOrConnectWithoutLicenseKeysInput = {
-    where: VendorWhereUniqueInput
-    create: XOR<VendorCreateWithoutLicenseKeysInput, VendorUncheckedCreateWithoutLicenseKeysInput>
+  export type VendorUpdateWithoutSoftwareInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    activations?: ActivationUpdateManyWithoutVendorNestedInput
+    licenseKeys?: LicenseKeyUpdateManyWithoutVendorNestedInput
+    monthlyUsage?: MonthlyUsageUpdateManyWithoutVendorNestedInput
   }
 
-  export type SoftwareCreateWithoutLicenseKeysInput = {
-    id?: string
-    name: string
-    pricingModel: $Enums.PricingModel
-    pricePerUse?: number | null
-    monthlyRate?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    vendor: VendorCreateNestedOneWithoutSoftwareInput
-    activations?: ActivationCreateNestedManyWithoutSoftwareInput
-    monthlyUsage?: MonthlyUsageCreateNestedManyWithoutSoftwareInput
-  }
-
-  export type SoftwareUncheckedCreateWithoutLicenseKeysInput = {
-    id?: string
-    name: string
-    vendorId: string
-    pricingModel: $Enums.PricingModel
-    pricePerUse?: number | null
-    monthlyRate?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    activations?: ActivationUncheckedCreateNestedManyWithoutSoftwareInput
-    monthlyUsage?: MonthlyUsageUncheckedCreateNestedManyWithoutSoftwareInput
-  }
-
-  export type SoftwareCreateOrConnectWithoutLicenseKeysInput = {
-    where: SoftwareWhereUniqueInput
-    create: XOR<SoftwareCreateWithoutLicenseKeysInput, SoftwareUncheckedCreateWithoutLicenseKeysInput>
-  }
-
-  export type EmployeeCreateWithoutActivatedKeysInput = {
-    id?: string
-    supabaseUserId?: string | null
-    name: string
-    email: string
-    companyName?: string | null
-    role?: $Enums.EmployeeRole
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    performedActivations?: ActivationCreateNestedManyWithoutActivatedByInput
-  }
-
-  export type EmployeeUncheckedCreateWithoutActivatedKeysInput = {
-    id?: string
-    supabaseUserId?: string | null
-    name: string
-    email: string
-    companyName?: string | null
-    role?: $Enums.EmployeeRole
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    performedActivations?: ActivationUncheckedCreateNestedManyWithoutActivatedByInput
-  }
-
-  export type EmployeeCreateOrConnectWithoutActivatedKeysInput = {
-    where: EmployeeWhereUniqueInput
-    create: XOR<EmployeeCreateWithoutActivatedKeysInput, EmployeeUncheckedCreateWithoutActivatedKeysInput>
+  export type VendorUncheckedUpdateWithoutSoftwareInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    activations?: ActivationUncheckedUpdateManyWithoutVendorNestedInput
+    licenseKeys?: LicenseKeyUncheckedUpdateManyWithoutVendorNestedInput
+    monthlyUsage?: MonthlyUsageUncheckedUpdateManyWithoutVendorNestedInput
   }
 
   export type ActivationCreateWithoutLicenseKeyInput = {
@@ -11756,113 +11665,95 @@ export namespace Prisma {
     create: XOR<ActivationCreateWithoutLicenseKeyInput, ActivationUncheckedCreateWithoutLicenseKeyInput>
   }
 
-  export type VendorUpsertWithoutLicenseKeysInput = {
-    update: XOR<VendorUpdateWithoutLicenseKeysInput, VendorUncheckedUpdateWithoutLicenseKeysInput>
-    create: XOR<VendorCreateWithoutLicenseKeysInput, VendorUncheckedCreateWithoutLicenseKeysInput>
-    where?: VendorWhereInput
+  export type EmployeeCreateWithoutActivatedKeysInput = {
+    id?: string
+    name: string
+    email: string
+    role?: $Enums.EmployeeRole
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    companyName?: string | null
+    supabaseUserId?: string | null
+    performedActivations?: ActivationCreateNestedManyWithoutActivatedByInput
   }
 
-  export type VendorUpdateToOneWithWhereWithoutLicenseKeysInput = {
-    where?: VendorWhereInput
-    data: XOR<VendorUpdateWithoutLicenseKeysInput, VendorUncheckedUpdateWithoutLicenseKeysInput>
+  export type EmployeeUncheckedCreateWithoutActivatedKeysInput = {
+    id?: string
+    name: string
+    email: string
+    role?: $Enums.EmployeeRole
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    companyName?: string | null
+    supabaseUserId?: string | null
+    performedActivations?: ActivationUncheckedCreateNestedManyWithoutActivatedByInput
   }
 
-  export type VendorUpdateWithoutLicenseKeysInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    contactEmail?: StringFieldUpdateOperationsInput | string
-    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    software?: SoftwareUpdateManyWithoutVendorNestedInput
-    activations?: ActivationUpdateManyWithoutVendorNestedInput
-    monthlyUsage?: MonthlyUsageUpdateManyWithoutVendorNestedInput
-  }
-
-  export type VendorUncheckedUpdateWithoutLicenseKeysInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    contactEmail?: StringFieldUpdateOperationsInput | string
-    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    software?: SoftwareUncheckedUpdateManyWithoutVendorNestedInput
-    activations?: ActivationUncheckedUpdateManyWithoutVendorNestedInput
-    monthlyUsage?: MonthlyUsageUncheckedUpdateManyWithoutVendorNestedInput
-  }
-
-  export type SoftwareUpsertWithoutLicenseKeysInput = {
-    update: XOR<SoftwareUpdateWithoutLicenseKeysInput, SoftwareUncheckedUpdateWithoutLicenseKeysInput>
-    create: XOR<SoftwareCreateWithoutLicenseKeysInput, SoftwareUncheckedCreateWithoutLicenseKeysInput>
-    where?: SoftwareWhereInput
-  }
-
-  export type SoftwareUpdateToOneWithWhereWithoutLicenseKeysInput = {
-    where?: SoftwareWhereInput
-    data: XOR<SoftwareUpdateWithoutLicenseKeysInput, SoftwareUncheckedUpdateWithoutLicenseKeysInput>
-  }
-
-  export type SoftwareUpdateWithoutLicenseKeysInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
-    pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
-    monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    vendor?: VendorUpdateOneRequiredWithoutSoftwareNestedInput
-    activations?: ActivationUpdateManyWithoutSoftwareNestedInput
-    monthlyUsage?: MonthlyUsageUpdateManyWithoutSoftwareNestedInput
-  }
-
-  export type SoftwareUncheckedUpdateWithoutLicenseKeysInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    vendorId?: StringFieldUpdateOperationsInput | string
-    pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
-    pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
-    monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    activations?: ActivationUncheckedUpdateManyWithoutSoftwareNestedInput
-    monthlyUsage?: MonthlyUsageUncheckedUpdateManyWithoutSoftwareNestedInput
-  }
-
-  export type EmployeeUpsertWithoutActivatedKeysInput = {
-    update: XOR<EmployeeUpdateWithoutActivatedKeysInput, EmployeeUncheckedUpdateWithoutActivatedKeysInput>
+  export type EmployeeCreateOrConnectWithoutActivatedKeysInput = {
+    where: EmployeeWhereUniqueInput
     create: XOR<EmployeeCreateWithoutActivatedKeysInput, EmployeeUncheckedCreateWithoutActivatedKeysInput>
-    where?: EmployeeWhereInput
   }
 
-  export type EmployeeUpdateToOneWithWhereWithoutActivatedKeysInput = {
-    where?: EmployeeWhereInput
-    data: XOR<EmployeeUpdateWithoutActivatedKeysInput, EmployeeUncheckedUpdateWithoutActivatedKeysInput>
+  export type SoftwareCreateWithoutLicenseKeysInput = {
+    id?: string
+    name: string
+    pricingModel: $Enums.PricingModel
+    pricePerUse?: number | null
+    monthlyRate?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    activations?: ActivationCreateNestedManyWithoutSoftwareInput
+    monthlyUsage?: MonthlyUsageCreateNestedManyWithoutSoftwareInput
+    vendor: VendorCreateNestedOneWithoutSoftwareInput
   }
 
-  export type EmployeeUpdateWithoutActivatedKeysInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    companyName?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    performedActivations?: ActivationUpdateManyWithoutActivatedByNestedInput
+  export type SoftwareUncheckedCreateWithoutLicenseKeysInput = {
+    id?: string
+    name: string
+    vendorId: string
+    pricingModel: $Enums.PricingModel
+    pricePerUse?: number | null
+    monthlyRate?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    activations?: ActivationUncheckedCreateNestedManyWithoutSoftwareInput
+    monthlyUsage?: MonthlyUsageUncheckedCreateNestedManyWithoutSoftwareInput
   }
 
-  export type EmployeeUncheckedUpdateWithoutActivatedKeysInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    companyName?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    performedActivations?: ActivationUncheckedUpdateManyWithoutActivatedByNestedInput
+  export type SoftwareCreateOrConnectWithoutLicenseKeysInput = {
+    where: SoftwareWhereUniqueInput
+    create: XOR<SoftwareCreateWithoutLicenseKeysInput, SoftwareUncheckedCreateWithoutLicenseKeysInput>
+  }
+
+  export type VendorCreateWithoutLicenseKeysInput = {
+    id?: string
+    name: string
+    contactEmail: string
+    billingAddress?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    supabaseUserId?: string | null
+    activations?: ActivationCreateNestedManyWithoutVendorInput
+    monthlyUsage?: MonthlyUsageCreateNestedManyWithoutVendorInput
+    software?: SoftwareCreateNestedManyWithoutVendorInput
+  }
+
+  export type VendorUncheckedCreateWithoutLicenseKeysInput = {
+    id?: string
+    name: string
+    contactEmail: string
+    billingAddress?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    supabaseUserId?: string | null
+    activations?: ActivationUncheckedCreateNestedManyWithoutVendorInput
+    monthlyUsage?: MonthlyUsageUncheckedCreateNestedManyWithoutVendorInput
+    software?: SoftwareUncheckedCreateNestedManyWithoutVendorInput
+  }
+
+  export type VendorCreateOrConnectWithoutLicenseKeysInput = {
+    where: VendorWhereUniqueInput
+    create: XOR<VendorCreateWithoutLicenseKeysInput, VendorUncheckedCreateWithoutLicenseKeysInput>
   }
 
   export type ActivationUpsertWithoutLicenseKeyInput = {
@@ -11896,6 +11787,144 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type EmployeeUpsertWithoutActivatedKeysInput = {
+    update: XOR<EmployeeUpdateWithoutActivatedKeysInput, EmployeeUncheckedUpdateWithoutActivatedKeysInput>
+    create: XOR<EmployeeCreateWithoutActivatedKeysInput, EmployeeUncheckedCreateWithoutActivatedKeysInput>
+    where?: EmployeeWhereInput
+  }
+
+  export type EmployeeUpdateToOneWithWhereWithoutActivatedKeysInput = {
+    where?: EmployeeWhereInput
+    data: XOR<EmployeeUpdateWithoutActivatedKeysInput, EmployeeUncheckedUpdateWithoutActivatedKeysInput>
+  }
+
+  export type EmployeeUpdateWithoutActivatedKeysInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    performedActivations?: ActivationUpdateManyWithoutActivatedByNestedInput
+  }
+
+  export type EmployeeUncheckedUpdateWithoutActivatedKeysInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    performedActivations?: ActivationUncheckedUpdateManyWithoutActivatedByNestedInput
+  }
+
+  export type SoftwareUpsertWithoutLicenseKeysInput = {
+    update: XOR<SoftwareUpdateWithoutLicenseKeysInput, SoftwareUncheckedUpdateWithoutLicenseKeysInput>
+    create: XOR<SoftwareCreateWithoutLicenseKeysInput, SoftwareUncheckedCreateWithoutLicenseKeysInput>
+    where?: SoftwareWhereInput
+  }
+
+  export type SoftwareUpdateToOneWithWhereWithoutLicenseKeysInput = {
+    where?: SoftwareWhereInput
+    data: XOR<SoftwareUpdateWithoutLicenseKeysInput, SoftwareUncheckedUpdateWithoutLicenseKeysInput>
+  }
+
+  export type SoftwareUpdateWithoutLicenseKeysInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
+    pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
+    monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    activations?: ActivationUpdateManyWithoutSoftwareNestedInput
+    monthlyUsage?: MonthlyUsageUpdateManyWithoutSoftwareNestedInput
+    vendor?: VendorUpdateOneRequiredWithoutSoftwareNestedInput
+  }
+
+  export type SoftwareUncheckedUpdateWithoutLicenseKeysInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    vendorId?: StringFieldUpdateOperationsInput | string
+    pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
+    pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
+    monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    activations?: ActivationUncheckedUpdateManyWithoutSoftwareNestedInput
+    monthlyUsage?: MonthlyUsageUncheckedUpdateManyWithoutSoftwareNestedInput
+  }
+
+  export type VendorUpsertWithoutLicenseKeysInput = {
+    update: XOR<VendorUpdateWithoutLicenseKeysInput, VendorUncheckedUpdateWithoutLicenseKeysInput>
+    create: XOR<VendorCreateWithoutLicenseKeysInput, VendorUncheckedCreateWithoutLicenseKeysInput>
+    where?: VendorWhereInput
+  }
+
+  export type VendorUpdateToOneWithWhereWithoutLicenseKeysInput = {
+    where?: VendorWhereInput
+    data: XOR<VendorUpdateWithoutLicenseKeysInput, VendorUncheckedUpdateWithoutLicenseKeysInput>
+  }
+
+  export type VendorUpdateWithoutLicenseKeysInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    activations?: ActivationUpdateManyWithoutVendorNestedInput
+    monthlyUsage?: MonthlyUsageUpdateManyWithoutVendorNestedInput
+    software?: SoftwareUpdateManyWithoutVendorNestedInput
+  }
+
+  export type VendorUncheckedUpdateWithoutLicenseKeysInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    activations?: ActivationUncheckedUpdateManyWithoutVendorNestedInput
+    monthlyUsage?: MonthlyUsageUncheckedUpdateManyWithoutVendorNestedInput
+    software?: SoftwareUncheckedUpdateManyWithoutVendorNestedInput
+  }
+
+  export type EmployeeCreateWithoutPerformedActivationsInput = {
+    id?: string
+    name: string
+    email: string
+    role?: $Enums.EmployeeRole
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    companyName?: string | null
+    supabaseUserId?: string | null
+    activatedKeys?: LicenseKeyCreateNestedManyWithoutActivatedByInput
+  }
+
+  export type EmployeeUncheckedCreateWithoutPerformedActivationsInput = {
+    id?: string
+    name: string
+    email: string
+    role?: $Enums.EmployeeRole
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    companyName?: string | null
+    supabaseUserId?: string | null
+    activatedKeys?: LicenseKeyUncheckedCreateNestedManyWithoutActivatedByInput
+  }
+
+  export type EmployeeCreateOrConnectWithoutPerformedActivationsInput = {
+    where: EmployeeWhereUniqueInput
+    create: XOR<EmployeeCreateWithoutPerformedActivationsInput, EmployeeUncheckedCreateWithoutPerformedActivationsInput>
+  }
+
   export type LicenseKeyCreateWithoutActivationInput = {
     id?: string
     key: string
@@ -11907,9 +11936,9 @@ export namespace Prisma {
     activatedAt?: Date | string | null
     canceledAt?: Date | string | null
     canceledReason?: string | null
-    vendor: VendorCreateNestedOneWithoutLicenseKeysInput
-    software: SoftwareCreateNestedOneWithoutLicenseKeysInput
     activatedBy?: EmployeeCreateNestedOneWithoutActivatedKeysInput
+    software: SoftwareCreateNestedOneWithoutLicenseKeysInput
+    vendor: VendorCreateNestedOneWithoutLicenseKeysInput
   }
 
   export type LicenseKeyUncheckedCreateWithoutActivationInput = {
@@ -11933,35 +11962,6 @@ export namespace Prisma {
     create: XOR<LicenseKeyCreateWithoutActivationInput, LicenseKeyUncheckedCreateWithoutActivationInput>
   }
 
-  export type EmployeeCreateWithoutPerformedActivationsInput = {
-    id?: string
-    supabaseUserId?: string | null
-    name: string
-    email: string
-    companyName?: string | null
-    role?: $Enums.EmployeeRole
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    activatedKeys?: LicenseKeyCreateNestedManyWithoutActivatedByInput
-  }
-
-  export type EmployeeUncheckedCreateWithoutPerformedActivationsInput = {
-    id?: string
-    supabaseUserId?: string | null
-    name: string
-    email: string
-    companyName?: string | null
-    role?: $Enums.EmployeeRole
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    activatedKeys?: LicenseKeyUncheckedCreateNestedManyWithoutActivatedByInput
-  }
-
-  export type EmployeeCreateOrConnectWithoutPerformedActivationsInput = {
-    where: EmployeeWhereUniqueInput
-    create: XOR<EmployeeCreateWithoutPerformedActivationsInput, EmployeeUncheckedCreateWithoutPerformedActivationsInput>
-  }
-
   export type SoftwareCreateWithoutActivationsInput = {
     id?: string
     name: string
@@ -11970,9 +11970,9 @@ export namespace Prisma {
     monthlyRate?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    vendor: VendorCreateNestedOneWithoutSoftwareInput
     licenseKeys?: LicenseKeyCreateNestedManyWithoutSoftwareInput
     monthlyUsage?: MonthlyUsageCreateNestedManyWithoutSoftwareInput
+    vendor: VendorCreateNestedOneWithoutSoftwareInput
   }
 
   export type SoftwareUncheckedCreateWithoutActivationsInput = {
@@ -11995,33 +11995,68 @@ export namespace Prisma {
 
   export type VendorCreateWithoutActivationsInput = {
     id?: string
-    supabaseUserId?: string | null
     name: string
     contactEmail: string
     billingAddress?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    software?: SoftwareCreateNestedManyWithoutVendorInput
+    supabaseUserId?: string | null
     licenseKeys?: LicenseKeyCreateNestedManyWithoutVendorInput
     monthlyUsage?: MonthlyUsageCreateNestedManyWithoutVendorInput
+    software?: SoftwareCreateNestedManyWithoutVendorInput
   }
 
   export type VendorUncheckedCreateWithoutActivationsInput = {
     id?: string
-    supabaseUserId?: string | null
     name: string
     contactEmail: string
     billingAddress?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    software?: SoftwareUncheckedCreateNestedManyWithoutVendorInput
+    supabaseUserId?: string | null
     licenseKeys?: LicenseKeyUncheckedCreateNestedManyWithoutVendorInput
     monthlyUsage?: MonthlyUsageUncheckedCreateNestedManyWithoutVendorInput
+    software?: SoftwareUncheckedCreateNestedManyWithoutVendorInput
   }
 
   export type VendorCreateOrConnectWithoutActivationsInput = {
     where: VendorWhereUniqueInput
     create: XOR<VendorCreateWithoutActivationsInput, VendorUncheckedCreateWithoutActivationsInput>
+  }
+
+  export type EmployeeUpsertWithoutPerformedActivationsInput = {
+    update: XOR<EmployeeUpdateWithoutPerformedActivationsInput, EmployeeUncheckedUpdateWithoutPerformedActivationsInput>
+    create: XOR<EmployeeCreateWithoutPerformedActivationsInput, EmployeeUncheckedCreateWithoutPerformedActivationsInput>
+    where?: EmployeeWhereInput
+  }
+
+  export type EmployeeUpdateToOneWithWhereWithoutPerformedActivationsInput = {
+    where?: EmployeeWhereInput
+    data: XOR<EmployeeUpdateWithoutPerformedActivationsInput, EmployeeUncheckedUpdateWithoutPerformedActivationsInput>
+  }
+
+  export type EmployeeUpdateWithoutPerformedActivationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedKeys?: LicenseKeyUpdateManyWithoutActivatedByNestedInput
+  }
+
+  export type EmployeeUncheckedUpdateWithoutPerformedActivationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedKeys?: LicenseKeyUncheckedUpdateManyWithoutActivatedByNestedInput
   }
 
   export type LicenseKeyUpsertWithoutActivationInput = {
@@ -12046,9 +12081,9 @@ export namespace Prisma {
     activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     canceledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     canceledReason?: NullableStringFieldUpdateOperationsInput | string | null
-    vendor?: VendorUpdateOneRequiredWithoutLicenseKeysNestedInput
-    software?: SoftwareUpdateOneRequiredWithoutLicenseKeysNestedInput
     activatedBy?: EmployeeUpdateOneWithoutActivatedKeysNestedInput
+    software?: SoftwareUpdateOneRequiredWithoutLicenseKeysNestedInput
+    vendor?: VendorUpdateOneRequiredWithoutLicenseKeysNestedInput
   }
 
   export type LicenseKeyUncheckedUpdateWithoutActivationInput = {
@@ -12065,41 +12100,6 @@ export namespace Prisma {
     activatedById?: NullableStringFieldUpdateOperationsInput | string | null
     canceledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     canceledReason?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type EmployeeUpsertWithoutPerformedActivationsInput = {
-    update: XOR<EmployeeUpdateWithoutPerformedActivationsInput, EmployeeUncheckedUpdateWithoutPerformedActivationsInput>
-    create: XOR<EmployeeCreateWithoutPerformedActivationsInput, EmployeeUncheckedCreateWithoutPerformedActivationsInput>
-    where?: EmployeeWhereInput
-  }
-
-  export type EmployeeUpdateToOneWithWhereWithoutPerformedActivationsInput = {
-    where?: EmployeeWhereInput
-    data: XOR<EmployeeUpdateWithoutPerformedActivationsInput, EmployeeUncheckedUpdateWithoutPerformedActivationsInput>
-  }
-
-  export type EmployeeUpdateWithoutPerformedActivationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    companyName?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    activatedKeys?: LicenseKeyUpdateManyWithoutActivatedByNestedInput
-  }
-
-  export type EmployeeUncheckedUpdateWithoutPerformedActivationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    companyName?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    activatedKeys?: LicenseKeyUncheckedUpdateManyWithoutActivatedByNestedInput
   }
 
   export type SoftwareUpsertWithoutActivationsInput = {
@@ -12121,9 +12121,9 @@ export namespace Prisma {
     monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    vendor?: VendorUpdateOneRequiredWithoutSoftwareNestedInput
     licenseKeys?: LicenseKeyUpdateManyWithoutSoftwareNestedInput
     monthlyUsage?: MonthlyUsageUpdateManyWithoutSoftwareNestedInput
+    vendor?: VendorUpdateOneRequiredWithoutSoftwareNestedInput
   }
 
   export type SoftwareUncheckedUpdateWithoutActivationsInput = {
@@ -12152,70 +12152,28 @@ export namespace Prisma {
 
   export type VendorUpdateWithoutActivationsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     contactEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    software?: SoftwareUpdateManyWithoutVendorNestedInput
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
     licenseKeys?: LicenseKeyUpdateManyWithoutVendorNestedInput
     monthlyUsage?: MonthlyUsageUpdateManyWithoutVendorNestedInput
+    software?: SoftwareUpdateManyWithoutVendorNestedInput
   }
 
   export type VendorUncheckedUpdateWithoutActivationsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     contactEmail?: StringFieldUpdateOperationsInput | string
     billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    software?: SoftwareUncheckedUpdateManyWithoutVendorNestedInput
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
     licenseKeys?: LicenseKeyUncheckedUpdateManyWithoutVendorNestedInput
     monthlyUsage?: MonthlyUsageUncheckedUpdateManyWithoutVendorNestedInput
-  }
-
-  export type LicenseKeyCreateWithoutActivatedByInput = {
-    id?: string
-    key: string
-    status?: $Enums.LicenseStatus
-    expiresAt?: Date | string | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    activatedAt?: Date | string | null
-    canceledAt?: Date | string | null
-    canceledReason?: string | null
-    vendor: VendorCreateNestedOneWithoutLicenseKeysInput
-    software: SoftwareCreateNestedOneWithoutLicenseKeysInput
-    activation?: ActivationCreateNestedOneWithoutLicenseKeyInput
-  }
-
-  export type LicenseKeyUncheckedCreateWithoutActivatedByInput = {
-    id?: string
-    key: string
-    status?: $Enums.LicenseStatus
-    vendorId: string
-    softwareId: string
-    expiresAt?: Date | string | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    activatedAt?: Date | string | null
-    canceledAt?: Date | string | null
-    canceledReason?: string | null
-    activation?: ActivationUncheckedCreateNestedOneWithoutLicenseKeyInput
-  }
-
-  export type LicenseKeyCreateOrConnectWithoutActivatedByInput = {
-    where: LicenseKeyWhereUniqueInput
-    create: XOR<LicenseKeyCreateWithoutActivatedByInput, LicenseKeyUncheckedCreateWithoutActivatedByInput>
-  }
-
-  export type LicenseKeyCreateManyActivatedByInputEnvelope = {
-    data: LicenseKeyCreateManyActivatedByInput | LicenseKeyCreateManyActivatedByInput[]
-    skipDuplicates?: boolean
+    software?: SoftwareUncheckedUpdateManyWithoutVendorNestedInput
   }
 
   export type ActivationCreateWithoutActivatedByInput = {
@@ -12248,20 +12206,46 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type LicenseKeyUpsertWithWhereUniqueWithoutActivatedByInput = {
+  export type LicenseKeyCreateWithoutActivatedByInput = {
+    id?: string
+    key: string
+    status?: $Enums.LicenseStatus
+    expiresAt?: Date | string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    activatedAt?: Date | string | null
+    canceledAt?: Date | string | null
+    canceledReason?: string | null
+    activation?: ActivationCreateNestedOneWithoutLicenseKeyInput
+    software: SoftwareCreateNestedOneWithoutLicenseKeysInput
+    vendor: VendorCreateNestedOneWithoutLicenseKeysInput
+  }
+
+  export type LicenseKeyUncheckedCreateWithoutActivatedByInput = {
+    id?: string
+    key: string
+    status?: $Enums.LicenseStatus
+    vendorId: string
+    softwareId: string
+    expiresAt?: Date | string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    activatedAt?: Date | string | null
+    canceledAt?: Date | string | null
+    canceledReason?: string | null
+    activation?: ActivationUncheckedCreateNestedOneWithoutLicenseKeyInput
+  }
+
+  export type LicenseKeyCreateOrConnectWithoutActivatedByInput = {
     where: LicenseKeyWhereUniqueInput
-    update: XOR<LicenseKeyUpdateWithoutActivatedByInput, LicenseKeyUncheckedUpdateWithoutActivatedByInput>
     create: XOR<LicenseKeyCreateWithoutActivatedByInput, LicenseKeyUncheckedCreateWithoutActivatedByInput>
   }
 
-  export type LicenseKeyUpdateWithWhereUniqueWithoutActivatedByInput = {
-    where: LicenseKeyWhereUniqueInput
-    data: XOR<LicenseKeyUpdateWithoutActivatedByInput, LicenseKeyUncheckedUpdateWithoutActivatedByInput>
-  }
-
-  export type LicenseKeyUpdateManyWithWhereWithoutActivatedByInput = {
-    where: LicenseKeyScalarWhereInput
-    data: XOR<LicenseKeyUpdateManyMutationInput, LicenseKeyUncheckedUpdateManyWithoutActivatedByInput>
+  export type LicenseKeyCreateManyActivatedByInputEnvelope = {
+    data: LicenseKeyCreateManyActivatedByInput | LicenseKeyCreateManyActivatedByInput[]
+    skipDuplicates?: boolean
   }
 
   export type ActivationUpsertWithWhereUniqueWithoutActivatedByInput = {
@@ -12280,35 +12264,20 @@ export namespace Prisma {
     data: XOR<ActivationUpdateManyMutationInput, ActivationUncheckedUpdateManyWithoutActivatedByInput>
   }
 
-  export type VendorCreateWithoutMonthlyUsageInput = {
-    id?: string
-    supabaseUserId?: string | null
-    name: string
-    contactEmail: string
-    billingAddress?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    software?: SoftwareCreateNestedManyWithoutVendorInput
-    licenseKeys?: LicenseKeyCreateNestedManyWithoutVendorInput
-    activations?: ActivationCreateNestedManyWithoutVendorInput
+  export type LicenseKeyUpsertWithWhereUniqueWithoutActivatedByInput = {
+    where: LicenseKeyWhereUniqueInput
+    update: XOR<LicenseKeyUpdateWithoutActivatedByInput, LicenseKeyUncheckedUpdateWithoutActivatedByInput>
+    create: XOR<LicenseKeyCreateWithoutActivatedByInput, LicenseKeyUncheckedCreateWithoutActivatedByInput>
   }
 
-  export type VendorUncheckedCreateWithoutMonthlyUsageInput = {
-    id?: string
-    supabaseUserId?: string | null
-    name: string
-    contactEmail: string
-    billingAddress?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    software?: SoftwareUncheckedCreateNestedManyWithoutVendorInput
-    licenseKeys?: LicenseKeyUncheckedCreateNestedManyWithoutVendorInput
-    activations?: ActivationUncheckedCreateNestedManyWithoutVendorInput
+  export type LicenseKeyUpdateWithWhereUniqueWithoutActivatedByInput = {
+    where: LicenseKeyWhereUniqueInput
+    data: XOR<LicenseKeyUpdateWithoutActivatedByInput, LicenseKeyUncheckedUpdateWithoutActivatedByInput>
   }
 
-  export type VendorCreateOrConnectWithoutMonthlyUsageInput = {
-    where: VendorWhereUniqueInput
-    create: XOR<VendorCreateWithoutMonthlyUsageInput, VendorUncheckedCreateWithoutMonthlyUsageInput>
+  export type LicenseKeyUpdateManyWithWhereWithoutActivatedByInput = {
+    where: LicenseKeyScalarWhereInput
+    data: XOR<LicenseKeyUpdateManyMutationInput, LicenseKeyUncheckedUpdateManyWithoutActivatedByInput>
   }
 
   export type SoftwareCreateWithoutMonthlyUsageInput = {
@@ -12319,9 +12288,9 @@ export namespace Prisma {
     monthlyRate?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    vendor: VendorCreateNestedOneWithoutSoftwareInput
-    licenseKeys?: LicenseKeyCreateNestedManyWithoutSoftwareInput
     activations?: ActivationCreateNestedManyWithoutSoftwareInput
+    licenseKeys?: LicenseKeyCreateNestedManyWithoutSoftwareInput
+    vendor: VendorCreateNestedOneWithoutSoftwareInput
   }
 
   export type SoftwareUncheckedCreateWithoutMonthlyUsageInput = {
@@ -12333,8 +12302,8 @@ export namespace Prisma {
     monthlyRate?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    licenseKeys?: LicenseKeyUncheckedCreateNestedManyWithoutSoftwareInput
     activations?: ActivationUncheckedCreateNestedManyWithoutSoftwareInput
+    licenseKeys?: LicenseKeyUncheckedCreateNestedManyWithoutSoftwareInput
   }
 
   export type SoftwareCreateOrConnectWithoutMonthlyUsageInput = {
@@ -12342,41 +12311,35 @@ export namespace Prisma {
     create: XOR<SoftwareCreateWithoutMonthlyUsageInput, SoftwareUncheckedCreateWithoutMonthlyUsageInput>
   }
 
-  export type VendorUpsertWithoutMonthlyUsageInput = {
-    update: XOR<VendorUpdateWithoutMonthlyUsageInput, VendorUncheckedUpdateWithoutMonthlyUsageInput>
+  export type VendorCreateWithoutMonthlyUsageInput = {
+    id?: string
+    name: string
+    contactEmail: string
+    billingAddress?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    supabaseUserId?: string | null
+    activations?: ActivationCreateNestedManyWithoutVendorInput
+    licenseKeys?: LicenseKeyCreateNestedManyWithoutVendorInput
+    software?: SoftwareCreateNestedManyWithoutVendorInput
+  }
+
+  export type VendorUncheckedCreateWithoutMonthlyUsageInput = {
+    id?: string
+    name: string
+    contactEmail: string
+    billingAddress?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    supabaseUserId?: string | null
+    activations?: ActivationUncheckedCreateNestedManyWithoutVendorInput
+    licenseKeys?: LicenseKeyUncheckedCreateNestedManyWithoutVendorInput
+    software?: SoftwareUncheckedCreateNestedManyWithoutVendorInput
+  }
+
+  export type VendorCreateOrConnectWithoutMonthlyUsageInput = {
+    where: VendorWhereUniqueInput
     create: XOR<VendorCreateWithoutMonthlyUsageInput, VendorUncheckedCreateWithoutMonthlyUsageInput>
-    where?: VendorWhereInput
-  }
-
-  export type VendorUpdateToOneWithWhereWithoutMonthlyUsageInput = {
-    where?: VendorWhereInput
-    data: XOR<VendorUpdateWithoutMonthlyUsageInput, VendorUncheckedUpdateWithoutMonthlyUsageInput>
-  }
-
-  export type VendorUpdateWithoutMonthlyUsageInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    contactEmail?: StringFieldUpdateOperationsInput | string
-    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    software?: SoftwareUpdateManyWithoutVendorNestedInput
-    licenseKeys?: LicenseKeyUpdateManyWithoutVendorNestedInput
-    activations?: ActivationUpdateManyWithoutVendorNestedInput
-  }
-
-  export type VendorUncheckedUpdateWithoutMonthlyUsageInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    contactEmail?: StringFieldUpdateOperationsInput | string
-    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    software?: SoftwareUncheckedUpdateManyWithoutVendorNestedInput
-    licenseKeys?: LicenseKeyUncheckedUpdateManyWithoutVendorNestedInput
-    activations?: ActivationUncheckedUpdateManyWithoutVendorNestedInput
   }
 
   export type SoftwareUpsertWithoutMonthlyUsageInput = {
@@ -12398,9 +12361,9 @@ export namespace Prisma {
     monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    vendor?: VendorUpdateOneRequiredWithoutSoftwareNestedInput
-    licenseKeys?: LicenseKeyUpdateManyWithoutSoftwareNestedInput
     activations?: ActivationUpdateManyWithoutSoftwareNestedInput
+    licenseKeys?: LicenseKeyUpdateManyWithoutSoftwareNestedInput
+    vendor?: VendorUpdateOneRequiredWithoutSoftwareNestedInput
   }
 
   export type SoftwareUncheckedUpdateWithoutMonthlyUsageInput = {
@@ -12412,18 +12375,55 @@ export namespace Prisma {
     monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    licenseKeys?: LicenseKeyUncheckedUpdateManyWithoutSoftwareNestedInput
     activations?: ActivationUncheckedUpdateManyWithoutSoftwareNestedInput
+    licenseKeys?: LicenseKeyUncheckedUpdateManyWithoutSoftwareNestedInput
   }
 
-  export type SoftwareCreateManyVendorInput = {
+  export type VendorUpsertWithoutMonthlyUsageInput = {
+    update: XOR<VendorUpdateWithoutMonthlyUsageInput, VendorUncheckedUpdateWithoutMonthlyUsageInput>
+    create: XOR<VendorCreateWithoutMonthlyUsageInput, VendorUncheckedCreateWithoutMonthlyUsageInput>
+    where?: VendorWhereInput
+  }
+
+  export type VendorUpdateToOneWithWhereWithoutMonthlyUsageInput = {
+    where?: VendorWhereInput
+    data: XOR<VendorUpdateWithoutMonthlyUsageInput, VendorUncheckedUpdateWithoutMonthlyUsageInput>
+  }
+
+  export type VendorUpdateWithoutMonthlyUsageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    activations?: ActivationUpdateManyWithoutVendorNestedInput
+    licenseKeys?: LicenseKeyUpdateManyWithoutVendorNestedInput
+    software?: SoftwareUpdateManyWithoutVendorNestedInput
+  }
+
+  export type VendorUncheckedUpdateWithoutMonthlyUsageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    contactEmail?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    activations?: ActivationUncheckedUpdateManyWithoutVendorNestedInput
+    licenseKeys?: LicenseKeyUncheckedUpdateManyWithoutVendorNestedInput
+    software?: SoftwareUncheckedUpdateManyWithoutVendorNestedInput
+  }
+
+  export type ActivationCreateManyVendorInput = {
     id?: string
-    name: string
-    pricingModel: $Enums.PricingModel
-    pricePerUse?: number | null
-    monthlyRate?: number | null
+    licenseKeyId: string
+    activatedById: string
+    softwareId: string
+    headsetSerialNumber?: string | null
+    activatedAt?: Date | string
     createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type LicenseKeyCreateManyVendorInput = {
@@ -12441,16 +12441,6 @@ export namespace Prisma {
     canceledReason?: string | null
   }
 
-  export type ActivationCreateManyVendorInput = {
-    id?: string
-    licenseKeyId: string
-    activatedById: string
-    softwareId: string
-    headsetSerialNumber?: string | null
-    activatedAt?: Date | string
-    createdAt?: Date | string
-  }
-
   export type MonthlyUsageCreateManyVendorInput = {
     id?: string
     softwareId: string
@@ -12460,40 +12450,44 @@ export namespace Prisma {
     calculatedAt?: Date | string
   }
 
-  export type SoftwareUpdateWithoutVendorInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
-    pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
-    monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    licenseKeys?: LicenseKeyUpdateManyWithoutSoftwareNestedInput
-    activations?: ActivationUpdateManyWithoutSoftwareNestedInput
-    monthlyUsage?: MonthlyUsageUpdateManyWithoutSoftwareNestedInput
+  export type SoftwareCreateManyVendorInput = {
+    id?: string
+    name: string
+    pricingModel: $Enums.PricingModel
+    pricePerUse?: number | null
+    monthlyRate?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type SoftwareUncheckedUpdateWithoutVendorInput = {
+  export type ActivationUpdateWithoutVendorInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
-    pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
-    monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    licenseKeys?: LicenseKeyUncheckedUpdateManyWithoutSoftwareNestedInput
-    activations?: ActivationUncheckedUpdateManyWithoutSoftwareNestedInput
-    monthlyUsage?: MonthlyUsageUncheckedUpdateManyWithoutSoftwareNestedInput
+    activatedBy?: EmployeeUpdateOneRequiredWithoutPerformedActivationsNestedInput
+    licenseKey?: LicenseKeyUpdateOneRequiredWithoutActivationNestedInput
+    software?: SoftwareUpdateOneRequiredWithoutActivationsNestedInput
   }
 
-  export type SoftwareUncheckedUpdateManyWithoutVendorInput = {
+  export type ActivationUncheckedUpdateWithoutVendorInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
-    pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
-    monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    licenseKeyId?: StringFieldUpdateOperationsInput | string
+    activatedById?: StringFieldUpdateOperationsInput | string
+    softwareId?: StringFieldUpdateOperationsInput | string
+    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivationUncheckedUpdateManyWithoutVendorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    licenseKeyId?: StringFieldUpdateOperationsInput | string
+    activatedById?: StringFieldUpdateOperationsInput | string
+    softwareId?: StringFieldUpdateOperationsInput | string
+    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LicenseKeyUpdateWithoutVendorInput = {
@@ -12507,9 +12501,9 @@ export namespace Prisma {
     activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     canceledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     canceledReason?: NullableStringFieldUpdateOperationsInput | string | null
-    software?: SoftwareUpdateOneRequiredWithoutLicenseKeysNestedInput
-    activatedBy?: EmployeeUpdateOneWithoutActivatedKeysNestedInput
     activation?: ActivationUpdateOneWithoutLicenseKeyNestedInput
+    activatedBy?: EmployeeUpdateOneWithoutActivatedKeysNestedInput
+    software?: SoftwareUpdateOneRequiredWithoutLicenseKeysNestedInput
   }
 
   export type LicenseKeyUncheckedUpdateWithoutVendorInput = {
@@ -12543,36 +12537,6 @@ export namespace Prisma {
     canceledReason?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type ActivationUpdateWithoutVendorInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    licenseKey?: LicenseKeyUpdateOneRequiredWithoutActivationNestedInput
-    activatedBy?: EmployeeUpdateOneRequiredWithoutPerformedActivationsNestedInput
-    software?: SoftwareUpdateOneRequiredWithoutActivationsNestedInput
-  }
-
-  export type ActivationUncheckedUpdateWithoutVendorInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    licenseKeyId?: StringFieldUpdateOperationsInput | string
-    activatedById?: StringFieldUpdateOperationsInput | string
-    softwareId?: StringFieldUpdateOperationsInput | string
-    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ActivationUncheckedUpdateManyWithoutVendorInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    licenseKeyId?: StringFieldUpdateOperationsInput | string
-    activatedById?: StringFieldUpdateOperationsInput | string
-    softwareId?: StringFieldUpdateOperationsInput | string
-    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type MonthlyUsageUpdateWithoutVendorInput = {
     id?: StringFieldUpdateOperationsInput | string
     month?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12600,6 +12564,52 @@ export namespace Prisma {
     calculatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type SoftwareUpdateWithoutVendorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
+    pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
+    monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    activations?: ActivationUpdateManyWithoutSoftwareNestedInput
+    licenseKeys?: LicenseKeyUpdateManyWithoutSoftwareNestedInput
+    monthlyUsage?: MonthlyUsageUpdateManyWithoutSoftwareNestedInput
+  }
+
+  export type SoftwareUncheckedUpdateWithoutVendorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
+    pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
+    monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    activations?: ActivationUncheckedUpdateManyWithoutSoftwareNestedInput
+    licenseKeys?: LicenseKeyUncheckedUpdateManyWithoutSoftwareNestedInput
+    monthlyUsage?: MonthlyUsageUncheckedUpdateManyWithoutSoftwareNestedInput
+  }
+
+  export type SoftwareUncheckedUpdateManyWithoutVendorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
+    pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
+    monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivationCreateManySoftwareInput = {
+    id?: string
+    licenseKeyId: string
+    activatedById: string
+    vendorId: string
+    headsetSerialNumber?: string | null
+    activatedAt?: Date | string
+    createdAt?: Date | string
+  }
+
   export type LicenseKeyCreateManySoftwareInput = {
     id?: string
     key: string
@@ -12615,16 +12625,6 @@ export namespace Prisma {
     canceledReason?: string | null
   }
 
-  export type ActivationCreateManySoftwareInput = {
-    id?: string
-    licenseKeyId: string
-    activatedById: string
-    vendorId: string
-    headsetSerialNumber?: string | null
-    activatedAt?: Date | string
-    createdAt?: Date | string
-  }
-
   export type MonthlyUsageCreateManySoftwareInput = {
     id?: string
     vendorId: string
@@ -12632,6 +12632,36 @@ export namespace Prisma {
     usageCount: number
     totalOwed: number
     calculatedAt?: Date | string
+  }
+
+  export type ActivationUpdateWithoutSoftwareInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    activatedBy?: EmployeeUpdateOneRequiredWithoutPerformedActivationsNestedInput
+    licenseKey?: LicenseKeyUpdateOneRequiredWithoutActivationNestedInput
+    vendor?: VendorUpdateOneRequiredWithoutActivationsNestedInput
+  }
+
+  export type ActivationUncheckedUpdateWithoutSoftwareInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    licenseKeyId?: StringFieldUpdateOperationsInput | string
+    activatedById?: StringFieldUpdateOperationsInput | string
+    vendorId?: StringFieldUpdateOperationsInput | string
+    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivationUncheckedUpdateManyWithoutSoftwareInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    licenseKeyId?: StringFieldUpdateOperationsInput | string
+    activatedById?: StringFieldUpdateOperationsInput | string
+    vendorId?: StringFieldUpdateOperationsInput | string
+    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LicenseKeyUpdateWithoutSoftwareInput = {
@@ -12645,9 +12675,9 @@ export namespace Prisma {
     activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     canceledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     canceledReason?: NullableStringFieldUpdateOperationsInput | string | null
-    vendor?: VendorUpdateOneRequiredWithoutLicenseKeysNestedInput
-    activatedBy?: EmployeeUpdateOneWithoutActivatedKeysNestedInput
     activation?: ActivationUpdateOneWithoutLicenseKeyNestedInput
+    activatedBy?: EmployeeUpdateOneWithoutActivatedKeysNestedInput
+    vendor?: VendorUpdateOneRequiredWithoutLicenseKeysNestedInput
   }
 
   export type LicenseKeyUncheckedUpdateWithoutSoftwareInput = {
@@ -12681,36 +12711,6 @@ export namespace Prisma {
     canceledReason?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type ActivationUpdateWithoutSoftwareInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    licenseKey?: LicenseKeyUpdateOneRequiredWithoutActivationNestedInput
-    activatedBy?: EmployeeUpdateOneRequiredWithoutPerformedActivationsNestedInput
-    vendor?: VendorUpdateOneRequiredWithoutActivationsNestedInput
-  }
-
-  export type ActivationUncheckedUpdateWithoutSoftwareInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    licenseKeyId?: StringFieldUpdateOperationsInput | string
-    activatedById?: StringFieldUpdateOperationsInput | string
-    vendorId?: StringFieldUpdateOperationsInput | string
-    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ActivationUncheckedUpdateManyWithoutSoftwareInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    licenseKeyId?: StringFieldUpdateOperationsInput | string
-    activatedById?: StringFieldUpdateOperationsInput | string
-    vendorId?: StringFieldUpdateOperationsInput | string
-    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type MonthlyUsageUpdateWithoutSoftwareInput = {
     id?: StringFieldUpdateOperationsInput | string
     month?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12738,6 +12738,16 @@ export namespace Prisma {
     calculatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ActivationCreateManyActivatedByInput = {
+    id?: string
+    licenseKeyId: string
+    softwareId: string
+    vendorId: string
+    headsetSerialNumber?: string | null
+    activatedAt?: Date | string
+    createdAt?: Date | string
+  }
+
   export type LicenseKeyCreateManyActivatedByInput = {
     id?: string
     key: string
@@ -12753,14 +12763,34 @@ export namespace Prisma {
     canceledReason?: string | null
   }
 
-  export type ActivationCreateManyActivatedByInput = {
-    id?: string
-    licenseKeyId: string
-    softwareId: string
-    vendorId: string
-    headsetSerialNumber?: string | null
-    activatedAt?: Date | string
-    createdAt?: Date | string
+  export type ActivationUpdateWithoutActivatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    licenseKey?: LicenseKeyUpdateOneRequiredWithoutActivationNestedInput
+    software?: SoftwareUpdateOneRequiredWithoutActivationsNestedInput
+    vendor?: VendorUpdateOneRequiredWithoutActivationsNestedInput
+  }
+
+  export type ActivationUncheckedUpdateWithoutActivatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    licenseKeyId?: StringFieldUpdateOperationsInput | string
+    softwareId?: StringFieldUpdateOperationsInput | string
+    vendorId?: StringFieldUpdateOperationsInput | string
+    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivationUncheckedUpdateManyWithoutActivatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    licenseKeyId?: StringFieldUpdateOperationsInput | string
+    softwareId?: StringFieldUpdateOperationsInput | string
+    vendorId?: StringFieldUpdateOperationsInput | string
+    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LicenseKeyUpdateWithoutActivatedByInput = {
@@ -12774,9 +12804,9 @@ export namespace Prisma {
     activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     canceledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     canceledReason?: NullableStringFieldUpdateOperationsInput | string | null
-    vendor?: VendorUpdateOneRequiredWithoutLicenseKeysNestedInput
-    software?: SoftwareUpdateOneRequiredWithoutLicenseKeysNestedInput
     activation?: ActivationUpdateOneWithoutLicenseKeyNestedInput
+    software?: SoftwareUpdateOneRequiredWithoutLicenseKeysNestedInput
+    vendor?: VendorUpdateOneRequiredWithoutLicenseKeysNestedInput
   }
 
   export type LicenseKeyUncheckedUpdateWithoutActivatedByInput = {
@@ -12808,36 +12838,6 @@ export namespace Prisma {
     activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     canceledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     canceledReason?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type ActivationUpdateWithoutActivatedByInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    licenseKey?: LicenseKeyUpdateOneRequiredWithoutActivationNestedInput
-    software?: SoftwareUpdateOneRequiredWithoutActivationsNestedInput
-    vendor?: VendorUpdateOneRequiredWithoutActivationsNestedInput
-  }
-
-  export type ActivationUncheckedUpdateWithoutActivatedByInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    licenseKeyId?: StringFieldUpdateOperationsInput | string
-    softwareId?: StringFieldUpdateOperationsInput | string
-    vendorId?: StringFieldUpdateOperationsInput | string
-    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ActivationUncheckedUpdateManyWithoutActivatedByInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    licenseKeyId?: StringFieldUpdateOperationsInput | string
-    softwareId?: StringFieldUpdateOperationsInput | string
-    vendorId?: StringFieldUpdateOperationsInput | string
-    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

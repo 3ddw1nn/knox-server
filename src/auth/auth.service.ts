@@ -9,7 +9,7 @@ import {
 import { PrismaService } from '../prisma/prisma.service';
 import { AuthenticatedUser } from './jwt.strategy';
 import { EnsureProfileDto } from './dto/ensure-profile.dto';
-import { Employee, Vendor, EmployeeRole, Prisma } from '../../generated/prisma'; // Added Prisma for error types
+import { Employee, Vendor, EmployeeRole, Prisma } from '../../generated/prisma';
 import { UserProfileResponse } from '../users/interfaces/user-profile.interface';
 
 @Injectable()
@@ -38,7 +38,7 @@ export class AuthService {
       id: vendor.id,
       email: vendor.contactEmail, // Assuming contactEmail is the primary email for a vendor user
       name: vendor.name,
-      role: 'vendor', // Explicitly set role
+      role: 'VENDOR', // Explicitly set role
       supabaseUserId: vendor.supabaseUserId,
     };
   }
@@ -124,7 +124,7 @@ export class AuthService {
         `No existing profile for ${supabaseUserId} and intendedRole not provided. Cannot create profile.`,
       );
       throw new BadRequestException(
-        'No profile found. Please specify an intendedRole (employee or vendor) to create a new profile.',
+        'No profile found. Please specify an intendedRole (EMPLOYEE, ADMIN, or VENDOR) to create a new profile.',
       );
     }
 
@@ -132,83 +132,27 @@ export class AuthService {
       `Attempting to create new profile for supabaseUserId: ${supabaseUserId} with role: ${intendedRole}`,
     );
 
-    if (intendedRole === 'employee') {
+    if (intendedRole === 'EMPLOYEE' || intendedRole === 'ADMIN') {
       try {
         const newEmployee = await this.prisma.employee.create({
           data: {
             email,
             supabaseUserId,
             name: fullName || email,
-            role: EmployeeRole.employee,
+            role: (intendedRole === 'ADMIN'
+              ? EmployeeRole.ADMIN
+              : EmployeeRole.EMPLOYEE) as EmployeeRole,
           },
         });
         this.logger.log(
-          `Created new employee profile for ${email} with supabaseUserId: ${supabaseUserId}`,
+          `Created new ${intendedRole} profile for ${email} with supabaseUserId: ${supabaseUserId}`,
         );
         return this.mapEmployeeToUserProfileResponse(newEmployee);
       } catch (error: unknown) {
-        if (
-          error instanceof Prisma.PrismaClientKnownRequestError &&
-          error.code === 'P2002'
-        ) {
-          const targetFields = error.meta?.target as string[] | undefined;
-          if (targetFields?.includes('email')) {
-            // Unique constraint on email
-            const isEmailVerified =
-              authenticatedUser.originalPayload?.email_verified === true;
-            if (isEmailVerified) {
-              this.logger.log(
-                `Attempting to link OAuth user ${supabaseUserId} to existing employee with email ${email}`,
-              );
-              const existingEmployeeByEmail =
-                await this.prisma.employee.findUnique({ where: { email } });
-
-              if (
-                existingEmployeeByEmail &&
-                (existingEmployeeByEmail.supabaseUserId === null ||
-                  existingEmployeeByEmail.supabaseUserId === supabaseUserId)
-              ) {
-                const updatedEmployee = await this.prisma.employee.update({
-                  where: { id: existingEmployeeByEmail.id },
-                  data: { supabaseUserId: supabaseUserId },
-                });
-                this.logger.log(
-                  `Successfully linked OAuth user to existing employee ${updatedEmployee.id}`,
-                );
-                return this.mapEmployeeToUserProfileResponse(updatedEmployee);
-              } else if (
-                existingEmployeeByEmail &&
-                existingEmployeeByEmail.supabaseUserId !== null &&
-                existingEmployeeByEmail.supabaseUserId !== supabaseUserId
-              ) {
-                this.logger.warn(
-                  `Employee with email ${email} exists but is linked to a different Supabase user (${existingEmployeeByEmail.supabaseUserId}). Current OAuth user is ${supabaseUserId}.`,
-                );
-                throw new ConflictException(
-                  `An account with this email is already linked to a different sign-in method. Please contact support.`,
-                );
-              } else {
-                this.logger.error(
-                  `Prisma P2002 on email for employee, but no existing employee found with email ${email}. This is an inconsistent state.`,
-                );
-                throw new InternalServerErrorException(
-                  'Could not create employee profile due to inconsistent data.',
-                );
-              }
-            } else {
-              this.logger.warn(
-                `Cannot link OAuth user ${supabaseUserId}: email ${email} is not verified by provider.`,
-              );
-              throw new BadRequestException(
-                'Your email address must be verified by your sign-in provider to link accounts.',
-              );
-            }
-          }
-        }
         this._handlePrismaCreateError(error, email, 'employee', 'email');
       }
     } else {
-      // If not 'employee', it implies intendedRole is 'vendor' here.
+      // If not 'EMPLOYEE' or 'ADMIN', it implies intendedRole is 'VENDOR' here.
       try {
         const vendorName = fullName || `Vendor (${email.split('@')[0]})`;
 

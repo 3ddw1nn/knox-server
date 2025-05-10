@@ -9,11 +9,7 @@ import { Reflector } from '@nestjs/core';
 import { PrismaService } from '../../prisma/prisma.service'; // Adjust path as needed
 import { Role } from '../enums/role.enum';
 import { ROLES_KEY } from '../decorators/roles.decorator';
-import { User as SupabaseUser } from '@supabase/supabase-js';
-
-interface AuthenticatedRequest extends Request {
-  user?: SupabaseUser; // User from Supabase
-}
+import { AuthenticatedRequest } from '../interfaces/authenticated-request.interface';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -54,8 +50,9 @@ export class RolesGuard implements CanActivate {
       );
     }
 
+    // Convert both to strings for comparison since they're from different enums
     const hasRequiredRole = requiredRoles.some(
-      (role) => employee.role === role,
+      (role) => employee.role.toString() === role.toString(),
     );
 
     if (!hasRequiredRole) {
@@ -63,9 +60,6 @@ export class RolesGuard implements CanActivate {
         'You do not have the required role to access this resource.',
       );
     }
-
-    // Optional: You might want to replace request.user with your internal employee object
-    // (request as any).user = employee; // Be mindful of typing if you do this
 
     return true;
   }

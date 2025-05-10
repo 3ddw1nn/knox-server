@@ -44,7 +44,7 @@ export class SeederService {
               create: {
                 id: keyId,
                 key: `MOCK-KEY-${keyId}`,
-                status: 'available',
+                status: 'AVAILABLE',
                 vendorId: vendor.id,
                 softwareId: software.id,
               },
@@ -66,7 +66,7 @@ export class SeederService {
             create: {
               id: activation.id,
               key: `MOCK-KEY-${activation.id}`,
-              status: 'activated',
+              status: 'ACTIVATED',
               vendorId: vendor.id,
               softwareId: activation.softwareId,
               activatedAt: activation.activatedAt,
