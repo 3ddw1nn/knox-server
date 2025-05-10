@@ -1,8 +1,8 @@
-import { IsString, IsIn, IsNotEmpty } from 'class-validator';
+import { IsString, IsIn, IsOptional } from 'class-validator';
 
 export class EnsureProfileDto {
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   @IsIn(['employee', 'vendor'])
-  intendedRole: string;
+  intendedRole?: 'employee' | 'vendor';
 }
