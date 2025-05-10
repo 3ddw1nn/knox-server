@@ -42,7 +42,7 @@ export const mockAvailableLicenses: VendorData[] = [
         software: {
           id: 'ms-office',
           name: 'Microsoft Office',
-          pricingModel: PricingModel.monthly_subscription,
+          pricingModel: PricingModel.MONTHLY_SUBSCRIPTION as PricingModel,
           monthlyRate: 12.99,
         },
         availableLicenseIds: ['key-1', 'key-2', 'key-3'],
@@ -60,7 +60,7 @@ export const mockAvailableLicenses: VendorData[] = [
         software: {
           id: 'adobe-creative-cloud',
           name: 'Adobe Creative Cloud',
-          pricingModel: PricingModel.monthly_subscription,
+          pricingModel: PricingModel.MONTHLY_SUBSCRIPTION as PricingModel,
           monthlyRate: 52.99,
         },
         availableLicenseIds: ['key-4', 'key-5'],

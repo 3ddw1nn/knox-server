@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
@@ -16,19 +10,19 @@ datasource db {
 
 model Vendor {
   id             String         @id @default(uuid())
-  supabaseUserId String?        @unique // Stores the Supabase User ID
   name           String
-  contactEmail   String         @unique // Assuming contactEmail should also be unique for vendors
+  contactEmail   String         @unique
   billingAddress String?
   createdAt      DateTime       @default(now()) @db.Timestamp(6)
   updatedAt      DateTime       @updatedAt @db.Timestamp(6)
-  software       Software[]
-  licenseKeys    LicenseKey[]
+  supabaseUserId String?        @unique
   activations    Activation[]
+  licenseKeys    LicenseKey[]
   monthlyUsage   MonthlyUsage[]
+  software       Software[]
 
   @@index([createdAt])
-  @@index([supabaseUserId]) // Index for faster lookups by Supabase ID
+  @@index([supabaseUserId])
 }
 
 model Software {
@@ -40,10 +34,10 @@ model Software {
   monthlyRate  Float?
   createdAt    DateTime       @default(now()) @db.Timestamp(6)
   updatedAt    DateTime       @updatedAt @db.Timestamp(6)
-  vendor       Vendor         @relation(fields: [vendorId], references: [id])
-  licenseKeys  LicenseKey[]
   activations  Activation[]
+  licenseKeys  LicenseKey[]
   monthlyUsage MonthlyUsage[]
+  vendor       Vendor         @relation(fields: [vendorId], references: [id])
 
   @@index([vendorId, createdAt, id])
 }
@@ -51,7 +45,7 @@ model Software {
 model LicenseKey {
   id             String        @id @default(uuid())
   key            String        @unique
-  status         LicenseStatus @default(available)
+  status         LicenseStatus @default(AVAILABLE)
   vendorId       String
   softwareId     String
   expiresAt      DateTime?     @db.Timestamp(6)
@@ -62,81 +56,78 @@ model LicenseKey {
   activatedById  String?
   canceledAt     DateTime?     @db.Timestamp(6)
   canceledReason String?
-
-  vendor      Vendor      @relation(fields: [vendorId], references: [id])
-  software    Software    @relation(fields: [softwareId], references: [id])
-  activatedBy Employee?   @relation("ActivatedKeys", fields: [activatedById], references: [id])
-  activation  Activation?
+  activation     Activation?
+  activatedBy    Employee?     @relation("ActivatedKeys", fields: [activatedById], references: [id])
+  software       Software      @relation(fields: [softwareId], references: [id])
+  vendor         Vendor        @relation(fields: [vendorId], references: [id])
 
   @@index([vendorId, softwareId, createdAt, id])
   @@index([activatedAt])
 }
 
 model Activation {
-  id                  String   @id @default(uuid())
-  licenseKeyId        String   @unique // Each activation is for one unique license key
+  id                  String     @id @default(uuid())
+  licenseKeyId        String     @unique
   activatedById       String
   softwareId          String
   vendorId            String
   headsetSerialNumber String?
-  activatedAt         DateTime @default(now()) @db.Timestamp(6)
-  createdAt           DateTime @default(now()) @db.Timestamp(6) // Separate from activatedAt for record creation time
-
-  licenseKey  LicenseKey @relation(fields: [licenseKeyId], references: [id])
-  activatedBy Employee   @relation("PerformedActivations", fields: [activatedById], references: [id])
-  software    Software   @relation(fields: [softwareId], references: [id])
-  vendor      Vendor     @relation(fields: [vendorId], references: [id])
+  activatedAt         DateTime   @default(now()) @db.Timestamp(6)
+  createdAt           DateTime   @default(now()) @db.Timestamp(6)
+  activatedBy         Employee   @relation("PerformedActivations", fields: [activatedById], references: [id])
+  licenseKey          LicenseKey @relation(fields: [licenseKeyId], references: [id])
+  software            Software   @relation(fields: [softwareId], references: [id])
+  vendor              Vendor     @relation(fields: [vendorId], references: [id])
 
   @@index([vendorId, activatedAt, id])
-  @@index([createdAt]) // Added based on data-model.mdc general indexing pattern
+  @@index([createdAt])
 }
 
 model Employee {
   id                   String       @id @default(uuid())
-  supabaseUserId       String?      @unique // Stores the Supabase User ID, marked optional for now if existing employees don't have it
-  name                 String // For full_name
-  email                String       @unique // This should match the Supabase email
-  companyName          String? // New field for company name
-  role                 EmployeeRole @default(employee)
+  name                 String
+  email                String       @unique
+  role                 EmployeeRole @default(EMPLOYEE)
   createdAt            DateTime     @default(now()) @db.Timestamp(6)
   updatedAt            DateTime     @updatedAt @db.Timestamp(6)
-  activatedKeys        LicenseKey[] @relation("ActivatedKeys")
+  companyName          String?
+  supabaseUserId       String?      @unique
   performedActivations Activation[] @relation("PerformedActivations")
+  activatedKeys        LicenseKey[] @relation("ActivatedKeys")
 
   @@index([createdAt])
-  @@index([supabaseUserId]) // Index for faster lookups by Supabase ID
+  @@index([supabaseUserId])
 }
 
 model MonthlyUsage {
   id           String   @id @default(uuid())
   vendorId     String
   softwareId   String
-  month        DateTime @db.Date // Store as YYYY-MM-01
+  month        DateTime @db.Date
   usageCount   Int
   totalOwed    Float
   calculatedAt DateTime @default(now()) @db.Timestamp(6)
+  software     Software @relation(fields: [softwareId], references: [id])
+  vendor       Vendor   @relation(fields: [vendorId], references: [id])
 
-  vendor   Vendor   @relation(fields: [vendorId], references: [id])
-  software Software @relation(fields: [softwareId], references: [id])
-
-  @@unique([vendorId, softwareId, month]) // Ensure one record per software per month for a vendor
+  @@unique([vendorId, softwareId, month])
   @@index([vendorId, softwareId, month])
 }
 
 enum PricingModel {
-  flat
-  per_use
-  monthly_subscription
+  FLAT
+  PER_USE
+  MONTHLY_SUBSCRIPTION
 }
 
 enum LicenseStatus {
-  available
-  activated
-  canceled
+  AVAILABLE
+  ACTIVATED
+  CANCELED
 }
 
 enum EmployeeRole {
-  employee
-  admin
-  vendor
+  EMPLOYEE
+  ADMIN
+  VENDOR
 }

@@ -1,11 +1,11 @@
 -- CreateEnum
-CREATE TYPE "PricingModel" AS ENUM ('flat', 'per_use', 'monthly_subscription');
+CREATE TYPE "PricingModel" AS ENUM ('FLAT', 'PER_USE', 'MONTHLY_SUBSCRIPTION');
 
 -- CreateEnum
-CREATE TYPE "LicenseStatus" AS ENUM ('available', 'activated', 'canceled');
+CREATE TYPE "LicenseStatus" AS ENUM ('AVAILABLE', 'ACTIVATED', 'CANCELED');
 
 -- CreateEnum
-CREATE TYPE "EmployeeRole" AS ENUM ('employee', 'admin');
+CREATE TYPE "EmployeeRole" AS ENUM ('EMPLOYEE', 'ADMIN', 'VENDOR');
 
 -- CreateTable
 CREATE TABLE "Vendor" (
@@ -15,6 +15,7 @@ CREATE TABLE "Vendor" (
     "billingAddress" TEXT,
     "createdAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(6) NOT NULL,
+    "supabaseUserId" TEXT,
 
     CONSTRAINT "Vendor_pkey" PRIMARY KEY ("id")
 );
@@ -37,7 +38,7 @@ CREATE TABLE "Software" (
 CREATE TABLE "LicenseKey" (
     "id" TEXT NOT NULL,
     "key" TEXT NOT NULL,
-    "status" "LicenseStatus" NOT NULL DEFAULT 'available',
+    "status" "LicenseStatus" NOT NULL DEFAULT 'AVAILABLE',
     "vendorId" TEXT NOT NULL,
     "softwareId" TEXT NOT NULL,
     "expiresAt" TIMESTAMP(6),
@@ -71,10 +72,11 @@ CREATE TABLE "Employee" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "role" "EmployeeRole" NOT NULL DEFAULT 'employee',
-    "passwordHash" TEXT NOT NULL,
+    "role" "EmployeeRole" NOT NULL DEFAULT 'EMPLOYEE',
     "createdAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(6) NOT NULL,
+    "companyName" TEXT,
+    "supabaseUserId" TEXT,
 
     CONSTRAINT "Employee_pkey" PRIMARY KEY ("id")
 );
@@ -93,7 +95,16 @@ CREATE TABLE "MonthlyUsage" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Vendor_contactEmail_key" ON "Vendor"("contactEmail");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Vendor_supabaseUserId_key" ON "Vendor"("supabaseUserId");
+
+-- CreateIndex
 CREATE INDEX "Vendor_createdAt_idx" ON "Vendor"("createdAt");
+
+-- CreateIndex
+CREATE INDEX "Vendor_supabaseUserId_idx" ON "Vendor"("supabaseUserId");
 
 -- CreateIndex
 CREATE INDEX "Software_vendorId_createdAt_id_idx" ON "Software"("vendorId", "createdAt", "id");
@@ -120,7 +131,13 @@ CREATE INDEX "Activation_createdAt_idx" ON "Activation"("createdAt");
 CREATE UNIQUE INDEX "Employee_email_key" ON "Employee"("email");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Employee_supabaseUserId_key" ON "Employee"("supabaseUserId");
+
+-- CreateIndex
 CREATE INDEX "Employee_createdAt_idx" ON "Employee"("createdAt");
+
+-- CreateIndex
+CREATE INDEX "Employee_supabaseUserId_idx" ON "Employee"("supabaseUserId");
 
 -- CreateIndex
 CREATE INDEX "MonthlyUsage_vendorId_softwareId_month_idx" ON "MonthlyUsage"("vendorId", "softwareId", "month");
@@ -132,19 +149,19 @@ CREATE UNIQUE INDEX "MonthlyUsage_vendorId_softwareId_month_key" ON "MonthlyUsag
 ALTER TABLE "Software" ADD CONSTRAINT "Software_vendorId_fkey" FOREIGN KEY ("vendorId") REFERENCES "Vendor"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "LicenseKey" ADD CONSTRAINT "LicenseKey_vendorId_fkey" FOREIGN KEY ("vendorId") REFERENCES "Vendor"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "LicenseKey" ADD CONSTRAINT "LicenseKey_activatedById_fkey" FOREIGN KEY ("activatedById") REFERENCES "Employee"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "LicenseKey" ADD CONSTRAINT "LicenseKey_softwareId_fkey" FOREIGN KEY ("softwareId") REFERENCES "Software"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "LicenseKey" ADD CONSTRAINT "LicenseKey_activatedById_fkey" FOREIGN KEY ("activatedById") REFERENCES "Employee"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Activation" ADD CONSTRAINT "Activation_licenseKeyId_fkey" FOREIGN KEY ("licenseKeyId") REFERENCES "LicenseKey"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "LicenseKey" ADD CONSTRAINT "LicenseKey_vendorId_fkey" FOREIGN KEY ("vendorId") REFERENCES "Vendor"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Activation" ADD CONSTRAINT "Activation_activatedById_fkey" FOREIGN KEY ("activatedById") REFERENCES "Employee"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Activation" ADD CONSTRAINT "Activation_licenseKeyId_fkey" FOREIGN KEY ("licenseKeyId") REFERENCES "LicenseKey"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Activation" ADD CONSTRAINT "Activation_softwareId_fkey" FOREIGN KEY ("softwareId") REFERENCES "Software"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -153,7 +170,7 @@ ALTER TABLE "Activation" ADD CONSTRAINT "Activation_softwareId_fkey" FOREIGN KEY
 ALTER TABLE "Activation" ADD CONSTRAINT "Activation_vendorId_fkey" FOREIGN KEY ("vendorId") REFERENCES "Vendor"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "MonthlyUsage" ADD CONSTRAINT "MonthlyUsage_vendorId_fkey" FOREIGN KEY ("vendorId") REFERENCES "Vendor"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "MonthlyUsage" ADD CONSTRAINT "MonthlyUsage_softwareId_fkey" FOREIGN KEY ("softwareId") REFERENCES "Software"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "MonthlyUsage" ADD CONSTRAINT "MonthlyUsage_softwareId_fkey" FOREIGN KEY ("softwareId") REFERENCES "Software"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "MonthlyUsage" ADD CONSTRAINT "MonthlyUsage_vendorId_fkey" FOREIGN KEY ("vendorId") REFERENCES "Vendor"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

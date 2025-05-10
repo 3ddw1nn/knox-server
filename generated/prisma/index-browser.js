@@ -122,12 +122,12 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.VendorScalarFieldEnum = {
   id: 'id',
-  supabaseUserId: 'supabaseUserId',
   name: 'name',
   contactEmail: 'contactEmail',
   billingAddress: 'billingAddress',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  supabaseUserId: 'supabaseUserId'
 };
 
 exports.Prisma.SoftwareScalarFieldEnum = {
@@ -170,13 +170,13 @@ exports.Prisma.ActivationScalarFieldEnum = {
 
 exports.Prisma.EmployeeScalarFieldEnum = {
   id: 'id',
-  supabaseUserId: 'supabaseUserId',
   name: 'name',
   email: 'email',
-  companyName: 'companyName',
   role: 'role',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  companyName: 'companyName',
+  supabaseUserId: 'supabaseUserId'
 };
 
 exports.Prisma.MonthlyUsageScalarFieldEnum = {
@@ -204,21 +204,21 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 exports.PricingModel = exports.$Enums.PricingModel = {
-  flat: 'flat',
-  per_use: 'per_use',
-  monthly_subscription: 'monthly_subscription'
+  FLAT: 'FLAT',
+  PER_USE: 'PER_USE',
+  MONTHLY_SUBSCRIPTION: 'MONTHLY_SUBSCRIPTION'
 };
 
 exports.LicenseStatus = exports.$Enums.LicenseStatus = {
-  available: 'available',
-  activated: 'activated',
-  canceled: 'canceled'
+  AVAILABLE: 'AVAILABLE',
+  ACTIVATED: 'ACTIVATED',
+  CANCELED: 'CANCELED'
 };
 
 exports.EmployeeRole = exports.$Enums.EmployeeRole = {
-  employee: 'employee',
-  admin: 'admin',
-  vendor: 'vendor'
+  EMPLOYEE: 'EMPLOYEE',
+  ADMIN: 'ADMIN',
+  VENDOR: 'VENDOR'
 };
 
 exports.Prisma.ModelName = {
