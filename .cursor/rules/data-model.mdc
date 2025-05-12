@@ -8,7 +8,6 @@ ts
 CopyEdit
 - id: UUID (PK)
 - name: string
-- contactEmail: string
 - billingAddress: string (optional)
 - createdAt: timestamp
 - updatedAt: timestamp
@@ -22,7 +21,6 @@ Optimized Data Model for Cursor-Based Pagination
 ---------
 - id: UUID (PK)
 - name: string
-- contactEmail: string
 - billingAddress: string (optional)
 - createdAt: timestamp (indexed, for cursor)
 - updatedAt: timestamp

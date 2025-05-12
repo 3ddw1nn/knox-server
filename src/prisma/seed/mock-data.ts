@@ -20,6 +20,8 @@ export interface Software {
   name: string;
   pricingModel: PricingModel;
   monthlyRate: number;
+  pricePerUse: number;
+  description: string;
 }
 
 export interface License {
@@ -54,31 +56,39 @@ const pricingModels = [
   PricingModel.MONTHLY_SUBSCRIPTION,
 ];
 
+// * Mock License Keys
 export function generateMockAvailableLicenses(): VendorData[] {
   return Array.from({ length: NUM_VENDORS }, () => {
     const vendorId = faker.string.uuid();
     const vendorName = faker.company.name();
+
+    const numSoftware = faker.number.int({
+      min: MIN_SOFTWARE_PER_VENDOR,
+      max: MAX_SOFTWARE_PER_VENDOR,
+    });
+
+    const numLicenses = faker.number.int({
+      min: MIN_LICENSES_PER_SOFTWARE,
+      max: MAX_LICENSES_PER_SOFTWARE,
+    });
+
     const vendor: Vendor = {
       id: vendorId,
       name: vendorName,
       contactEmail: faker.internet.email(),
     };
-    const numSoftware = faker.number.int({
-      min: MIN_SOFTWARE_PER_VENDOR,
-      max: MAX_SOFTWARE_PER_VENDOR,
-    });
+
     const licenses: License[] = Array.from({ length: numSoftware }, () => {
       const softwareId = faker.string.uuid();
       const software: Software = {
         id: softwareId,
         name: faker.commerce.productName(),
         pricingModel: faker.helpers.arrayElement(pricingModels) as PricingModel,
-        monthlyRate: faker.number.float({ min: 5, max: 100 }),
+        pricePerUse: faker.number.float({ min: 1, max: 50 }),
+        monthlyRate: faker.number.float({ min: 25, max: 300 }),
+        description: faker.commerce.productDescription(),
       };
-      const numLicenses = faker.number.int({
-        min: MIN_LICENSES_PER_SOFTWARE,
-        max: MAX_LICENSES_PER_SOFTWARE,
-      });
+
       const availableLicenseIds = Array.from({ length: numLicenses }, () =>
         faker.string.uuid(),
       );

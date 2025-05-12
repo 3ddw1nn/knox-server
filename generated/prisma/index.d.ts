@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type Vendor = $Result.DefaultSelection<Prisma.$VendorPayload>
 /**
+ * Model Employee
+ * 
+ */
+export type Employee = $Result.DefaultSelection<Prisma.$EmployeePayload>
+/**
  * Model Software
  * 
  */
@@ -33,11 +38,6 @@ export type LicenseKey = $Result.DefaultSelection<Prisma.$LicenseKeyPayload>
  * 
  */
 export type Activation = $Result.DefaultSelection<Prisma.$ActivationPayload>
-/**
- * Model Employee
- * 
- */
-export type Employee = $Result.DefaultSelection<Prisma.$EmployeePayload>
 /**
  * Model MonthlyUsage
  * 
@@ -224,6 +224,16 @@ export class PrismaClient<
   get vendor(): Prisma.VendorDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.employee`: Exposes CRUD operations for the **Employee** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Employees
+    * const employees = await prisma.employee.findMany()
+    * ```
+    */
+  get employee(): Prisma.EmployeeDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.software`: Exposes CRUD operations for the **Software** model.
     * Example usage:
     * ```ts
@@ -252,16 +262,6 @@ export class PrismaClient<
     * ```
     */
   get activation(): Prisma.ActivationDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.employee`: Exposes CRUD operations for the **Employee** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Employees
-    * const employees = await prisma.employee.findMany()
-    * ```
-    */
-  get employee(): Prisma.EmployeeDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.monthlyUsage`: Exposes CRUD operations for the **MonthlyUsage** model.
@@ -713,10 +713,10 @@ export namespace Prisma {
 
   export const ModelName: {
     Vendor: 'Vendor',
+    Employee: 'Employee',
     Software: 'Software',
     LicenseKey: 'LicenseKey',
     Activation: 'Activation',
-    Employee: 'Employee',
     MonthlyUsage: 'MonthlyUsage'
   };
 
@@ -736,7 +736,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "vendor" | "software" | "licenseKey" | "activation" | "employee" | "monthlyUsage"
+      modelProps: "vendor" | "employee" | "software" | "licenseKey" | "activation" | "monthlyUsage"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -811,6 +811,80 @@ export namespace Prisma {
           count: {
             args: Prisma.VendorCountArgs<ExtArgs>
             result: $Utils.Optional<VendorCountAggregateOutputType> | number
+          }
+        }
+      }
+      Employee: {
+        payload: Prisma.$EmployeePayload<ExtArgs>
+        fields: Prisma.EmployeeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EmployeeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmployeePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EmployeeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>
+          }
+          findFirst: {
+            args: Prisma.EmployeeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmployeePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EmployeeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>
+          }
+          findMany: {
+            args: Prisma.EmployeeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>[]
+          }
+          create: {
+            args: Prisma.EmployeeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>
+          }
+          createMany: {
+            args: Prisma.EmployeeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EmployeeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>[]
+          }
+          delete: {
+            args: Prisma.EmployeeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>
+          }
+          update: {
+            args: Prisma.EmployeeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>
+          }
+          deleteMany: {
+            args: Prisma.EmployeeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EmployeeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EmployeeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>[]
+          }
+          upsert: {
+            args: Prisma.EmployeeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>
+          }
+          aggregate: {
+            args: Prisma.EmployeeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEmployee>
+          }
+          groupBy: {
+            args: Prisma.EmployeeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EmployeeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EmployeeCountArgs<ExtArgs>
+            result: $Utils.Optional<EmployeeCountAggregateOutputType> | number
           }
         }
       }
@@ -1036,80 +1110,6 @@ export namespace Prisma {
           }
         }
       }
-      Employee: {
-        payload: Prisma.$EmployeePayload<ExtArgs>
-        fields: Prisma.EmployeeFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.EmployeeFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmployeePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.EmployeeFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>
-          }
-          findFirst: {
-            args: Prisma.EmployeeFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmployeePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.EmployeeFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>
-          }
-          findMany: {
-            args: Prisma.EmployeeFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>[]
-          }
-          create: {
-            args: Prisma.EmployeeCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>
-          }
-          createMany: {
-            args: Prisma.EmployeeCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.EmployeeCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>[]
-          }
-          delete: {
-            args: Prisma.EmployeeDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>
-          }
-          update: {
-            args: Prisma.EmployeeUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>
-          }
-          deleteMany: {
-            args: Prisma.EmployeeDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.EmployeeUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.EmployeeUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>[]
-          }
-          upsert: {
-            args: Prisma.EmployeeUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>
-          }
-          aggregate: {
-            args: Prisma.EmployeeAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateEmployee>
-          }
-          groupBy: {
-            args: Prisma.EmployeeGroupByArgs<ExtArgs>
-            result: $Utils.Optional<EmployeeGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.EmployeeCountArgs<ExtArgs>
-            result: $Utils.Optional<EmployeeCountAggregateOutputType> | number
-          }
-        }
-      }
       MonthlyUsage: {
         payload: Prisma.$MonthlyUsagePayload<ExtArgs>
         fields: Prisma.MonthlyUsageFieldRefs
@@ -1269,10 +1269,10 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     vendor?: VendorOmit
+    employee?: EmployeeOmit
     software?: SoftwareOmit
     licenseKey?: LicenseKeyOmit
     activation?: ActivationOmit
-    employee?: EmployeeOmit
     monthlyUsage?: MonthlyUsageOmit
   }
 
@@ -1422,6 +1422,46 @@ export namespace Prisma {
 
 
   /**
+   * Count Type EmployeeCountOutputType
+   */
+
+  export type EmployeeCountOutputType = {
+    performedActivations: number
+    activatedKeys: number
+  }
+
+  export type EmployeeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    performedActivations?: boolean | EmployeeCountOutputTypeCountPerformedActivationsArgs
+    activatedKeys?: boolean | EmployeeCountOutputTypeCountActivatedKeysArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EmployeeCountOutputType without action
+   */
+  export type EmployeeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmployeeCountOutputType
+     */
+    select?: EmployeeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EmployeeCountOutputType without action
+   */
+  export type EmployeeCountOutputTypeCountPerformedActivationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivationWhereInput
+  }
+
+  /**
+   * EmployeeCountOutputType without action
+   */
+  export type EmployeeCountOutputTypeCountActivatedKeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LicenseKeyWhereInput
+  }
+
+
+  /**
    * Count Type SoftwareCountOutputType
    */
 
@@ -1471,46 +1511,6 @@ export namespace Prisma {
 
 
   /**
-   * Count Type EmployeeCountOutputType
-   */
-
-  export type EmployeeCountOutputType = {
-    performedActivations: number
-    activatedKeys: number
-  }
-
-  export type EmployeeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    performedActivations?: boolean | EmployeeCountOutputTypeCountPerformedActivationsArgs
-    activatedKeys?: boolean | EmployeeCountOutputTypeCountActivatedKeysArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * EmployeeCountOutputType without action
-   */
-  export type EmployeeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EmployeeCountOutputType
-     */
-    select?: EmployeeCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * EmployeeCountOutputType without action
-   */
-  export type EmployeeCountOutputTypeCountPerformedActivationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ActivationWhereInput
-  }
-
-  /**
-   * EmployeeCountOutputType without action
-   */
-  export type EmployeeCountOutputTypeCountActivatedKeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: LicenseKeyWhereInput
-  }
-
-
-  /**
    * Models
    */
 
@@ -1526,64 +1526,64 @@ export namespace Prisma {
 
   export type VendorMinAggregateOutputType = {
     id: string | null
-    name: string | null
+    supabaseUserId: string | null
     contactEmail: string | null
-    billingAddress: string | null
+    name: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    supabaseUserId: string | null
+    role: $Enums.EmployeeRole | null
   }
 
   export type VendorMaxAggregateOutputType = {
     id: string | null
-    name: string | null
+    supabaseUserId: string | null
     contactEmail: string | null
-    billingAddress: string | null
+    name: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    supabaseUserId: string | null
+    role: $Enums.EmployeeRole | null
   }
 
   export type VendorCountAggregateOutputType = {
     id: number
-    name: number
+    supabaseUserId: number
     contactEmail: number
-    billingAddress: number
+    name: number
     createdAt: number
     updatedAt: number
-    supabaseUserId: number
+    role: number
     _all: number
   }
 
 
   export type VendorMinAggregateInputType = {
     id?: true
-    name?: true
+    supabaseUserId?: true
     contactEmail?: true
-    billingAddress?: true
+    name?: true
     createdAt?: true
     updatedAt?: true
-    supabaseUserId?: true
+    role?: true
   }
 
   export type VendorMaxAggregateInputType = {
     id?: true
-    name?: true
+    supabaseUserId?: true
     contactEmail?: true
-    billingAddress?: true
+    name?: true
     createdAt?: true
     updatedAt?: true
-    supabaseUserId?: true
+    role?: true
   }
 
   export type VendorCountAggregateInputType = {
     id?: true
-    name?: true
+    supabaseUserId?: true
     contactEmail?: true
-    billingAddress?: true
+    name?: true
     createdAt?: true
     updatedAt?: true
-    supabaseUserId?: true
+    role?: true
     _all?: true
   }
 
@@ -1661,12 +1661,12 @@ export namespace Prisma {
 
   export type VendorGroupByOutputType = {
     id: string
+    supabaseUserId: string | null
+    contactEmail: string | null
     name: string
-    contactEmail: string
-    billingAddress: string | null
     createdAt: Date
     updatedAt: Date
-    supabaseUserId: string | null
+    role: $Enums.EmployeeRole
     _count: VendorCountAggregateOutputType | null
     _min: VendorMinAggregateOutputType | null
     _max: VendorMaxAggregateOutputType | null
@@ -1688,12 +1688,12 @@ export namespace Prisma {
 
   export type VendorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
+    supabaseUserId?: boolean
     contactEmail?: boolean
-    billingAddress?: boolean
+    name?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    supabaseUserId?: boolean
+    role?: boolean
     activations?: boolean | Vendor$activationsArgs<ExtArgs>
     licenseKeys?: boolean | Vendor$licenseKeysArgs<ExtArgs>
     monthlyUsage?: boolean | Vendor$monthlyUsageArgs<ExtArgs>
@@ -1703,35 +1703,35 @@ export namespace Prisma {
 
   export type VendorSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
+    supabaseUserId?: boolean
     contactEmail?: boolean
-    billingAddress?: boolean
+    name?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    supabaseUserId?: boolean
+    role?: boolean
   }, ExtArgs["result"]["vendor"]>
 
   export type VendorSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
+    supabaseUserId?: boolean
     contactEmail?: boolean
-    billingAddress?: boolean
+    name?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    supabaseUserId?: boolean
+    role?: boolean
   }, ExtArgs["result"]["vendor"]>
 
   export type VendorSelectScalar = {
     id?: boolean
-    name?: boolean
+    supabaseUserId?: boolean
     contactEmail?: boolean
-    billingAddress?: boolean
+    name?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    supabaseUserId?: boolean
+    role?: boolean
   }
 
-  export type VendorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "contactEmail" | "billingAddress" | "createdAt" | "updatedAt" | "supabaseUserId", ExtArgs["result"]["vendor"]>
+  export type VendorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "supabaseUserId" | "contactEmail" | "name" | "createdAt" | "updatedAt" | "role", ExtArgs["result"]["vendor"]>
   export type VendorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     activations?: boolean | Vendor$activationsArgs<ExtArgs>
     licenseKeys?: boolean | Vendor$licenseKeysArgs<ExtArgs>
@@ -1752,12 +1752,12 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      supabaseUserId: string | null
+      contactEmail: string | null
       name: string
-      contactEmail: string
-      billingAddress: string | null
       createdAt: Date
       updatedAt: Date
-      supabaseUserId: string | null
+      role: $Enums.EmployeeRole
     }, ExtArgs["result"]["vendor"]>
     composites: {}
   }
@@ -2186,12 +2186,12 @@ export namespace Prisma {
    */
   interface VendorFieldRefs {
     readonly id: FieldRef<"Vendor", 'String'>
-    readonly name: FieldRef<"Vendor", 'String'>
+    readonly supabaseUserId: FieldRef<"Vendor", 'String'>
     readonly contactEmail: FieldRef<"Vendor", 'String'>
-    readonly billingAddress: FieldRef<"Vendor", 'String'>
+    readonly name: FieldRef<"Vendor", 'String'>
     readonly createdAt: FieldRef<"Vendor", 'DateTime'>
     readonly updatedAt: FieldRef<"Vendor", 'DateTime'>
-    readonly supabaseUserId: FieldRef<"Vendor", 'String'>
+    readonly role: FieldRef<"Vendor", 'EmployeeRole'>
   }
     
 
@@ -2695,6 +2695,1143 @@ export namespace Prisma {
 
 
   /**
+   * Model Employee
+   */
+
+  export type AggregateEmployee = {
+    _count: EmployeeCountAggregateOutputType | null
+    _min: EmployeeMinAggregateOutputType | null
+    _max: EmployeeMaxAggregateOutputType | null
+  }
+
+  export type EmployeeMinAggregateOutputType = {
+    id: string | null
+    supabaseUserId: string | null
+    companyName: string | null
+    name: string | null
+    email: string | null
+    role: $Enums.EmployeeRole | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EmployeeMaxAggregateOutputType = {
+    id: string | null
+    supabaseUserId: string | null
+    companyName: string | null
+    name: string | null
+    email: string | null
+    role: $Enums.EmployeeRole | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EmployeeCountAggregateOutputType = {
+    id: number
+    supabaseUserId: number
+    companyName: number
+    name: number
+    email: number
+    role: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type EmployeeMinAggregateInputType = {
+    id?: true
+    supabaseUserId?: true
+    companyName?: true
+    name?: true
+    email?: true
+    role?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EmployeeMaxAggregateInputType = {
+    id?: true
+    supabaseUserId?: true
+    companyName?: true
+    name?: true
+    email?: true
+    role?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EmployeeCountAggregateInputType = {
+    id?: true
+    supabaseUserId?: true
+    companyName?: true
+    name?: true
+    email?: true
+    role?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type EmployeeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Employee to aggregate.
+     */
+    where?: EmployeeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Employees to fetch.
+     */
+    orderBy?: EmployeeOrderByWithRelationInput | EmployeeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EmployeeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Employees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Employees.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Employees
+    **/
+    _count?: true | EmployeeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EmployeeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EmployeeMaxAggregateInputType
+  }
+
+  export type GetEmployeeAggregateType<T extends EmployeeAggregateArgs> = {
+        [P in keyof T & keyof AggregateEmployee]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEmployee[P]>
+      : GetScalarType<T[P], AggregateEmployee[P]>
+  }
+
+
+
+
+  export type EmployeeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmployeeWhereInput
+    orderBy?: EmployeeOrderByWithAggregationInput | EmployeeOrderByWithAggregationInput[]
+    by: EmployeeScalarFieldEnum[] | EmployeeScalarFieldEnum
+    having?: EmployeeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EmployeeCountAggregateInputType | true
+    _min?: EmployeeMinAggregateInputType
+    _max?: EmployeeMaxAggregateInputType
+  }
+
+  export type EmployeeGroupByOutputType = {
+    id: string
+    supabaseUserId: string | null
+    companyName: string | null
+    name: string
+    email: string
+    role: $Enums.EmployeeRole
+    createdAt: Date
+    updatedAt: Date
+    _count: EmployeeCountAggregateOutputType | null
+    _min: EmployeeMinAggregateOutputType | null
+    _max: EmployeeMaxAggregateOutputType | null
+  }
+
+  type GetEmployeeGroupByPayload<T extends EmployeeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EmployeeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EmployeeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EmployeeGroupByOutputType[P]>
+            : GetScalarType<T[P], EmployeeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EmployeeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    supabaseUserId?: boolean
+    companyName?: boolean
+    name?: boolean
+    email?: boolean
+    role?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    performedActivations?: boolean | Employee$performedActivationsArgs<ExtArgs>
+    activatedKeys?: boolean | Employee$activatedKeysArgs<ExtArgs>
+    _count?: boolean | EmployeeCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["employee"]>
+
+  export type EmployeeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    supabaseUserId?: boolean
+    companyName?: boolean
+    name?: boolean
+    email?: boolean
+    role?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["employee"]>
+
+  export type EmployeeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    supabaseUserId?: boolean
+    companyName?: boolean
+    name?: boolean
+    email?: boolean
+    role?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["employee"]>
+
+  export type EmployeeSelectScalar = {
+    id?: boolean
+    supabaseUserId?: boolean
+    companyName?: boolean
+    name?: boolean
+    email?: boolean
+    role?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type EmployeeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "supabaseUserId" | "companyName" | "name" | "email" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["employee"]>
+  export type EmployeeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    performedActivations?: boolean | Employee$performedActivationsArgs<ExtArgs>
+    activatedKeys?: boolean | Employee$activatedKeysArgs<ExtArgs>
+    _count?: boolean | EmployeeCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type EmployeeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type EmployeeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $EmployeePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Employee"
+    objects: {
+      performedActivations: Prisma.$ActivationPayload<ExtArgs>[]
+      activatedKeys: Prisma.$LicenseKeyPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      supabaseUserId: string | null
+      companyName: string | null
+      name: string
+      email: string
+      role: $Enums.EmployeeRole
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["employee"]>
+    composites: {}
+  }
+
+  type EmployeeGetPayload<S extends boolean | null | undefined | EmployeeDefaultArgs> = $Result.GetResult<Prisma.$EmployeePayload, S>
+
+  type EmployeeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EmployeeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EmployeeCountAggregateInputType | true
+    }
+
+  export interface EmployeeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Employee'], meta: { name: 'Employee' } }
+    /**
+     * Find zero or one Employee that matches the filter.
+     * @param {EmployeeFindUniqueArgs} args - Arguments to find a Employee
+     * @example
+     * // Get one Employee
+     * const employee = await prisma.employee.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EmployeeFindUniqueArgs>(args: SelectSubset<T, EmployeeFindUniqueArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Employee that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EmployeeFindUniqueOrThrowArgs} args - Arguments to find a Employee
+     * @example
+     * // Get one Employee
+     * const employee = await prisma.employee.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EmployeeFindUniqueOrThrowArgs>(args: SelectSubset<T, EmployeeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Employee that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmployeeFindFirstArgs} args - Arguments to find a Employee
+     * @example
+     * // Get one Employee
+     * const employee = await prisma.employee.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EmployeeFindFirstArgs>(args?: SelectSubset<T, EmployeeFindFirstArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Employee that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmployeeFindFirstOrThrowArgs} args - Arguments to find a Employee
+     * @example
+     * // Get one Employee
+     * const employee = await prisma.employee.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EmployeeFindFirstOrThrowArgs>(args?: SelectSubset<T, EmployeeFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Employees that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmployeeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Employees
+     * const employees = await prisma.employee.findMany()
+     * 
+     * // Get first 10 Employees
+     * const employees = await prisma.employee.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const employeeWithIdOnly = await prisma.employee.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EmployeeFindManyArgs>(args?: SelectSubset<T, EmployeeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Employee.
+     * @param {EmployeeCreateArgs} args - Arguments to create a Employee.
+     * @example
+     * // Create one Employee
+     * const Employee = await prisma.employee.create({
+     *   data: {
+     *     // ... data to create a Employee
+     *   }
+     * })
+     * 
+     */
+    create<T extends EmployeeCreateArgs>(args: SelectSubset<T, EmployeeCreateArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Employees.
+     * @param {EmployeeCreateManyArgs} args - Arguments to create many Employees.
+     * @example
+     * // Create many Employees
+     * const employee = await prisma.employee.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EmployeeCreateManyArgs>(args?: SelectSubset<T, EmployeeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Employees and returns the data saved in the database.
+     * @param {EmployeeCreateManyAndReturnArgs} args - Arguments to create many Employees.
+     * @example
+     * // Create many Employees
+     * const employee = await prisma.employee.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Employees and only return the `id`
+     * const employeeWithIdOnly = await prisma.employee.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EmployeeCreateManyAndReturnArgs>(args?: SelectSubset<T, EmployeeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Employee.
+     * @param {EmployeeDeleteArgs} args - Arguments to delete one Employee.
+     * @example
+     * // Delete one Employee
+     * const Employee = await prisma.employee.delete({
+     *   where: {
+     *     // ... filter to delete one Employee
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EmployeeDeleteArgs>(args: SelectSubset<T, EmployeeDeleteArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Employee.
+     * @param {EmployeeUpdateArgs} args - Arguments to update one Employee.
+     * @example
+     * // Update one Employee
+     * const employee = await prisma.employee.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EmployeeUpdateArgs>(args: SelectSubset<T, EmployeeUpdateArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Employees.
+     * @param {EmployeeDeleteManyArgs} args - Arguments to filter Employees to delete.
+     * @example
+     * // Delete a few Employees
+     * const { count } = await prisma.employee.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EmployeeDeleteManyArgs>(args?: SelectSubset<T, EmployeeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Employees.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmployeeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Employees
+     * const employee = await prisma.employee.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EmployeeUpdateManyArgs>(args: SelectSubset<T, EmployeeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Employees and returns the data updated in the database.
+     * @param {EmployeeUpdateManyAndReturnArgs} args - Arguments to update many Employees.
+     * @example
+     * // Update many Employees
+     * const employee = await prisma.employee.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Employees and only return the `id`
+     * const employeeWithIdOnly = await prisma.employee.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EmployeeUpdateManyAndReturnArgs>(args: SelectSubset<T, EmployeeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Employee.
+     * @param {EmployeeUpsertArgs} args - Arguments to update or create a Employee.
+     * @example
+     * // Update or create a Employee
+     * const employee = await prisma.employee.upsert({
+     *   create: {
+     *     // ... data to create a Employee
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Employee we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EmployeeUpsertArgs>(args: SelectSubset<T, EmployeeUpsertArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Employees.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmployeeCountArgs} args - Arguments to filter Employees to count.
+     * @example
+     * // Count the number of Employees
+     * const count = await prisma.employee.count({
+     *   where: {
+     *     // ... the filter for the Employees we want to count
+     *   }
+     * })
+    **/
+    count<T extends EmployeeCountArgs>(
+      args?: Subset<T, EmployeeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EmployeeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Employee.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmployeeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EmployeeAggregateArgs>(args: Subset<T, EmployeeAggregateArgs>): Prisma.PrismaPromise<GetEmployeeAggregateType<T>>
+
+    /**
+     * Group by Employee.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmployeeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EmployeeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EmployeeGroupByArgs['orderBy'] }
+        : { orderBy?: EmployeeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EmployeeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmployeeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Employee model
+   */
+  readonly fields: EmployeeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Employee.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EmployeeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    performedActivations<T extends Employee$performedActivationsArgs<ExtArgs> = {}>(args?: Subset<T, Employee$performedActivationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    activatedKeys<T extends Employee$activatedKeysArgs<ExtArgs> = {}>(args?: Subset<T, Employee$activatedKeysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LicenseKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Employee model
+   */
+  interface EmployeeFieldRefs {
+    readonly id: FieldRef<"Employee", 'String'>
+    readonly supabaseUserId: FieldRef<"Employee", 'String'>
+    readonly companyName: FieldRef<"Employee", 'String'>
+    readonly name: FieldRef<"Employee", 'String'>
+    readonly email: FieldRef<"Employee", 'String'>
+    readonly role: FieldRef<"Employee", 'EmployeeRole'>
+    readonly createdAt: FieldRef<"Employee", 'DateTime'>
+    readonly updatedAt: FieldRef<"Employee", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Employee findUnique
+   */
+  export type EmployeeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    /**
+     * Filter, which Employee to fetch.
+     */
+    where: EmployeeWhereUniqueInput
+  }
+
+  /**
+   * Employee findUniqueOrThrow
+   */
+  export type EmployeeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    /**
+     * Filter, which Employee to fetch.
+     */
+    where: EmployeeWhereUniqueInput
+  }
+
+  /**
+   * Employee findFirst
+   */
+  export type EmployeeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    /**
+     * Filter, which Employee to fetch.
+     */
+    where?: EmployeeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Employees to fetch.
+     */
+    orderBy?: EmployeeOrderByWithRelationInput | EmployeeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Employees.
+     */
+    cursor?: EmployeeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Employees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Employees.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Employees.
+     */
+    distinct?: EmployeeScalarFieldEnum | EmployeeScalarFieldEnum[]
+  }
+
+  /**
+   * Employee findFirstOrThrow
+   */
+  export type EmployeeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    /**
+     * Filter, which Employee to fetch.
+     */
+    where?: EmployeeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Employees to fetch.
+     */
+    orderBy?: EmployeeOrderByWithRelationInput | EmployeeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Employees.
+     */
+    cursor?: EmployeeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Employees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Employees.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Employees.
+     */
+    distinct?: EmployeeScalarFieldEnum | EmployeeScalarFieldEnum[]
+  }
+
+  /**
+   * Employee findMany
+   */
+  export type EmployeeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    /**
+     * Filter, which Employees to fetch.
+     */
+    where?: EmployeeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Employees to fetch.
+     */
+    orderBy?: EmployeeOrderByWithRelationInput | EmployeeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Employees.
+     */
+    cursor?: EmployeeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Employees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Employees.
+     */
+    skip?: number
+    distinct?: EmployeeScalarFieldEnum | EmployeeScalarFieldEnum[]
+  }
+
+  /**
+   * Employee create
+   */
+  export type EmployeeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Employee.
+     */
+    data: XOR<EmployeeCreateInput, EmployeeUncheckedCreateInput>
+  }
+
+  /**
+   * Employee createMany
+   */
+  export type EmployeeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Employees.
+     */
+    data: EmployeeCreateManyInput | EmployeeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Employee createManyAndReturn
+   */
+  export type EmployeeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * The data used to create many Employees.
+     */
+    data: EmployeeCreateManyInput | EmployeeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Employee update
+   */
+  export type EmployeeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Employee.
+     */
+    data: XOR<EmployeeUpdateInput, EmployeeUncheckedUpdateInput>
+    /**
+     * Choose, which Employee to update.
+     */
+    where: EmployeeWhereUniqueInput
+  }
+
+  /**
+   * Employee updateMany
+   */
+  export type EmployeeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Employees.
+     */
+    data: XOR<EmployeeUpdateManyMutationInput, EmployeeUncheckedUpdateManyInput>
+    /**
+     * Filter which Employees to update
+     */
+    where?: EmployeeWhereInput
+    /**
+     * Limit how many Employees to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Employee updateManyAndReturn
+   */
+  export type EmployeeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * The data used to update Employees.
+     */
+    data: XOR<EmployeeUpdateManyMutationInput, EmployeeUncheckedUpdateManyInput>
+    /**
+     * Filter which Employees to update
+     */
+    where?: EmployeeWhereInput
+    /**
+     * Limit how many Employees to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Employee upsert
+   */
+  export type EmployeeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Employee to update in case it exists.
+     */
+    where: EmployeeWhereUniqueInput
+    /**
+     * In case the Employee found by the `where` argument doesn't exist, create a new Employee with this data.
+     */
+    create: XOR<EmployeeCreateInput, EmployeeUncheckedCreateInput>
+    /**
+     * In case the Employee was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EmployeeUpdateInput, EmployeeUncheckedUpdateInput>
+  }
+
+  /**
+   * Employee delete
+   */
+  export type EmployeeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    /**
+     * Filter which Employee to delete.
+     */
+    where: EmployeeWhereUniqueInput
+  }
+
+  /**
+   * Employee deleteMany
+   */
+  export type EmployeeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Employees to delete
+     */
+    where?: EmployeeWhereInput
+    /**
+     * Limit how many Employees to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Employee.performedActivations
+   */
+  export type Employee$performedActivationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activation
+     */
+    select?: ActivationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activation
+     */
+    omit?: ActivationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivationInclude<ExtArgs> | null
+    where?: ActivationWhereInput
+    orderBy?: ActivationOrderByWithRelationInput | ActivationOrderByWithRelationInput[]
+    cursor?: ActivationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActivationScalarFieldEnum | ActivationScalarFieldEnum[]
+  }
+
+  /**
+   * Employee.activatedKeys
+   */
+  export type Employee$activatedKeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LicenseKey
+     */
+    select?: LicenseKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LicenseKey
+     */
+    omit?: LicenseKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LicenseKeyInclude<ExtArgs> | null
+    where?: LicenseKeyWhereInput
+    orderBy?: LicenseKeyOrderByWithRelationInput | LicenseKeyOrderByWithRelationInput[]
+    cursor?: LicenseKeyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LicenseKeyScalarFieldEnum | LicenseKeyScalarFieldEnum[]
+  }
+
+  /**
+   * Employee without action
+   */
+  export type EmployeeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Software
    */
 
@@ -2719,6 +3856,7 @@ export namespace Prisma {
   export type SoftwareMinAggregateOutputType = {
     id: string | null
     name: string | null
+    description: string | null
     vendorId: string | null
     pricingModel: $Enums.PricingModel | null
     pricePerUse: number | null
@@ -2730,6 +3868,7 @@ export namespace Prisma {
   export type SoftwareMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    description: string | null
     vendorId: string | null
     pricingModel: $Enums.PricingModel | null
     pricePerUse: number | null
@@ -2741,6 +3880,7 @@ export namespace Prisma {
   export type SoftwareCountAggregateOutputType = {
     id: number
     name: number
+    description: number
     vendorId: number
     pricingModel: number
     pricePerUse: number
@@ -2764,6 +3904,7 @@ export namespace Prisma {
   export type SoftwareMinAggregateInputType = {
     id?: true
     name?: true
+    description?: true
     vendorId?: true
     pricingModel?: true
     pricePerUse?: true
@@ -2775,6 +3916,7 @@ export namespace Prisma {
   export type SoftwareMaxAggregateInputType = {
     id?: true
     name?: true
+    description?: true
     vendorId?: true
     pricingModel?: true
     pricePerUse?: true
@@ -2786,6 +3928,7 @@ export namespace Prisma {
   export type SoftwareCountAggregateInputType = {
     id?: true
     name?: true
+    description?: true
     vendorId?: true
     pricingModel?: true
     pricePerUse?: true
@@ -2884,6 +4027,7 @@ export namespace Prisma {
   export type SoftwareGroupByOutputType = {
     id: string
     name: string
+    description: string | null
     vendorId: string
     pricingModel: $Enums.PricingModel
     pricePerUse: number | null
@@ -2914,6 +4058,7 @@ export namespace Prisma {
   export type SoftwareSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    description?: boolean
     vendorId?: boolean
     pricingModel?: boolean
     pricePerUse?: boolean
@@ -2930,6 +4075,7 @@ export namespace Prisma {
   export type SoftwareSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    description?: boolean
     vendorId?: boolean
     pricingModel?: boolean
     pricePerUse?: boolean
@@ -2942,6 +4088,7 @@ export namespace Prisma {
   export type SoftwareSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    description?: boolean
     vendorId?: boolean
     pricingModel?: boolean
     pricePerUse?: boolean
@@ -2954,6 +4101,7 @@ export namespace Prisma {
   export type SoftwareSelectScalar = {
     id?: boolean
     name?: boolean
+    description?: boolean
     vendorId?: boolean
     pricingModel?: boolean
     pricePerUse?: boolean
@@ -2962,7 +4110,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type SoftwareOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "vendorId" | "pricingModel" | "pricePerUse" | "monthlyRate" | "createdAt" | "updatedAt", ExtArgs["result"]["software"]>
+  export type SoftwareOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "vendorId" | "pricingModel" | "pricePerUse" | "monthlyRate" | "createdAt" | "updatedAt", ExtArgs["result"]["software"]>
   export type SoftwareInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     activations?: boolean | Software$activationsArgs<ExtArgs>
     licenseKeys?: boolean | Software$licenseKeysArgs<ExtArgs>
@@ -2988,6 +4136,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
+      description: string | null
       vendorId: string
       pricingModel: $Enums.PricingModel
       pricePerUse: number | null
@@ -3423,6 +4572,7 @@ export namespace Prisma {
   interface SoftwareFieldRefs {
     readonly id: FieldRef<"Software", 'String'>
     readonly name: FieldRef<"Software", 'String'>
+    readonly description: FieldRef<"Software", 'String'>
     readonly vendorId: FieldRef<"Software", 'String'>
     readonly pricingModel: FieldRef<"Software", 'PricingModel'>
     readonly pricePerUse: FieldRef<"Software", 'Float'>
@@ -6257,1143 +7407,6 @@ export namespace Prisma {
 
 
   /**
-   * Model Employee
-   */
-
-  export type AggregateEmployee = {
-    _count: EmployeeCountAggregateOutputType | null
-    _min: EmployeeMinAggregateOutputType | null
-    _max: EmployeeMaxAggregateOutputType | null
-  }
-
-  export type EmployeeMinAggregateOutputType = {
-    id: string | null
-    name: string | null
-    email: string | null
-    role: $Enums.EmployeeRole | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    companyName: string | null
-    supabaseUserId: string | null
-  }
-
-  export type EmployeeMaxAggregateOutputType = {
-    id: string | null
-    name: string | null
-    email: string | null
-    role: $Enums.EmployeeRole | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    companyName: string | null
-    supabaseUserId: string | null
-  }
-
-  export type EmployeeCountAggregateOutputType = {
-    id: number
-    name: number
-    email: number
-    role: number
-    createdAt: number
-    updatedAt: number
-    companyName: number
-    supabaseUserId: number
-    _all: number
-  }
-
-
-  export type EmployeeMinAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-    role?: true
-    createdAt?: true
-    updatedAt?: true
-    companyName?: true
-    supabaseUserId?: true
-  }
-
-  export type EmployeeMaxAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-    role?: true
-    createdAt?: true
-    updatedAt?: true
-    companyName?: true
-    supabaseUserId?: true
-  }
-
-  export type EmployeeCountAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-    role?: true
-    createdAt?: true
-    updatedAt?: true
-    companyName?: true
-    supabaseUserId?: true
-    _all?: true
-  }
-
-  export type EmployeeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Employee to aggregate.
-     */
-    where?: EmployeeWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Employees to fetch.
-     */
-    orderBy?: EmployeeOrderByWithRelationInput | EmployeeOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: EmployeeWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Employees from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Employees.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Employees
-    **/
-    _count?: true | EmployeeCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: EmployeeMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: EmployeeMaxAggregateInputType
-  }
-
-  export type GetEmployeeAggregateType<T extends EmployeeAggregateArgs> = {
-        [P in keyof T & keyof AggregateEmployee]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateEmployee[P]>
-      : GetScalarType<T[P], AggregateEmployee[P]>
-  }
-
-
-
-
-  export type EmployeeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EmployeeWhereInput
-    orderBy?: EmployeeOrderByWithAggregationInput | EmployeeOrderByWithAggregationInput[]
-    by: EmployeeScalarFieldEnum[] | EmployeeScalarFieldEnum
-    having?: EmployeeScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: EmployeeCountAggregateInputType | true
-    _min?: EmployeeMinAggregateInputType
-    _max?: EmployeeMaxAggregateInputType
-  }
-
-  export type EmployeeGroupByOutputType = {
-    id: string
-    name: string
-    email: string
-    role: $Enums.EmployeeRole
-    createdAt: Date
-    updatedAt: Date
-    companyName: string | null
-    supabaseUserId: string | null
-    _count: EmployeeCountAggregateOutputType | null
-    _min: EmployeeMinAggregateOutputType | null
-    _max: EmployeeMaxAggregateOutputType | null
-  }
-
-  type GetEmployeeGroupByPayload<T extends EmployeeGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<EmployeeGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof EmployeeGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], EmployeeGroupByOutputType[P]>
-            : GetScalarType<T[P], EmployeeGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type EmployeeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    email?: boolean
-    role?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    companyName?: boolean
-    supabaseUserId?: boolean
-    performedActivations?: boolean | Employee$performedActivationsArgs<ExtArgs>
-    activatedKeys?: boolean | Employee$activatedKeysArgs<ExtArgs>
-    _count?: boolean | EmployeeCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["employee"]>
-
-  export type EmployeeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    email?: boolean
-    role?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    companyName?: boolean
-    supabaseUserId?: boolean
-  }, ExtArgs["result"]["employee"]>
-
-  export type EmployeeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    email?: boolean
-    role?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    companyName?: boolean
-    supabaseUserId?: boolean
-  }, ExtArgs["result"]["employee"]>
-
-  export type EmployeeSelectScalar = {
-    id?: boolean
-    name?: boolean
-    email?: boolean
-    role?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    companyName?: boolean
-    supabaseUserId?: boolean
-  }
-
-  export type EmployeeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "role" | "createdAt" | "updatedAt" | "companyName" | "supabaseUserId", ExtArgs["result"]["employee"]>
-  export type EmployeeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    performedActivations?: boolean | Employee$performedActivationsArgs<ExtArgs>
-    activatedKeys?: boolean | Employee$activatedKeysArgs<ExtArgs>
-    _count?: boolean | EmployeeCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type EmployeeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type EmployeeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-
-  export type $EmployeePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Employee"
-    objects: {
-      performedActivations: Prisma.$ActivationPayload<ExtArgs>[]
-      activatedKeys: Prisma.$LicenseKeyPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      name: string
-      email: string
-      role: $Enums.EmployeeRole
-      createdAt: Date
-      updatedAt: Date
-      companyName: string | null
-      supabaseUserId: string | null
-    }, ExtArgs["result"]["employee"]>
-    composites: {}
-  }
-
-  type EmployeeGetPayload<S extends boolean | null | undefined | EmployeeDefaultArgs> = $Result.GetResult<Prisma.$EmployeePayload, S>
-
-  type EmployeeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<EmployeeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: EmployeeCountAggregateInputType | true
-    }
-
-  export interface EmployeeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Employee'], meta: { name: 'Employee' } }
-    /**
-     * Find zero or one Employee that matches the filter.
-     * @param {EmployeeFindUniqueArgs} args - Arguments to find a Employee
-     * @example
-     * // Get one Employee
-     * const employee = await prisma.employee.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends EmployeeFindUniqueArgs>(args: SelectSubset<T, EmployeeFindUniqueArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Employee that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {EmployeeFindUniqueOrThrowArgs} args - Arguments to find a Employee
-     * @example
-     * // Get one Employee
-     * const employee = await prisma.employee.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends EmployeeFindUniqueOrThrowArgs>(args: SelectSubset<T, EmployeeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Employee that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmployeeFindFirstArgs} args - Arguments to find a Employee
-     * @example
-     * // Get one Employee
-     * const employee = await prisma.employee.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends EmployeeFindFirstArgs>(args?: SelectSubset<T, EmployeeFindFirstArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Employee that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmployeeFindFirstOrThrowArgs} args - Arguments to find a Employee
-     * @example
-     * // Get one Employee
-     * const employee = await prisma.employee.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends EmployeeFindFirstOrThrowArgs>(args?: SelectSubset<T, EmployeeFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Employees that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmployeeFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Employees
-     * const employees = await prisma.employee.findMany()
-     * 
-     * // Get first 10 Employees
-     * const employees = await prisma.employee.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const employeeWithIdOnly = await prisma.employee.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends EmployeeFindManyArgs>(args?: SelectSubset<T, EmployeeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Employee.
-     * @param {EmployeeCreateArgs} args - Arguments to create a Employee.
-     * @example
-     * // Create one Employee
-     * const Employee = await prisma.employee.create({
-     *   data: {
-     *     // ... data to create a Employee
-     *   }
-     * })
-     * 
-     */
-    create<T extends EmployeeCreateArgs>(args: SelectSubset<T, EmployeeCreateArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Employees.
-     * @param {EmployeeCreateManyArgs} args - Arguments to create many Employees.
-     * @example
-     * // Create many Employees
-     * const employee = await prisma.employee.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends EmployeeCreateManyArgs>(args?: SelectSubset<T, EmployeeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Employees and returns the data saved in the database.
-     * @param {EmployeeCreateManyAndReturnArgs} args - Arguments to create many Employees.
-     * @example
-     * // Create many Employees
-     * const employee = await prisma.employee.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Employees and only return the `id`
-     * const employeeWithIdOnly = await prisma.employee.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends EmployeeCreateManyAndReturnArgs>(args?: SelectSubset<T, EmployeeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Employee.
-     * @param {EmployeeDeleteArgs} args - Arguments to delete one Employee.
-     * @example
-     * // Delete one Employee
-     * const Employee = await prisma.employee.delete({
-     *   where: {
-     *     // ... filter to delete one Employee
-     *   }
-     * })
-     * 
-     */
-    delete<T extends EmployeeDeleteArgs>(args: SelectSubset<T, EmployeeDeleteArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Employee.
-     * @param {EmployeeUpdateArgs} args - Arguments to update one Employee.
-     * @example
-     * // Update one Employee
-     * const employee = await prisma.employee.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends EmployeeUpdateArgs>(args: SelectSubset<T, EmployeeUpdateArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Employees.
-     * @param {EmployeeDeleteManyArgs} args - Arguments to filter Employees to delete.
-     * @example
-     * // Delete a few Employees
-     * const { count } = await prisma.employee.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends EmployeeDeleteManyArgs>(args?: SelectSubset<T, EmployeeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Employees.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmployeeUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Employees
-     * const employee = await prisma.employee.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends EmployeeUpdateManyArgs>(args: SelectSubset<T, EmployeeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Employees and returns the data updated in the database.
-     * @param {EmployeeUpdateManyAndReturnArgs} args - Arguments to update many Employees.
-     * @example
-     * // Update many Employees
-     * const employee = await prisma.employee.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Employees and only return the `id`
-     * const employeeWithIdOnly = await prisma.employee.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends EmployeeUpdateManyAndReturnArgs>(args: SelectSubset<T, EmployeeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Employee.
-     * @param {EmployeeUpsertArgs} args - Arguments to update or create a Employee.
-     * @example
-     * // Update or create a Employee
-     * const employee = await prisma.employee.upsert({
-     *   create: {
-     *     // ... data to create a Employee
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Employee we want to update
-     *   }
-     * })
-     */
-    upsert<T extends EmployeeUpsertArgs>(args: SelectSubset<T, EmployeeUpsertArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Employees.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmployeeCountArgs} args - Arguments to filter Employees to count.
-     * @example
-     * // Count the number of Employees
-     * const count = await prisma.employee.count({
-     *   where: {
-     *     // ... the filter for the Employees we want to count
-     *   }
-     * })
-    **/
-    count<T extends EmployeeCountArgs>(
-      args?: Subset<T, EmployeeCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], EmployeeCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Employee.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmployeeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends EmployeeAggregateArgs>(args: Subset<T, EmployeeAggregateArgs>): Prisma.PrismaPromise<GetEmployeeAggregateType<T>>
-
-    /**
-     * Group by Employee.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmployeeGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends EmployeeGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: EmployeeGroupByArgs['orderBy'] }
-        : { orderBy?: EmployeeGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, EmployeeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmployeeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Employee model
-   */
-  readonly fields: EmployeeFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Employee.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__EmployeeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    performedActivations<T extends Employee$performedActivationsArgs<ExtArgs> = {}>(args?: Subset<T, Employee$performedActivationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    activatedKeys<T extends Employee$activatedKeysArgs<ExtArgs> = {}>(args?: Subset<T, Employee$activatedKeysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LicenseKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Employee model
-   */
-  interface EmployeeFieldRefs {
-    readonly id: FieldRef<"Employee", 'String'>
-    readonly name: FieldRef<"Employee", 'String'>
-    readonly email: FieldRef<"Employee", 'String'>
-    readonly role: FieldRef<"Employee", 'EmployeeRole'>
-    readonly createdAt: FieldRef<"Employee", 'DateTime'>
-    readonly updatedAt: FieldRef<"Employee", 'DateTime'>
-    readonly companyName: FieldRef<"Employee", 'String'>
-    readonly supabaseUserId: FieldRef<"Employee", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Employee findUnique
-   */
-  export type EmployeeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Employee
-     */
-    select?: EmployeeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Employee
-     */
-    omit?: EmployeeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmployeeInclude<ExtArgs> | null
-    /**
-     * Filter, which Employee to fetch.
-     */
-    where: EmployeeWhereUniqueInput
-  }
-
-  /**
-   * Employee findUniqueOrThrow
-   */
-  export type EmployeeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Employee
-     */
-    select?: EmployeeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Employee
-     */
-    omit?: EmployeeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmployeeInclude<ExtArgs> | null
-    /**
-     * Filter, which Employee to fetch.
-     */
-    where: EmployeeWhereUniqueInput
-  }
-
-  /**
-   * Employee findFirst
-   */
-  export type EmployeeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Employee
-     */
-    select?: EmployeeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Employee
-     */
-    omit?: EmployeeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmployeeInclude<ExtArgs> | null
-    /**
-     * Filter, which Employee to fetch.
-     */
-    where?: EmployeeWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Employees to fetch.
-     */
-    orderBy?: EmployeeOrderByWithRelationInput | EmployeeOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Employees.
-     */
-    cursor?: EmployeeWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Employees from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Employees.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Employees.
-     */
-    distinct?: EmployeeScalarFieldEnum | EmployeeScalarFieldEnum[]
-  }
-
-  /**
-   * Employee findFirstOrThrow
-   */
-  export type EmployeeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Employee
-     */
-    select?: EmployeeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Employee
-     */
-    omit?: EmployeeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmployeeInclude<ExtArgs> | null
-    /**
-     * Filter, which Employee to fetch.
-     */
-    where?: EmployeeWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Employees to fetch.
-     */
-    orderBy?: EmployeeOrderByWithRelationInput | EmployeeOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Employees.
-     */
-    cursor?: EmployeeWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Employees from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Employees.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Employees.
-     */
-    distinct?: EmployeeScalarFieldEnum | EmployeeScalarFieldEnum[]
-  }
-
-  /**
-   * Employee findMany
-   */
-  export type EmployeeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Employee
-     */
-    select?: EmployeeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Employee
-     */
-    omit?: EmployeeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmployeeInclude<ExtArgs> | null
-    /**
-     * Filter, which Employees to fetch.
-     */
-    where?: EmployeeWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Employees to fetch.
-     */
-    orderBy?: EmployeeOrderByWithRelationInput | EmployeeOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Employees.
-     */
-    cursor?: EmployeeWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Employees from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Employees.
-     */
-    skip?: number
-    distinct?: EmployeeScalarFieldEnum | EmployeeScalarFieldEnum[]
-  }
-
-  /**
-   * Employee create
-   */
-  export type EmployeeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Employee
-     */
-    select?: EmployeeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Employee
-     */
-    omit?: EmployeeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmployeeInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Employee.
-     */
-    data: XOR<EmployeeCreateInput, EmployeeUncheckedCreateInput>
-  }
-
-  /**
-   * Employee createMany
-   */
-  export type EmployeeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Employees.
-     */
-    data: EmployeeCreateManyInput | EmployeeCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Employee createManyAndReturn
-   */
-  export type EmployeeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Employee
-     */
-    select?: EmployeeSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Employee
-     */
-    omit?: EmployeeOmit<ExtArgs> | null
-    /**
-     * The data used to create many Employees.
-     */
-    data: EmployeeCreateManyInput | EmployeeCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Employee update
-   */
-  export type EmployeeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Employee
-     */
-    select?: EmployeeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Employee
-     */
-    omit?: EmployeeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmployeeInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Employee.
-     */
-    data: XOR<EmployeeUpdateInput, EmployeeUncheckedUpdateInput>
-    /**
-     * Choose, which Employee to update.
-     */
-    where: EmployeeWhereUniqueInput
-  }
-
-  /**
-   * Employee updateMany
-   */
-  export type EmployeeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Employees.
-     */
-    data: XOR<EmployeeUpdateManyMutationInput, EmployeeUncheckedUpdateManyInput>
-    /**
-     * Filter which Employees to update
-     */
-    where?: EmployeeWhereInput
-    /**
-     * Limit how many Employees to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Employee updateManyAndReturn
-   */
-  export type EmployeeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Employee
-     */
-    select?: EmployeeSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Employee
-     */
-    omit?: EmployeeOmit<ExtArgs> | null
-    /**
-     * The data used to update Employees.
-     */
-    data: XOR<EmployeeUpdateManyMutationInput, EmployeeUncheckedUpdateManyInput>
-    /**
-     * Filter which Employees to update
-     */
-    where?: EmployeeWhereInput
-    /**
-     * Limit how many Employees to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Employee upsert
-   */
-  export type EmployeeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Employee
-     */
-    select?: EmployeeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Employee
-     */
-    omit?: EmployeeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmployeeInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Employee to update in case it exists.
-     */
-    where: EmployeeWhereUniqueInput
-    /**
-     * In case the Employee found by the `where` argument doesn't exist, create a new Employee with this data.
-     */
-    create: XOR<EmployeeCreateInput, EmployeeUncheckedCreateInput>
-    /**
-     * In case the Employee was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<EmployeeUpdateInput, EmployeeUncheckedUpdateInput>
-  }
-
-  /**
-   * Employee delete
-   */
-  export type EmployeeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Employee
-     */
-    select?: EmployeeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Employee
-     */
-    omit?: EmployeeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmployeeInclude<ExtArgs> | null
-    /**
-     * Filter which Employee to delete.
-     */
-    where: EmployeeWhereUniqueInput
-  }
-
-  /**
-   * Employee deleteMany
-   */
-  export type EmployeeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Employees to delete
-     */
-    where?: EmployeeWhereInput
-    /**
-     * Limit how many Employees to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Employee.performedActivations
-   */
-  export type Employee$performedActivationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Activation
-     */
-    select?: ActivationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Activation
-     */
-    omit?: ActivationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ActivationInclude<ExtArgs> | null
-    where?: ActivationWhereInput
-    orderBy?: ActivationOrderByWithRelationInput | ActivationOrderByWithRelationInput[]
-    cursor?: ActivationWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ActivationScalarFieldEnum | ActivationScalarFieldEnum[]
-  }
-
-  /**
-   * Employee.activatedKeys
-   */
-  export type Employee$activatedKeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LicenseKey
-     */
-    select?: LicenseKeySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LicenseKey
-     */
-    omit?: LicenseKeyOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LicenseKeyInclude<ExtArgs> | null
-    where?: LicenseKeyWhereInput
-    orderBy?: LicenseKeyOrderByWithRelationInput | LicenseKeyOrderByWithRelationInput[]
-    cursor?: LicenseKeyWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: LicenseKeyScalarFieldEnum | LicenseKeyScalarFieldEnum[]
-  }
-
-  /**
-   * Employee without action
-   */
-  export type EmployeeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Employee
-     */
-    select?: EmployeeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Employee
-     */
-    omit?: EmployeeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmployeeInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model MonthlyUsage
    */
 
@@ -8539,20 +8552,35 @@ export namespace Prisma {
 
   export const VendorScalarFieldEnum: {
     id: 'id',
-    name: 'name',
+    supabaseUserId: 'supabaseUserId',
     contactEmail: 'contactEmail',
-    billingAddress: 'billingAddress',
+    name: 'name',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    supabaseUserId: 'supabaseUserId'
+    role: 'role'
   };
 
   export type VendorScalarFieldEnum = (typeof VendorScalarFieldEnum)[keyof typeof VendorScalarFieldEnum]
 
 
+  export const EmployeeScalarFieldEnum: {
+    id: 'id',
+    supabaseUserId: 'supabaseUserId',
+    companyName: 'companyName',
+    name: 'name',
+    email: 'email',
+    role: 'role',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type EmployeeScalarFieldEnum = (typeof EmployeeScalarFieldEnum)[keyof typeof EmployeeScalarFieldEnum]
+
+
   export const SoftwareScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    description: 'description',
     vendorId: 'vendorId',
     pricingModel: 'pricingModel',
     pricePerUse: 'pricePerUse',
@@ -8595,20 +8623,6 @@ export namespace Prisma {
   };
 
   export type ActivationScalarFieldEnum = (typeof ActivationScalarFieldEnum)[keyof typeof ActivationScalarFieldEnum]
-
-
-  export const EmployeeScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    email: 'email',
-    role: 'role',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    companyName: 'companyName',
-    supabaseUserId: 'supabaseUserId'
-  };
-
-  export type EmployeeScalarFieldEnum = (typeof EmployeeScalarFieldEnum)[keyof typeof EmployeeScalarFieldEnum]
 
 
   export const MonthlyUsageScalarFieldEnum: {
@@ -8682,6 +8696,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'EmployeeRole'
+   */
+  export type EnumEmployeeRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EmployeeRole'>
+    
+
+
+  /**
+   * Reference to a field of type 'EmployeeRole[]'
+   */
+  export type ListEnumEmployeeRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EmployeeRole[]'>
+    
+
+
+  /**
    * Reference to a field of type 'PricingModel'
    */
   export type EnumPricingModelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PricingModel'>
@@ -8724,20 +8752,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'EmployeeRole'
-   */
-  export type EnumEmployeeRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EmployeeRole'>
-    
-
-
-  /**
-   * Reference to a field of type 'EmployeeRole[]'
-   */
-  export type ListEnumEmployeeRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EmployeeRole[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -8759,12 +8773,12 @@ export namespace Prisma {
     OR?: VendorWhereInput[]
     NOT?: VendorWhereInput | VendorWhereInput[]
     id?: StringFilter<"Vendor"> | string
+    supabaseUserId?: StringNullableFilter<"Vendor"> | string | null
+    contactEmail?: StringNullableFilter<"Vendor"> | string | null
     name?: StringFilter<"Vendor"> | string
-    contactEmail?: StringFilter<"Vendor"> | string
-    billingAddress?: StringNullableFilter<"Vendor"> | string | null
     createdAt?: DateTimeFilter<"Vendor"> | Date | string
     updatedAt?: DateTimeFilter<"Vendor"> | Date | string
-    supabaseUserId?: StringNullableFilter<"Vendor"> | string | null
+    role?: EnumEmployeeRoleFilter<"Vendor"> | $Enums.EmployeeRole
     activations?: ActivationListRelationFilter
     licenseKeys?: LicenseKeyListRelationFilter
     monthlyUsage?: MonthlyUsageListRelationFilter
@@ -8773,12 +8787,12 @@ export namespace Prisma {
 
   export type VendorOrderByWithRelationInput = {
     id?: SortOrder
+    supabaseUserId?: SortOrderInput | SortOrder
+    contactEmail?: SortOrderInput | SortOrder
     name?: SortOrder
-    contactEmail?: SortOrder
-    billingAddress?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    supabaseUserId?: SortOrderInput | SortOrder
+    role?: SortOrder
     activations?: ActivationOrderByRelationAggregateInput
     licenseKeys?: LicenseKeyOrderByRelationAggregateInput
     monthlyUsage?: MonthlyUsageOrderByRelationAggregateInput
@@ -8787,29 +8801,29 @@ export namespace Prisma {
 
   export type VendorWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    contactEmail?: string
     supabaseUserId?: string
     AND?: VendorWhereInput | VendorWhereInput[]
     OR?: VendorWhereInput[]
     NOT?: VendorWhereInput | VendorWhereInput[]
+    contactEmail?: StringNullableFilter<"Vendor"> | string | null
     name?: StringFilter<"Vendor"> | string
-    billingAddress?: StringNullableFilter<"Vendor"> | string | null
     createdAt?: DateTimeFilter<"Vendor"> | Date | string
     updatedAt?: DateTimeFilter<"Vendor"> | Date | string
+    role?: EnumEmployeeRoleFilter<"Vendor"> | $Enums.EmployeeRole
     activations?: ActivationListRelationFilter
     licenseKeys?: LicenseKeyListRelationFilter
     monthlyUsage?: MonthlyUsageListRelationFilter
     software?: SoftwareListRelationFilter
-  }, "id" | "contactEmail" | "supabaseUserId">
+  }, "id" | "supabaseUserId">
 
   export type VendorOrderByWithAggregationInput = {
     id?: SortOrder
+    supabaseUserId?: SortOrderInput | SortOrder
+    contactEmail?: SortOrderInput | SortOrder
     name?: SortOrder
-    contactEmail?: SortOrder
-    billingAddress?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    supabaseUserId?: SortOrderInput | SortOrder
+    role?: SortOrder
     _count?: VendorCountOrderByAggregateInput
     _max?: VendorMaxOrderByAggregateInput
     _min?: VendorMinOrderByAggregateInput
@@ -8820,12 +8834,85 @@ export namespace Prisma {
     OR?: VendorScalarWhereWithAggregatesInput[]
     NOT?: VendorScalarWhereWithAggregatesInput | VendorScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Vendor"> | string
+    supabaseUserId?: StringNullableWithAggregatesFilter<"Vendor"> | string | null
+    contactEmail?: StringNullableWithAggregatesFilter<"Vendor"> | string | null
     name?: StringWithAggregatesFilter<"Vendor"> | string
-    contactEmail?: StringWithAggregatesFilter<"Vendor"> | string
-    billingAddress?: StringNullableWithAggregatesFilter<"Vendor"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Vendor"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Vendor"> | Date | string
-    supabaseUserId?: StringNullableWithAggregatesFilter<"Vendor"> | string | null
+    role?: EnumEmployeeRoleWithAggregatesFilter<"Vendor"> | $Enums.EmployeeRole
+  }
+
+  export type EmployeeWhereInput = {
+    AND?: EmployeeWhereInput | EmployeeWhereInput[]
+    OR?: EmployeeWhereInput[]
+    NOT?: EmployeeWhereInput | EmployeeWhereInput[]
+    id?: StringFilter<"Employee"> | string
+    supabaseUserId?: StringNullableFilter<"Employee"> | string | null
+    companyName?: StringNullableFilter<"Employee"> | string | null
+    name?: StringFilter<"Employee"> | string
+    email?: StringFilter<"Employee"> | string
+    role?: EnumEmployeeRoleFilter<"Employee"> | $Enums.EmployeeRole
+    createdAt?: DateTimeFilter<"Employee"> | Date | string
+    updatedAt?: DateTimeFilter<"Employee"> | Date | string
+    performedActivations?: ActivationListRelationFilter
+    activatedKeys?: LicenseKeyListRelationFilter
+  }
+
+  export type EmployeeOrderByWithRelationInput = {
+    id?: SortOrder
+    supabaseUserId?: SortOrderInput | SortOrder
+    companyName?: SortOrderInput | SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    role?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    performedActivations?: ActivationOrderByRelationAggregateInput
+    activatedKeys?: LicenseKeyOrderByRelationAggregateInput
+  }
+
+  export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    supabaseUserId?: string
+    email?: string
+    AND?: EmployeeWhereInput | EmployeeWhereInput[]
+    OR?: EmployeeWhereInput[]
+    NOT?: EmployeeWhereInput | EmployeeWhereInput[]
+    companyName?: StringNullableFilter<"Employee"> | string | null
+    name?: StringFilter<"Employee"> | string
+    role?: EnumEmployeeRoleFilter<"Employee"> | $Enums.EmployeeRole
+    createdAt?: DateTimeFilter<"Employee"> | Date | string
+    updatedAt?: DateTimeFilter<"Employee"> | Date | string
+    performedActivations?: ActivationListRelationFilter
+    activatedKeys?: LicenseKeyListRelationFilter
+  }, "id" | "supabaseUserId" | "email">
+
+  export type EmployeeOrderByWithAggregationInput = {
+    id?: SortOrder
+    supabaseUserId?: SortOrderInput | SortOrder
+    companyName?: SortOrderInput | SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    role?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: EmployeeCountOrderByAggregateInput
+    _max?: EmployeeMaxOrderByAggregateInput
+    _min?: EmployeeMinOrderByAggregateInput
+  }
+
+  export type EmployeeScalarWhereWithAggregatesInput = {
+    AND?: EmployeeScalarWhereWithAggregatesInput | EmployeeScalarWhereWithAggregatesInput[]
+    OR?: EmployeeScalarWhereWithAggregatesInput[]
+    NOT?: EmployeeScalarWhereWithAggregatesInput | EmployeeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Employee"> | string
+    supabaseUserId?: StringNullableWithAggregatesFilter<"Employee"> | string | null
+    companyName?: StringNullableWithAggregatesFilter<"Employee"> | string | null
+    name?: StringWithAggregatesFilter<"Employee"> | string
+    email?: StringWithAggregatesFilter<"Employee"> | string
+    role?: EnumEmployeeRoleWithAggregatesFilter<"Employee"> | $Enums.EmployeeRole
+    createdAt?: DateTimeWithAggregatesFilter<"Employee"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Employee"> | Date | string
   }
 
   export type SoftwareWhereInput = {
@@ -8834,6 +8921,7 @@ export namespace Prisma {
     NOT?: SoftwareWhereInput | SoftwareWhereInput[]
     id?: StringFilter<"Software"> | string
     name?: StringFilter<"Software"> | string
+    description?: StringNullableFilter<"Software"> | string | null
     vendorId?: StringFilter<"Software"> | string
     pricingModel?: EnumPricingModelFilter<"Software"> | $Enums.PricingModel
     pricePerUse?: FloatNullableFilter<"Software"> | number | null
@@ -8849,6 +8937,7 @@ export namespace Prisma {
   export type SoftwareOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    description?: SortOrderInput | SortOrder
     vendorId?: SortOrder
     pricingModel?: SortOrder
     pricePerUse?: SortOrderInput | SortOrder
@@ -8867,6 +8956,7 @@ export namespace Prisma {
     OR?: SoftwareWhereInput[]
     NOT?: SoftwareWhereInput | SoftwareWhereInput[]
     name?: StringFilter<"Software"> | string
+    description?: StringNullableFilter<"Software"> | string | null
     vendorId?: StringFilter<"Software"> | string
     pricingModel?: EnumPricingModelFilter<"Software"> | $Enums.PricingModel
     pricePerUse?: FloatNullableFilter<"Software"> | number | null
@@ -8882,6 +8972,7 @@ export namespace Prisma {
   export type SoftwareOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    description?: SortOrderInput | SortOrder
     vendorId?: SortOrder
     pricingModel?: SortOrder
     pricePerUse?: SortOrderInput | SortOrder
@@ -8901,6 +8992,7 @@ export namespace Prisma {
     NOT?: SoftwareScalarWhereWithAggregatesInput | SoftwareScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Software"> | string
     name?: StringWithAggregatesFilter<"Software"> | string
+    description?: StringNullableWithAggregatesFilter<"Software"> | string | null
     vendorId?: StringWithAggregatesFilter<"Software"> | string
     pricingModel?: EnumPricingModelWithAggregatesFilter<"Software"> | $Enums.PricingModel
     pricePerUse?: FloatNullableWithAggregatesFilter<"Software"> | number | null
@@ -9092,79 +9184,6 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Activation"> | Date | string
   }
 
-  export type EmployeeWhereInput = {
-    AND?: EmployeeWhereInput | EmployeeWhereInput[]
-    OR?: EmployeeWhereInput[]
-    NOT?: EmployeeWhereInput | EmployeeWhereInput[]
-    id?: StringFilter<"Employee"> | string
-    name?: StringFilter<"Employee"> | string
-    email?: StringFilter<"Employee"> | string
-    role?: EnumEmployeeRoleFilter<"Employee"> | $Enums.EmployeeRole
-    createdAt?: DateTimeFilter<"Employee"> | Date | string
-    updatedAt?: DateTimeFilter<"Employee"> | Date | string
-    companyName?: StringNullableFilter<"Employee"> | string | null
-    supabaseUserId?: StringNullableFilter<"Employee"> | string | null
-    performedActivations?: ActivationListRelationFilter
-    activatedKeys?: LicenseKeyListRelationFilter
-  }
-
-  export type EmployeeOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    role?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    companyName?: SortOrderInput | SortOrder
-    supabaseUserId?: SortOrderInput | SortOrder
-    performedActivations?: ActivationOrderByRelationAggregateInput
-    activatedKeys?: LicenseKeyOrderByRelationAggregateInput
-  }
-
-  export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    email?: string
-    supabaseUserId?: string
-    AND?: EmployeeWhereInput | EmployeeWhereInput[]
-    OR?: EmployeeWhereInput[]
-    NOT?: EmployeeWhereInput | EmployeeWhereInput[]
-    name?: StringFilter<"Employee"> | string
-    role?: EnumEmployeeRoleFilter<"Employee"> | $Enums.EmployeeRole
-    createdAt?: DateTimeFilter<"Employee"> | Date | string
-    updatedAt?: DateTimeFilter<"Employee"> | Date | string
-    companyName?: StringNullableFilter<"Employee"> | string | null
-    performedActivations?: ActivationListRelationFilter
-    activatedKeys?: LicenseKeyListRelationFilter
-  }, "id" | "email" | "supabaseUserId">
-
-  export type EmployeeOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    role?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    companyName?: SortOrderInput | SortOrder
-    supabaseUserId?: SortOrderInput | SortOrder
-    _count?: EmployeeCountOrderByAggregateInput
-    _max?: EmployeeMaxOrderByAggregateInput
-    _min?: EmployeeMinOrderByAggregateInput
-  }
-
-  export type EmployeeScalarWhereWithAggregatesInput = {
-    AND?: EmployeeScalarWhereWithAggregatesInput | EmployeeScalarWhereWithAggregatesInput[]
-    OR?: EmployeeScalarWhereWithAggregatesInput[]
-    NOT?: EmployeeScalarWhereWithAggregatesInput | EmployeeScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Employee"> | string
-    name?: StringWithAggregatesFilter<"Employee"> | string
-    email?: StringWithAggregatesFilter<"Employee"> | string
-    role?: EnumEmployeeRoleWithAggregatesFilter<"Employee"> | $Enums.EmployeeRole
-    createdAt?: DateTimeWithAggregatesFilter<"Employee"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Employee"> | Date | string
-    companyName?: StringNullableWithAggregatesFilter<"Employee"> | string | null
-    supabaseUserId?: StringNullableWithAggregatesFilter<"Employee"> | string | null
-  }
-
   export type MonthlyUsageWhereInput = {
     AND?: MonthlyUsageWhereInput | MonthlyUsageWhereInput[]
     OR?: MonthlyUsageWhereInput[]
@@ -9238,12 +9257,12 @@ export namespace Prisma {
 
   export type VendorCreateInput = {
     id?: string
+    supabaseUserId?: string | null
+    contactEmail?: string | null
     name: string
-    contactEmail: string
-    billingAddress?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    supabaseUserId?: string | null
+    role?: $Enums.EmployeeRole
     activations?: ActivationCreateNestedManyWithoutVendorInput
     licenseKeys?: LicenseKeyCreateNestedManyWithoutVendorInput
     monthlyUsage?: MonthlyUsageCreateNestedManyWithoutVendorInput
@@ -9252,12 +9271,12 @@ export namespace Prisma {
 
   export type VendorUncheckedCreateInput = {
     id?: string
+    supabaseUserId?: string | null
+    contactEmail?: string | null
     name: string
-    contactEmail: string
-    billingAddress?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    supabaseUserId?: string | null
+    role?: $Enums.EmployeeRole
     activations?: ActivationUncheckedCreateNestedManyWithoutVendorInput
     licenseKeys?: LicenseKeyUncheckedCreateNestedManyWithoutVendorInput
     monthlyUsage?: MonthlyUsageUncheckedCreateNestedManyWithoutVendorInput
@@ -9266,12 +9285,12 @@ export namespace Prisma {
 
   export type VendorUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    contactEmail?: StringFieldUpdateOperationsInput | string
-    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
     activations?: ActivationUpdateManyWithoutVendorNestedInput
     licenseKeys?: LicenseKeyUpdateManyWithoutVendorNestedInput
     monthlyUsage?: MonthlyUsageUpdateManyWithoutVendorNestedInput
@@ -9280,12 +9299,12 @@ export namespace Prisma {
 
   export type VendorUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    contactEmail?: StringFieldUpdateOperationsInput | string
-    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
     activations?: ActivationUncheckedUpdateManyWithoutVendorNestedInput
     licenseKeys?: LicenseKeyUncheckedUpdateManyWithoutVendorNestedInput
     monthlyUsage?: MonthlyUsageUncheckedUpdateManyWithoutVendorNestedInput
@@ -9294,37 +9313,123 @@ export namespace Prisma {
 
   export type VendorCreateManyInput = {
     id?: string
+    supabaseUserId?: string | null
+    contactEmail?: string | null
     name: string
-    contactEmail: string
-    billingAddress?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    supabaseUserId?: string | null
+    role?: $Enums.EmployeeRole
   }
 
   export type VendorUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    contactEmail?: StringFieldUpdateOperationsInput | string
-    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
   }
 
   export type VendorUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    contactEmail?: StringFieldUpdateOperationsInput | string
-    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
+  }
+
+  export type EmployeeCreateInput = {
+    id?: string
+    supabaseUserId?: string | null
+    companyName?: string | null
+    name: string
+    email: string
+    role?: $Enums.EmployeeRole
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    performedActivations?: ActivationCreateNestedManyWithoutActivatedByInput
+    activatedKeys?: LicenseKeyCreateNestedManyWithoutActivatedByInput
+  }
+
+  export type EmployeeUncheckedCreateInput = {
+    id?: string
+    supabaseUserId?: string | null
+    companyName?: string | null
+    name: string
+    email: string
+    role?: $Enums.EmployeeRole
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    performedActivations?: ActivationUncheckedCreateNestedManyWithoutActivatedByInput
+    activatedKeys?: LicenseKeyUncheckedCreateNestedManyWithoutActivatedByInput
+  }
+
+  export type EmployeeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
     supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    performedActivations?: ActivationUpdateManyWithoutActivatedByNestedInput
+    activatedKeys?: LicenseKeyUpdateManyWithoutActivatedByNestedInput
+  }
+
+  export type EmployeeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    performedActivations?: ActivationUncheckedUpdateManyWithoutActivatedByNestedInput
+    activatedKeys?: LicenseKeyUncheckedUpdateManyWithoutActivatedByNestedInput
+  }
+
+  export type EmployeeCreateManyInput = {
+    id?: string
+    supabaseUserId?: string | null
+    companyName?: string | null
+    name: string
+    email: string
+    role?: $Enums.EmployeeRole
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmployeeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmployeeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SoftwareCreateInput = {
     id?: string
     name: string
+    description?: string | null
     pricingModel: $Enums.PricingModel
     pricePerUse?: number | null
     monthlyRate?: number | null
@@ -9339,6 +9444,7 @@ export namespace Prisma {
   export type SoftwareUncheckedCreateInput = {
     id?: string
     name: string
+    description?: string | null
     vendorId: string
     pricingModel: $Enums.PricingModel
     pricePerUse?: number | null
@@ -9353,6 +9459,7 @@ export namespace Prisma {
   export type SoftwareUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
     pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
     monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -9367,6 +9474,7 @@ export namespace Prisma {
   export type SoftwareUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     vendorId?: StringFieldUpdateOperationsInput | string
     pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
     pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -9381,6 +9489,7 @@ export namespace Prisma {
   export type SoftwareCreateManyInput = {
     id?: string
     name: string
+    description?: string | null
     vendorId: string
     pricingModel: $Enums.PricingModel
     pricePerUse?: number | null
@@ -9392,6 +9501,7 @@ export namespace Prisma {
   export type SoftwareUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
     pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
     monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -9402,6 +9512,7 @@ export namespace Prisma {
   export type SoftwareUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     vendorId?: StringFieldUpdateOperationsInput | string
     pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
     pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -9596,91 +9707,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type EmployeeCreateInput = {
-    id?: string
-    name: string
-    email: string
-    role?: $Enums.EmployeeRole
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    companyName?: string | null
-    supabaseUserId?: string | null
-    performedActivations?: ActivationCreateNestedManyWithoutActivatedByInput
-    activatedKeys?: LicenseKeyCreateNestedManyWithoutActivatedByInput
-  }
-
-  export type EmployeeUncheckedCreateInput = {
-    id?: string
-    name: string
-    email: string
-    role?: $Enums.EmployeeRole
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    companyName?: string | null
-    supabaseUserId?: string | null
-    performedActivations?: ActivationUncheckedCreateNestedManyWithoutActivatedByInput
-    activatedKeys?: LicenseKeyUncheckedCreateNestedManyWithoutActivatedByInput
-  }
-
-  export type EmployeeUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    companyName?: NullableStringFieldUpdateOperationsInput | string | null
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-    performedActivations?: ActivationUpdateManyWithoutActivatedByNestedInput
-    activatedKeys?: LicenseKeyUpdateManyWithoutActivatedByNestedInput
-  }
-
-  export type EmployeeUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    companyName?: NullableStringFieldUpdateOperationsInput | string | null
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-    performedActivations?: ActivationUncheckedUpdateManyWithoutActivatedByNestedInput
-    activatedKeys?: LicenseKeyUncheckedUpdateManyWithoutActivatedByNestedInput
-  }
-
-  export type EmployeeCreateManyInput = {
-    id?: string
-    name: string
-    email: string
-    role?: $Enums.EmployeeRole
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    companyName?: string | null
-    supabaseUserId?: string | null
-  }
-
-  export type EmployeeUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    companyName?: NullableStringFieldUpdateOperationsInput | string | null
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type EmployeeUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    companyName?: NullableStringFieldUpdateOperationsInput | string | null
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
   export type MonthlyUsageCreateInput = {
     id?: string
     month: Date | string
@@ -9790,6 +9816,13 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type EnumEmployeeRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.EmployeeRole | EnumEmployeeRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.EmployeeRole[] | ListEnumEmployeeRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EmployeeRole[] | ListEnumEmployeeRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumEmployeeRoleFilter<$PrismaModel> | $Enums.EmployeeRole
+  }
+
   export type ActivationListRelationFilter = {
     every?: ActivationWhereInput
     some?: ActivationWhereInput
@@ -9837,32 +9870,32 @@ export namespace Prisma {
 
   export type VendorCountOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    supabaseUserId?: SortOrder
     contactEmail?: SortOrder
-    billingAddress?: SortOrder
+    name?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    supabaseUserId?: SortOrder
+    role?: SortOrder
   }
 
   export type VendorMaxOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    supabaseUserId?: SortOrder
     contactEmail?: SortOrder
-    billingAddress?: SortOrder
+    name?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    supabaseUserId?: SortOrder
+    role?: SortOrder
   }
 
   export type VendorMinOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    supabaseUserId?: SortOrder
     contactEmail?: SortOrder
-    billingAddress?: SortOrder
+    name?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    supabaseUserId?: SortOrder
+    role?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -9915,6 +9948,49 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type EnumEmployeeRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EmployeeRole | EnumEmployeeRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.EmployeeRole[] | ListEnumEmployeeRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EmployeeRole[] | ListEnumEmployeeRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumEmployeeRoleWithAggregatesFilter<$PrismaModel> | $Enums.EmployeeRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEmployeeRoleFilter<$PrismaModel>
+    _max?: NestedEnumEmployeeRoleFilter<$PrismaModel>
+  }
+
+  export type EmployeeCountOrderByAggregateInput = {
+    id?: SortOrder
+    supabaseUserId?: SortOrder
+    companyName?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    role?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmployeeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    supabaseUserId?: SortOrder
+    companyName?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    role?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmployeeMinOrderByAggregateInput = {
+    id?: SortOrder
+    supabaseUserId?: SortOrder
+    companyName?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    role?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type EnumPricingModelFilter<$PrismaModel = never> = {
     equals?: $Enums.PricingModel | EnumPricingModelFieldRefInput<$PrismaModel>
     in?: $Enums.PricingModel[] | ListEnumPricingModelFieldRefInput<$PrismaModel>
@@ -9941,6 +10017,7 @@ export namespace Prisma {
   export type SoftwareCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    description?: SortOrder
     vendorId?: SortOrder
     pricingModel?: SortOrder
     pricePerUse?: SortOrder
@@ -9957,6 +10034,7 @@ export namespace Prisma {
   export type SoftwareMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    description?: SortOrder
     vendorId?: SortOrder
     pricingModel?: SortOrder
     pricePerUse?: SortOrder
@@ -9968,6 +10046,7 @@ export namespace Prisma {
   export type SoftwareMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    description?: SortOrder
     vendorId?: SortOrder
     pricingModel?: SortOrder
     pricePerUse?: SortOrder
@@ -10155,56 +10234,6 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
-  export type EnumEmployeeRoleFilter<$PrismaModel = never> = {
-    equals?: $Enums.EmployeeRole | EnumEmployeeRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.EmployeeRole[] | ListEnumEmployeeRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.EmployeeRole[] | ListEnumEmployeeRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumEmployeeRoleFilter<$PrismaModel> | $Enums.EmployeeRole
-  }
-
-  export type EmployeeCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    role?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    companyName?: SortOrder
-    supabaseUserId?: SortOrder
-  }
-
-  export type EmployeeMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    role?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    companyName?: SortOrder
-    supabaseUserId?: SortOrder
-  }
-
-  export type EmployeeMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    role?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    companyName?: SortOrder
-    supabaseUserId?: SortOrder
-  }
-
-  export type EnumEmployeeRoleWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.EmployeeRole | EnumEmployeeRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.EmployeeRole[] | ListEnumEmployeeRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.EmployeeRole[] | ListEnumEmployeeRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumEmployeeRoleWithAggregatesFilter<$PrismaModel> | $Enums.EmployeeRole
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumEmployeeRoleFilter<$PrismaModel>
-    _max?: NestedEnumEmployeeRoleFilter<$PrismaModel>
-  }
-
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -10373,6 +10402,10 @@ export namespace Prisma {
     set?: Date | string
   }
 
+  export type EnumEmployeeRoleFieldUpdateOperationsInput = {
+    set?: $Enums.EmployeeRole
+  }
+
   export type ActivationUpdateManyWithoutVendorNestedInput = {
     create?: XOR<ActivationCreateWithoutVendorInput, ActivationUncheckedCreateWithoutVendorInput> | ActivationCreateWithoutVendorInput[] | ActivationUncheckedCreateWithoutVendorInput[]
     connectOrCreate?: ActivationCreateOrConnectWithoutVendorInput | ActivationCreateOrConnectWithoutVendorInput[]
@@ -10483,6 +10516,90 @@ export namespace Prisma {
     update?: SoftwareUpdateWithWhereUniqueWithoutVendorInput | SoftwareUpdateWithWhereUniqueWithoutVendorInput[]
     updateMany?: SoftwareUpdateManyWithWhereWithoutVendorInput | SoftwareUpdateManyWithWhereWithoutVendorInput[]
     deleteMany?: SoftwareScalarWhereInput | SoftwareScalarWhereInput[]
+  }
+
+  export type ActivationCreateNestedManyWithoutActivatedByInput = {
+    create?: XOR<ActivationCreateWithoutActivatedByInput, ActivationUncheckedCreateWithoutActivatedByInput> | ActivationCreateWithoutActivatedByInput[] | ActivationUncheckedCreateWithoutActivatedByInput[]
+    connectOrCreate?: ActivationCreateOrConnectWithoutActivatedByInput | ActivationCreateOrConnectWithoutActivatedByInput[]
+    createMany?: ActivationCreateManyActivatedByInputEnvelope
+    connect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
+  }
+
+  export type LicenseKeyCreateNestedManyWithoutActivatedByInput = {
+    create?: XOR<LicenseKeyCreateWithoutActivatedByInput, LicenseKeyUncheckedCreateWithoutActivatedByInput> | LicenseKeyCreateWithoutActivatedByInput[] | LicenseKeyUncheckedCreateWithoutActivatedByInput[]
+    connectOrCreate?: LicenseKeyCreateOrConnectWithoutActivatedByInput | LicenseKeyCreateOrConnectWithoutActivatedByInput[]
+    createMany?: LicenseKeyCreateManyActivatedByInputEnvelope
+    connect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+  }
+
+  export type ActivationUncheckedCreateNestedManyWithoutActivatedByInput = {
+    create?: XOR<ActivationCreateWithoutActivatedByInput, ActivationUncheckedCreateWithoutActivatedByInput> | ActivationCreateWithoutActivatedByInput[] | ActivationUncheckedCreateWithoutActivatedByInput[]
+    connectOrCreate?: ActivationCreateOrConnectWithoutActivatedByInput | ActivationCreateOrConnectWithoutActivatedByInput[]
+    createMany?: ActivationCreateManyActivatedByInputEnvelope
+    connect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
+  }
+
+  export type LicenseKeyUncheckedCreateNestedManyWithoutActivatedByInput = {
+    create?: XOR<LicenseKeyCreateWithoutActivatedByInput, LicenseKeyUncheckedCreateWithoutActivatedByInput> | LicenseKeyCreateWithoutActivatedByInput[] | LicenseKeyUncheckedCreateWithoutActivatedByInput[]
+    connectOrCreate?: LicenseKeyCreateOrConnectWithoutActivatedByInput | LicenseKeyCreateOrConnectWithoutActivatedByInput[]
+    createMany?: LicenseKeyCreateManyActivatedByInputEnvelope
+    connect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+  }
+
+  export type ActivationUpdateManyWithoutActivatedByNestedInput = {
+    create?: XOR<ActivationCreateWithoutActivatedByInput, ActivationUncheckedCreateWithoutActivatedByInput> | ActivationCreateWithoutActivatedByInput[] | ActivationUncheckedCreateWithoutActivatedByInput[]
+    connectOrCreate?: ActivationCreateOrConnectWithoutActivatedByInput | ActivationCreateOrConnectWithoutActivatedByInput[]
+    upsert?: ActivationUpsertWithWhereUniqueWithoutActivatedByInput | ActivationUpsertWithWhereUniqueWithoutActivatedByInput[]
+    createMany?: ActivationCreateManyActivatedByInputEnvelope
+    set?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
+    disconnect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
+    delete?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
+    connect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
+    update?: ActivationUpdateWithWhereUniqueWithoutActivatedByInput | ActivationUpdateWithWhereUniqueWithoutActivatedByInput[]
+    updateMany?: ActivationUpdateManyWithWhereWithoutActivatedByInput | ActivationUpdateManyWithWhereWithoutActivatedByInput[]
+    deleteMany?: ActivationScalarWhereInput | ActivationScalarWhereInput[]
+  }
+
+  export type LicenseKeyUpdateManyWithoutActivatedByNestedInput = {
+    create?: XOR<LicenseKeyCreateWithoutActivatedByInput, LicenseKeyUncheckedCreateWithoutActivatedByInput> | LicenseKeyCreateWithoutActivatedByInput[] | LicenseKeyUncheckedCreateWithoutActivatedByInput[]
+    connectOrCreate?: LicenseKeyCreateOrConnectWithoutActivatedByInput | LicenseKeyCreateOrConnectWithoutActivatedByInput[]
+    upsert?: LicenseKeyUpsertWithWhereUniqueWithoutActivatedByInput | LicenseKeyUpsertWithWhereUniqueWithoutActivatedByInput[]
+    createMany?: LicenseKeyCreateManyActivatedByInputEnvelope
+    set?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    disconnect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    delete?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    connect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    update?: LicenseKeyUpdateWithWhereUniqueWithoutActivatedByInput | LicenseKeyUpdateWithWhereUniqueWithoutActivatedByInput[]
+    updateMany?: LicenseKeyUpdateManyWithWhereWithoutActivatedByInput | LicenseKeyUpdateManyWithWhereWithoutActivatedByInput[]
+    deleteMany?: LicenseKeyScalarWhereInput | LicenseKeyScalarWhereInput[]
+  }
+
+  export type ActivationUncheckedUpdateManyWithoutActivatedByNestedInput = {
+    create?: XOR<ActivationCreateWithoutActivatedByInput, ActivationUncheckedCreateWithoutActivatedByInput> | ActivationCreateWithoutActivatedByInput[] | ActivationUncheckedCreateWithoutActivatedByInput[]
+    connectOrCreate?: ActivationCreateOrConnectWithoutActivatedByInput | ActivationCreateOrConnectWithoutActivatedByInput[]
+    upsert?: ActivationUpsertWithWhereUniqueWithoutActivatedByInput | ActivationUpsertWithWhereUniqueWithoutActivatedByInput[]
+    createMany?: ActivationCreateManyActivatedByInputEnvelope
+    set?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
+    disconnect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
+    delete?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
+    connect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
+    update?: ActivationUpdateWithWhereUniqueWithoutActivatedByInput | ActivationUpdateWithWhereUniqueWithoutActivatedByInput[]
+    updateMany?: ActivationUpdateManyWithWhereWithoutActivatedByInput | ActivationUpdateManyWithWhereWithoutActivatedByInput[]
+    deleteMany?: ActivationScalarWhereInput | ActivationScalarWhereInput[]
+  }
+
+  export type LicenseKeyUncheckedUpdateManyWithoutActivatedByNestedInput = {
+    create?: XOR<LicenseKeyCreateWithoutActivatedByInput, LicenseKeyUncheckedCreateWithoutActivatedByInput> | LicenseKeyCreateWithoutActivatedByInput[] | LicenseKeyUncheckedCreateWithoutActivatedByInput[]
+    connectOrCreate?: LicenseKeyCreateOrConnectWithoutActivatedByInput | LicenseKeyCreateOrConnectWithoutActivatedByInput[]
+    upsert?: LicenseKeyUpsertWithWhereUniqueWithoutActivatedByInput | LicenseKeyUpsertWithWhereUniqueWithoutActivatedByInput[]
+    createMany?: LicenseKeyCreateManyActivatedByInputEnvelope
+    set?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    disconnect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    delete?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    connect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
+    update?: LicenseKeyUpdateWithWhereUniqueWithoutActivatedByInput | LicenseKeyUpdateWithWhereUniqueWithoutActivatedByInput[]
+    updateMany?: LicenseKeyUpdateManyWithWhereWithoutActivatedByInput | LicenseKeyUpdateManyWithWhereWithoutActivatedByInput[]
+    deleteMany?: LicenseKeyScalarWhereInput | LicenseKeyScalarWhereInput[]
   }
 
   export type ActivationCreateNestedManyWithoutSoftwareInput = {
@@ -10777,94 +10894,6 @@ export namespace Prisma {
     update?: XOR<XOR<VendorUpdateToOneWithWhereWithoutActivationsInput, VendorUpdateWithoutActivationsInput>, VendorUncheckedUpdateWithoutActivationsInput>
   }
 
-  export type ActivationCreateNestedManyWithoutActivatedByInput = {
-    create?: XOR<ActivationCreateWithoutActivatedByInput, ActivationUncheckedCreateWithoutActivatedByInput> | ActivationCreateWithoutActivatedByInput[] | ActivationUncheckedCreateWithoutActivatedByInput[]
-    connectOrCreate?: ActivationCreateOrConnectWithoutActivatedByInput | ActivationCreateOrConnectWithoutActivatedByInput[]
-    createMany?: ActivationCreateManyActivatedByInputEnvelope
-    connect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
-  }
-
-  export type LicenseKeyCreateNestedManyWithoutActivatedByInput = {
-    create?: XOR<LicenseKeyCreateWithoutActivatedByInput, LicenseKeyUncheckedCreateWithoutActivatedByInput> | LicenseKeyCreateWithoutActivatedByInput[] | LicenseKeyUncheckedCreateWithoutActivatedByInput[]
-    connectOrCreate?: LicenseKeyCreateOrConnectWithoutActivatedByInput | LicenseKeyCreateOrConnectWithoutActivatedByInput[]
-    createMany?: LicenseKeyCreateManyActivatedByInputEnvelope
-    connect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-  }
-
-  export type ActivationUncheckedCreateNestedManyWithoutActivatedByInput = {
-    create?: XOR<ActivationCreateWithoutActivatedByInput, ActivationUncheckedCreateWithoutActivatedByInput> | ActivationCreateWithoutActivatedByInput[] | ActivationUncheckedCreateWithoutActivatedByInput[]
-    connectOrCreate?: ActivationCreateOrConnectWithoutActivatedByInput | ActivationCreateOrConnectWithoutActivatedByInput[]
-    createMany?: ActivationCreateManyActivatedByInputEnvelope
-    connect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
-  }
-
-  export type LicenseKeyUncheckedCreateNestedManyWithoutActivatedByInput = {
-    create?: XOR<LicenseKeyCreateWithoutActivatedByInput, LicenseKeyUncheckedCreateWithoutActivatedByInput> | LicenseKeyCreateWithoutActivatedByInput[] | LicenseKeyUncheckedCreateWithoutActivatedByInput[]
-    connectOrCreate?: LicenseKeyCreateOrConnectWithoutActivatedByInput | LicenseKeyCreateOrConnectWithoutActivatedByInput[]
-    createMany?: LicenseKeyCreateManyActivatedByInputEnvelope
-    connect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-  }
-
-  export type EnumEmployeeRoleFieldUpdateOperationsInput = {
-    set?: $Enums.EmployeeRole
-  }
-
-  export type ActivationUpdateManyWithoutActivatedByNestedInput = {
-    create?: XOR<ActivationCreateWithoutActivatedByInput, ActivationUncheckedCreateWithoutActivatedByInput> | ActivationCreateWithoutActivatedByInput[] | ActivationUncheckedCreateWithoutActivatedByInput[]
-    connectOrCreate?: ActivationCreateOrConnectWithoutActivatedByInput | ActivationCreateOrConnectWithoutActivatedByInput[]
-    upsert?: ActivationUpsertWithWhereUniqueWithoutActivatedByInput | ActivationUpsertWithWhereUniqueWithoutActivatedByInput[]
-    createMany?: ActivationCreateManyActivatedByInputEnvelope
-    set?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
-    disconnect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
-    delete?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
-    connect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
-    update?: ActivationUpdateWithWhereUniqueWithoutActivatedByInput | ActivationUpdateWithWhereUniqueWithoutActivatedByInput[]
-    updateMany?: ActivationUpdateManyWithWhereWithoutActivatedByInput | ActivationUpdateManyWithWhereWithoutActivatedByInput[]
-    deleteMany?: ActivationScalarWhereInput | ActivationScalarWhereInput[]
-  }
-
-  export type LicenseKeyUpdateManyWithoutActivatedByNestedInput = {
-    create?: XOR<LicenseKeyCreateWithoutActivatedByInput, LicenseKeyUncheckedCreateWithoutActivatedByInput> | LicenseKeyCreateWithoutActivatedByInput[] | LicenseKeyUncheckedCreateWithoutActivatedByInput[]
-    connectOrCreate?: LicenseKeyCreateOrConnectWithoutActivatedByInput | LicenseKeyCreateOrConnectWithoutActivatedByInput[]
-    upsert?: LicenseKeyUpsertWithWhereUniqueWithoutActivatedByInput | LicenseKeyUpsertWithWhereUniqueWithoutActivatedByInput[]
-    createMany?: LicenseKeyCreateManyActivatedByInputEnvelope
-    set?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-    disconnect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-    delete?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-    connect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-    update?: LicenseKeyUpdateWithWhereUniqueWithoutActivatedByInput | LicenseKeyUpdateWithWhereUniqueWithoutActivatedByInput[]
-    updateMany?: LicenseKeyUpdateManyWithWhereWithoutActivatedByInput | LicenseKeyUpdateManyWithWhereWithoutActivatedByInput[]
-    deleteMany?: LicenseKeyScalarWhereInput | LicenseKeyScalarWhereInput[]
-  }
-
-  export type ActivationUncheckedUpdateManyWithoutActivatedByNestedInput = {
-    create?: XOR<ActivationCreateWithoutActivatedByInput, ActivationUncheckedCreateWithoutActivatedByInput> | ActivationCreateWithoutActivatedByInput[] | ActivationUncheckedCreateWithoutActivatedByInput[]
-    connectOrCreate?: ActivationCreateOrConnectWithoutActivatedByInput | ActivationCreateOrConnectWithoutActivatedByInput[]
-    upsert?: ActivationUpsertWithWhereUniqueWithoutActivatedByInput | ActivationUpsertWithWhereUniqueWithoutActivatedByInput[]
-    createMany?: ActivationCreateManyActivatedByInputEnvelope
-    set?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
-    disconnect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
-    delete?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
-    connect?: ActivationWhereUniqueInput | ActivationWhereUniqueInput[]
-    update?: ActivationUpdateWithWhereUniqueWithoutActivatedByInput | ActivationUpdateWithWhereUniqueWithoutActivatedByInput[]
-    updateMany?: ActivationUpdateManyWithWhereWithoutActivatedByInput | ActivationUpdateManyWithWhereWithoutActivatedByInput[]
-    deleteMany?: ActivationScalarWhereInput | ActivationScalarWhereInput[]
-  }
-
-  export type LicenseKeyUncheckedUpdateManyWithoutActivatedByNestedInput = {
-    create?: XOR<LicenseKeyCreateWithoutActivatedByInput, LicenseKeyUncheckedCreateWithoutActivatedByInput> | LicenseKeyCreateWithoutActivatedByInput[] | LicenseKeyUncheckedCreateWithoutActivatedByInput[]
-    connectOrCreate?: LicenseKeyCreateOrConnectWithoutActivatedByInput | LicenseKeyCreateOrConnectWithoutActivatedByInput[]
-    upsert?: LicenseKeyUpsertWithWhereUniqueWithoutActivatedByInput | LicenseKeyUpsertWithWhereUniqueWithoutActivatedByInput[]
-    createMany?: LicenseKeyCreateManyActivatedByInputEnvelope
-    set?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-    disconnect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-    delete?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-    connect?: LicenseKeyWhereUniqueInput | LicenseKeyWhereUniqueInput[]
-    update?: LicenseKeyUpdateWithWhereUniqueWithoutActivatedByInput | LicenseKeyUpdateWithWhereUniqueWithoutActivatedByInput[]
-    updateMany?: LicenseKeyUpdateManyWithWhereWithoutActivatedByInput | LicenseKeyUpdateManyWithWhereWithoutActivatedByInput[]
-    deleteMany?: LicenseKeyScalarWhereInput | LicenseKeyScalarWhereInput[]
-  }
-
   export type SoftwareCreateNestedOneWithoutMonthlyUsageInput = {
     create?: XOR<SoftwareCreateWithoutMonthlyUsageInput, SoftwareUncheckedCreateWithoutMonthlyUsageInput>
     connectOrCreate?: SoftwareCreateOrConnectWithoutMonthlyUsageInput
@@ -10948,6 +10977,13 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedEnumEmployeeRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.EmployeeRole | EnumEmployeeRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.EmployeeRole[] | ListEnumEmployeeRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EmployeeRole[] | ListEnumEmployeeRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumEmployeeRoleFilter<$PrismaModel> | $Enums.EmployeeRole
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -11016,6 +11052,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumEmployeeRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EmployeeRole | EnumEmployeeRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.EmployeeRole[] | ListEnumEmployeeRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EmployeeRole[] | ListEnumEmployeeRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumEmployeeRoleWithAggregatesFilter<$PrismaModel> | $Enums.EmployeeRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEmployeeRoleFilter<$PrismaModel>
+    _max?: NestedEnumEmployeeRoleFilter<$PrismaModel>
   }
 
   export type NestedEnumPricingModelFilter<$PrismaModel = never> = {
@@ -11102,23 +11148,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedEnumEmployeeRoleFilter<$PrismaModel = never> = {
-    equals?: $Enums.EmployeeRole | EnumEmployeeRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.EmployeeRole[] | ListEnumEmployeeRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.EmployeeRole[] | ListEnumEmployeeRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumEmployeeRoleFilter<$PrismaModel> | $Enums.EmployeeRole
-  }
-
-  export type NestedEnumEmployeeRoleWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.EmployeeRole | EnumEmployeeRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.EmployeeRole[] | ListEnumEmployeeRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.EmployeeRole[] | ListEnumEmployeeRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumEmployeeRoleWithAggregatesFilter<$PrismaModel> | $Enums.EmployeeRole
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumEmployeeRoleFilter<$PrismaModel>
-    _max?: NestedEnumEmployeeRoleFilter<$PrismaModel>
   }
 
   export type NestedFloatFilter<$PrismaModel = never> = {
@@ -11267,6 +11296,7 @@ export namespace Prisma {
   export type SoftwareCreateWithoutVendorInput = {
     id?: string
     name: string
+    description?: string | null
     pricingModel: $Enums.PricingModel
     pricePerUse?: number | null
     monthlyRate?: number | null
@@ -11280,6 +11310,7 @@ export namespace Prisma {
   export type SoftwareUncheckedCreateWithoutVendorInput = {
     id?: string
     name: string
+    description?: string | null
     pricingModel: $Enums.PricingModel
     pricePerUse?: number | null
     monthlyRate?: number | null
@@ -11416,764 +11447,13 @@ export namespace Prisma {
     NOT?: SoftwareScalarWhereInput | SoftwareScalarWhereInput[]
     id?: StringFilter<"Software"> | string
     name?: StringFilter<"Software"> | string
+    description?: StringNullableFilter<"Software"> | string | null
     vendorId?: StringFilter<"Software"> | string
     pricingModel?: EnumPricingModelFilter<"Software"> | $Enums.PricingModel
     pricePerUse?: FloatNullableFilter<"Software"> | number | null
     monthlyRate?: FloatNullableFilter<"Software"> | number | null
     createdAt?: DateTimeFilter<"Software"> | Date | string
     updatedAt?: DateTimeFilter<"Software"> | Date | string
-  }
-
-  export type ActivationCreateWithoutSoftwareInput = {
-    id?: string
-    headsetSerialNumber?: string | null
-    activatedAt?: Date | string
-    createdAt?: Date | string
-    activatedBy: EmployeeCreateNestedOneWithoutPerformedActivationsInput
-    licenseKey: LicenseKeyCreateNestedOneWithoutActivationInput
-    vendor: VendorCreateNestedOneWithoutActivationsInput
-  }
-
-  export type ActivationUncheckedCreateWithoutSoftwareInput = {
-    id?: string
-    licenseKeyId: string
-    activatedById: string
-    vendorId: string
-    headsetSerialNumber?: string | null
-    activatedAt?: Date | string
-    createdAt?: Date | string
-  }
-
-  export type ActivationCreateOrConnectWithoutSoftwareInput = {
-    where: ActivationWhereUniqueInput
-    create: XOR<ActivationCreateWithoutSoftwareInput, ActivationUncheckedCreateWithoutSoftwareInput>
-  }
-
-  export type ActivationCreateManySoftwareInputEnvelope = {
-    data: ActivationCreateManySoftwareInput | ActivationCreateManySoftwareInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type LicenseKeyCreateWithoutSoftwareInput = {
-    id?: string
-    key: string
-    status?: $Enums.LicenseStatus
-    expiresAt?: Date | string | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    activatedAt?: Date | string | null
-    canceledAt?: Date | string | null
-    canceledReason?: string | null
-    activation?: ActivationCreateNestedOneWithoutLicenseKeyInput
-    activatedBy?: EmployeeCreateNestedOneWithoutActivatedKeysInput
-    vendor: VendorCreateNestedOneWithoutLicenseKeysInput
-  }
-
-  export type LicenseKeyUncheckedCreateWithoutSoftwareInput = {
-    id?: string
-    key: string
-    status?: $Enums.LicenseStatus
-    vendorId: string
-    expiresAt?: Date | string | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    activatedAt?: Date | string | null
-    activatedById?: string | null
-    canceledAt?: Date | string | null
-    canceledReason?: string | null
-    activation?: ActivationUncheckedCreateNestedOneWithoutLicenseKeyInput
-  }
-
-  export type LicenseKeyCreateOrConnectWithoutSoftwareInput = {
-    where: LicenseKeyWhereUniqueInput
-    create: XOR<LicenseKeyCreateWithoutSoftwareInput, LicenseKeyUncheckedCreateWithoutSoftwareInput>
-  }
-
-  export type LicenseKeyCreateManySoftwareInputEnvelope = {
-    data: LicenseKeyCreateManySoftwareInput | LicenseKeyCreateManySoftwareInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type MonthlyUsageCreateWithoutSoftwareInput = {
-    id?: string
-    month: Date | string
-    usageCount: number
-    totalOwed: number
-    calculatedAt?: Date | string
-    vendor: VendorCreateNestedOneWithoutMonthlyUsageInput
-  }
-
-  export type MonthlyUsageUncheckedCreateWithoutSoftwareInput = {
-    id?: string
-    vendorId: string
-    month: Date | string
-    usageCount: number
-    totalOwed: number
-    calculatedAt?: Date | string
-  }
-
-  export type MonthlyUsageCreateOrConnectWithoutSoftwareInput = {
-    where: MonthlyUsageWhereUniqueInput
-    create: XOR<MonthlyUsageCreateWithoutSoftwareInput, MonthlyUsageUncheckedCreateWithoutSoftwareInput>
-  }
-
-  export type MonthlyUsageCreateManySoftwareInputEnvelope = {
-    data: MonthlyUsageCreateManySoftwareInput | MonthlyUsageCreateManySoftwareInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type VendorCreateWithoutSoftwareInput = {
-    id?: string
-    name: string
-    contactEmail: string
-    billingAddress?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    supabaseUserId?: string | null
-    activations?: ActivationCreateNestedManyWithoutVendorInput
-    licenseKeys?: LicenseKeyCreateNestedManyWithoutVendorInput
-    monthlyUsage?: MonthlyUsageCreateNestedManyWithoutVendorInput
-  }
-
-  export type VendorUncheckedCreateWithoutSoftwareInput = {
-    id?: string
-    name: string
-    contactEmail: string
-    billingAddress?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    supabaseUserId?: string | null
-    activations?: ActivationUncheckedCreateNestedManyWithoutVendorInput
-    licenseKeys?: LicenseKeyUncheckedCreateNestedManyWithoutVendorInput
-    monthlyUsage?: MonthlyUsageUncheckedCreateNestedManyWithoutVendorInput
-  }
-
-  export type VendorCreateOrConnectWithoutSoftwareInput = {
-    where: VendorWhereUniqueInput
-    create: XOR<VendorCreateWithoutSoftwareInput, VendorUncheckedCreateWithoutSoftwareInput>
-  }
-
-  export type ActivationUpsertWithWhereUniqueWithoutSoftwareInput = {
-    where: ActivationWhereUniqueInput
-    update: XOR<ActivationUpdateWithoutSoftwareInput, ActivationUncheckedUpdateWithoutSoftwareInput>
-    create: XOR<ActivationCreateWithoutSoftwareInput, ActivationUncheckedCreateWithoutSoftwareInput>
-  }
-
-  export type ActivationUpdateWithWhereUniqueWithoutSoftwareInput = {
-    where: ActivationWhereUniqueInput
-    data: XOR<ActivationUpdateWithoutSoftwareInput, ActivationUncheckedUpdateWithoutSoftwareInput>
-  }
-
-  export type ActivationUpdateManyWithWhereWithoutSoftwareInput = {
-    where: ActivationScalarWhereInput
-    data: XOR<ActivationUpdateManyMutationInput, ActivationUncheckedUpdateManyWithoutSoftwareInput>
-  }
-
-  export type LicenseKeyUpsertWithWhereUniqueWithoutSoftwareInput = {
-    where: LicenseKeyWhereUniqueInput
-    update: XOR<LicenseKeyUpdateWithoutSoftwareInput, LicenseKeyUncheckedUpdateWithoutSoftwareInput>
-    create: XOR<LicenseKeyCreateWithoutSoftwareInput, LicenseKeyUncheckedCreateWithoutSoftwareInput>
-  }
-
-  export type LicenseKeyUpdateWithWhereUniqueWithoutSoftwareInput = {
-    where: LicenseKeyWhereUniqueInput
-    data: XOR<LicenseKeyUpdateWithoutSoftwareInput, LicenseKeyUncheckedUpdateWithoutSoftwareInput>
-  }
-
-  export type LicenseKeyUpdateManyWithWhereWithoutSoftwareInput = {
-    where: LicenseKeyScalarWhereInput
-    data: XOR<LicenseKeyUpdateManyMutationInput, LicenseKeyUncheckedUpdateManyWithoutSoftwareInput>
-  }
-
-  export type MonthlyUsageUpsertWithWhereUniqueWithoutSoftwareInput = {
-    where: MonthlyUsageWhereUniqueInput
-    update: XOR<MonthlyUsageUpdateWithoutSoftwareInput, MonthlyUsageUncheckedUpdateWithoutSoftwareInput>
-    create: XOR<MonthlyUsageCreateWithoutSoftwareInput, MonthlyUsageUncheckedCreateWithoutSoftwareInput>
-  }
-
-  export type MonthlyUsageUpdateWithWhereUniqueWithoutSoftwareInput = {
-    where: MonthlyUsageWhereUniqueInput
-    data: XOR<MonthlyUsageUpdateWithoutSoftwareInput, MonthlyUsageUncheckedUpdateWithoutSoftwareInput>
-  }
-
-  export type MonthlyUsageUpdateManyWithWhereWithoutSoftwareInput = {
-    where: MonthlyUsageScalarWhereInput
-    data: XOR<MonthlyUsageUpdateManyMutationInput, MonthlyUsageUncheckedUpdateManyWithoutSoftwareInput>
-  }
-
-  export type VendorUpsertWithoutSoftwareInput = {
-    update: XOR<VendorUpdateWithoutSoftwareInput, VendorUncheckedUpdateWithoutSoftwareInput>
-    create: XOR<VendorCreateWithoutSoftwareInput, VendorUncheckedCreateWithoutSoftwareInput>
-    where?: VendorWhereInput
-  }
-
-  export type VendorUpdateToOneWithWhereWithoutSoftwareInput = {
-    where?: VendorWhereInput
-    data: XOR<VendorUpdateWithoutSoftwareInput, VendorUncheckedUpdateWithoutSoftwareInput>
-  }
-
-  export type VendorUpdateWithoutSoftwareInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    contactEmail?: StringFieldUpdateOperationsInput | string
-    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-    activations?: ActivationUpdateManyWithoutVendorNestedInput
-    licenseKeys?: LicenseKeyUpdateManyWithoutVendorNestedInput
-    monthlyUsage?: MonthlyUsageUpdateManyWithoutVendorNestedInput
-  }
-
-  export type VendorUncheckedUpdateWithoutSoftwareInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    contactEmail?: StringFieldUpdateOperationsInput | string
-    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-    activations?: ActivationUncheckedUpdateManyWithoutVendorNestedInput
-    licenseKeys?: LicenseKeyUncheckedUpdateManyWithoutVendorNestedInput
-    monthlyUsage?: MonthlyUsageUncheckedUpdateManyWithoutVendorNestedInput
-  }
-
-  export type ActivationCreateWithoutLicenseKeyInput = {
-    id?: string
-    headsetSerialNumber?: string | null
-    activatedAt?: Date | string
-    createdAt?: Date | string
-    activatedBy: EmployeeCreateNestedOneWithoutPerformedActivationsInput
-    software: SoftwareCreateNestedOneWithoutActivationsInput
-    vendor: VendorCreateNestedOneWithoutActivationsInput
-  }
-
-  export type ActivationUncheckedCreateWithoutLicenseKeyInput = {
-    id?: string
-    activatedById: string
-    softwareId: string
-    vendorId: string
-    headsetSerialNumber?: string | null
-    activatedAt?: Date | string
-    createdAt?: Date | string
-  }
-
-  export type ActivationCreateOrConnectWithoutLicenseKeyInput = {
-    where: ActivationWhereUniqueInput
-    create: XOR<ActivationCreateWithoutLicenseKeyInput, ActivationUncheckedCreateWithoutLicenseKeyInput>
-  }
-
-  export type EmployeeCreateWithoutActivatedKeysInput = {
-    id?: string
-    name: string
-    email: string
-    role?: $Enums.EmployeeRole
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    companyName?: string | null
-    supabaseUserId?: string | null
-    performedActivations?: ActivationCreateNestedManyWithoutActivatedByInput
-  }
-
-  export type EmployeeUncheckedCreateWithoutActivatedKeysInput = {
-    id?: string
-    name: string
-    email: string
-    role?: $Enums.EmployeeRole
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    companyName?: string | null
-    supabaseUserId?: string | null
-    performedActivations?: ActivationUncheckedCreateNestedManyWithoutActivatedByInput
-  }
-
-  export type EmployeeCreateOrConnectWithoutActivatedKeysInput = {
-    where: EmployeeWhereUniqueInput
-    create: XOR<EmployeeCreateWithoutActivatedKeysInput, EmployeeUncheckedCreateWithoutActivatedKeysInput>
-  }
-
-  export type SoftwareCreateWithoutLicenseKeysInput = {
-    id?: string
-    name: string
-    pricingModel: $Enums.PricingModel
-    pricePerUse?: number | null
-    monthlyRate?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    activations?: ActivationCreateNestedManyWithoutSoftwareInput
-    monthlyUsage?: MonthlyUsageCreateNestedManyWithoutSoftwareInput
-    vendor: VendorCreateNestedOneWithoutSoftwareInput
-  }
-
-  export type SoftwareUncheckedCreateWithoutLicenseKeysInput = {
-    id?: string
-    name: string
-    vendorId: string
-    pricingModel: $Enums.PricingModel
-    pricePerUse?: number | null
-    monthlyRate?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    activations?: ActivationUncheckedCreateNestedManyWithoutSoftwareInput
-    monthlyUsage?: MonthlyUsageUncheckedCreateNestedManyWithoutSoftwareInput
-  }
-
-  export type SoftwareCreateOrConnectWithoutLicenseKeysInput = {
-    where: SoftwareWhereUniqueInput
-    create: XOR<SoftwareCreateWithoutLicenseKeysInput, SoftwareUncheckedCreateWithoutLicenseKeysInput>
-  }
-
-  export type VendorCreateWithoutLicenseKeysInput = {
-    id?: string
-    name: string
-    contactEmail: string
-    billingAddress?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    supabaseUserId?: string | null
-    activations?: ActivationCreateNestedManyWithoutVendorInput
-    monthlyUsage?: MonthlyUsageCreateNestedManyWithoutVendorInput
-    software?: SoftwareCreateNestedManyWithoutVendorInput
-  }
-
-  export type VendorUncheckedCreateWithoutLicenseKeysInput = {
-    id?: string
-    name: string
-    contactEmail: string
-    billingAddress?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    supabaseUserId?: string | null
-    activations?: ActivationUncheckedCreateNestedManyWithoutVendorInput
-    monthlyUsage?: MonthlyUsageUncheckedCreateNestedManyWithoutVendorInput
-    software?: SoftwareUncheckedCreateNestedManyWithoutVendorInput
-  }
-
-  export type VendorCreateOrConnectWithoutLicenseKeysInput = {
-    where: VendorWhereUniqueInput
-    create: XOR<VendorCreateWithoutLicenseKeysInput, VendorUncheckedCreateWithoutLicenseKeysInput>
-  }
-
-  export type ActivationUpsertWithoutLicenseKeyInput = {
-    update: XOR<ActivationUpdateWithoutLicenseKeyInput, ActivationUncheckedUpdateWithoutLicenseKeyInput>
-    create: XOR<ActivationCreateWithoutLicenseKeyInput, ActivationUncheckedCreateWithoutLicenseKeyInput>
-    where?: ActivationWhereInput
-  }
-
-  export type ActivationUpdateToOneWithWhereWithoutLicenseKeyInput = {
-    where?: ActivationWhereInput
-    data: XOR<ActivationUpdateWithoutLicenseKeyInput, ActivationUncheckedUpdateWithoutLicenseKeyInput>
-  }
-
-  export type ActivationUpdateWithoutLicenseKeyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    activatedBy?: EmployeeUpdateOneRequiredWithoutPerformedActivationsNestedInput
-    software?: SoftwareUpdateOneRequiredWithoutActivationsNestedInput
-    vendor?: VendorUpdateOneRequiredWithoutActivationsNestedInput
-  }
-
-  export type ActivationUncheckedUpdateWithoutLicenseKeyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    activatedById?: StringFieldUpdateOperationsInput | string
-    softwareId?: StringFieldUpdateOperationsInput | string
-    vendorId?: StringFieldUpdateOperationsInput | string
-    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type EmployeeUpsertWithoutActivatedKeysInput = {
-    update: XOR<EmployeeUpdateWithoutActivatedKeysInput, EmployeeUncheckedUpdateWithoutActivatedKeysInput>
-    create: XOR<EmployeeCreateWithoutActivatedKeysInput, EmployeeUncheckedCreateWithoutActivatedKeysInput>
-    where?: EmployeeWhereInput
-  }
-
-  export type EmployeeUpdateToOneWithWhereWithoutActivatedKeysInput = {
-    where?: EmployeeWhereInput
-    data: XOR<EmployeeUpdateWithoutActivatedKeysInput, EmployeeUncheckedUpdateWithoutActivatedKeysInput>
-  }
-
-  export type EmployeeUpdateWithoutActivatedKeysInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    companyName?: NullableStringFieldUpdateOperationsInput | string | null
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-    performedActivations?: ActivationUpdateManyWithoutActivatedByNestedInput
-  }
-
-  export type EmployeeUncheckedUpdateWithoutActivatedKeysInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    companyName?: NullableStringFieldUpdateOperationsInput | string | null
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-    performedActivations?: ActivationUncheckedUpdateManyWithoutActivatedByNestedInput
-  }
-
-  export type SoftwareUpsertWithoutLicenseKeysInput = {
-    update: XOR<SoftwareUpdateWithoutLicenseKeysInput, SoftwareUncheckedUpdateWithoutLicenseKeysInput>
-    create: XOR<SoftwareCreateWithoutLicenseKeysInput, SoftwareUncheckedCreateWithoutLicenseKeysInput>
-    where?: SoftwareWhereInput
-  }
-
-  export type SoftwareUpdateToOneWithWhereWithoutLicenseKeysInput = {
-    where?: SoftwareWhereInput
-    data: XOR<SoftwareUpdateWithoutLicenseKeysInput, SoftwareUncheckedUpdateWithoutLicenseKeysInput>
-  }
-
-  export type SoftwareUpdateWithoutLicenseKeysInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
-    pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
-    monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    activations?: ActivationUpdateManyWithoutSoftwareNestedInput
-    monthlyUsage?: MonthlyUsageUpdateManyWithoutSoftwareNestedInput
-    vendor?: VendorUpdateOneRequiredWithoutSoftwareNestedInput
-  }
-
-  export type SoftwareUncheckedUpdateWithoutLicenseKeysInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    vendorId?: StringFieldUpdateOperationsInput | string
-    pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
-    pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
-    monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    activations?: ActivationUncheckedUpdateManyWithoutSoftwareNestedInput
-    monthlyUsage?: MonthlyUsageUncheckedUpdateManyWithoutSoftwareNestedInput
-  }
-
-  export type VendorUpsertWithoutLicenseKeysInput = {
-    update: XOR<VendorUpdateWithoutLicenseKeysInput, VendorUncheckedUpdateWithoutLicenseKeysInput>
-    create: XOR<VendorCreateWithoutLicenseKeysInput, VendorUncheckedCreateWithoutLicenseKeysInput>
-    where?: VendorWhereInput
-  }
-
-  export type VendorUpdateToOneWithWhereWithoutLicenseKeysInput = {
-    where?: VendorWhereInput
-    data: XOR<VendorUpdateWithoutLicenseKeysInput, VendorUncheckedUpdateWithoutLicenseKeysInput>
-  }
-
-  export type VendorUpdateWithoutLicenseKeysInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    contactEmail?: StringFieldUpdateOperationsInput | string
-    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-    activations?: ActivationUpdateManyWithoutVendorNestedInput
-    monthlyUsage?: MonthlyUsageUpdateManyWithoutVendorNestedInput
-    software?: SoftwareUpdateManyWithoutVendorNestedInput
-  }
-
-  export type VendorUncheckedUpdateWithoutLicenseKeysInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    contactEmail?: StringFieldUpdateOperationsInput | string
-    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-    activations?: ActivationUncheckedUpdateManyWithoutVendorNestedInput
-    monthlyUsage?: MonthlyUsageUncheckedUpdateManyWithoutVendorNestedInput
-    software?: SoftwareUncheckedUpdateManyWithoutVendorNestedInput
-  }
-
-  export type EmployeeCreateWithoutPerformedActivationsInput = {
-    id?: string
-    name: string
-    email: string
-    role?: $Enums.EmployeeRole
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    companyName?: string | null
-    supabaseUserId?: string | null
-    activatedKeys?: LicenseKeyCreateNestedManyWithoutActivatedByInput
-  }
-
-  export type EmployeeUncheckedCreateWithoutPerformedActivationsInput = {
-    id?: string
-    name: string
-    email: string
-    role?: $Enums.EmployeeRole
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    companyName?: string | null
-    supabaseUserId?: string | null
-    activatedKeys?: LicenseKeyUncheckedCreateNestedManyWithoutActivatedByInput
-  }
-
-  export type EmployeeCreateOrConnectWithoutPerformedActivationsInput = {
-    where: EmployeeWhereUniqueInput
-    create: XOR<EmployeeCreateWithoutPerformedActivationsInput, EmployeeUncheckedCreateWithoutPerformedActivationsInput>
-  }
-
-  export type LicenseKeyCreateWithoutActivationInput = {
-    id?: string
-    key: string
-    status?: $Enums.LicenseStatus
-    expiresAt?: Date | string | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    activatedAt?: Date | string | null
-    canceledAt?: Date | string | null
-    canceledReason?: string | null
-    activatedBy?: EmployeeCreateNestedOneWithoutActivatedKeysInput
-    software: SoftwareCreateNestedOneWithoutLicenseKeysInput
-    vendor: VendorCreateNestedOneWithoutLicenseKeysInput
-  }
-
-  export type LicenseKeyUncheckedCreateWithoutActivationInput = {
-    id?: string
-    key: string
-    status?: $Enums.LicenseStatus
-    vendorId: string
-    softwareId: string
-    expiresAt?: Date | string | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    activatedAt?: Date | string | null
-    activatedById?: string | null
-    canceledAt?: Date | string | null
-    canceledReason?: string | null
-  }
-
-  export type LicenseKeyCreateOrConnectWithoutActivationInput = {
-    where: LicenseKeyWhereUniqueInput
-    create: XOR<LicenseKeyCreateWithoutActivationInput, LicenseKeyUncheckedCreateWithoutActivationInput>
-  }
-
-  export type SoftwareCreateWithoutActivationsInput = {
-    id?: string
-    name: string
-    pricingModel: $Enums.PricingModel
-    pricePerUse?: number | null
-    monthlyRate?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    licenseKeys?: LicenseKeyCreateNestedManyWithoutSoftwareInput
-    monthlyUsage?: MonthlyUsageCreateNestedManyWithoutSoftwareInput
-    vendor: VendorCreateNestedOneWithoutSoftwareInput
-  }
-
-  export type SoftwareUncheckedCreateWithoutActivationsInput = {
-    id?: string
-    name: string
-    vendorId: string
-    pricingModel: $Enums.PricingModel
-    pricePerUse?: number | null
-    monthlyRate?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    licenseKeys?: LicenseKeyUncheckedCreateNestedManyWithoutSoftwareInput
-    monthlyUsage?: MonthlyUsageUncheckedCreateNestedManyWithoutSoftwareInput
-  }
-
-  export type SoftwareCreateOrConnectWithoutActivationsInput = {
-    where: SoftwareWhereUniqueInput
-    create: XOR<SoftwareCreateWithoutActivationsInput, SoftwareUncheckedCreateWithoutActivationsInput>
-  }
-
-  export type VendorCreateWithoutActivationsInput = {
-    id?: string
-    name: string
-    contactEmail: string
-    billingAddress?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    supabaseUserId?: string | null
-    licenseKeys?: LicenseKeyCreateNestedManyWithoutVendorInput
-    monthlyUsage?: MonthlyUsageCreateNestedManyWithoutVendorInput
-    software?: SoftwareCreateNestedManyWithoutVendorInput
-  }
-
-  export type VendorUncheckedCreateWithoutActivationsInput = {
-    id?: string
-    name: string
-    contactEmail: string
-    billingAddress?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    supabaseUserId?: string | null
-    licenseKeys?: LicenseKeyUncheckedCreateNestedManyWithoutVendorInput
-    monthlyUsage?: MonthlyUsageUncheckedCreateNestedManyWithoutVendorInput
-    software?: SoftwareUncheckedCreateNestedManyWithoutVendorInput
-  }
-
-  export type VendorCreateOrConnectWithoutActivationsInput = {
-    where: VendorWhereUniqueInput
-    create: XOR<VendorCreateWithoutActivationsInput, VendorUncheckedCreateWithoutActivationsInput>
-  }
-
-  export type EmployeeUpsertWithoutPerformedActivationsInput = {
-    update: XOR<EmployeeUpdateWithoutPerformedActivationsInput, EmployeeUncheckedUpdateWithoutPerformedActivationsInput>
-    create: XOR<EmployeeCreateWithoutPerformedActivationsInput, EmployeeUncheckedCreateWithoutPerformedActivationsInput>
-    where?: EmployeeWhereInput
-  }
-
-  export type EmployeeUpdateToOneWithWhereWithoutPerformedActivationsInput = {
-    where?: EmployeeWhereInput
-    data: XOR<EmployeeUpdateWithoutPerformedActivationsInput, EmployeeUncheckedUpdateWithoutPerformedActivationsInput>
-  }
-
-  export type EmployeeUpdateWithoutPerformedActivationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    companyName?: NullableStringFieldUpdateOperationsInput | string | null
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-    activatedKeys?: LicenseKeyUpdateManyWithoutActivatedByNestedInput
-  }
-
-  export type EmployeeUncheckedUpdateWithoutPerformedActivationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    companyName?: NullableStringFieldUpdateOperationsInput | string | null
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-    activatedKeys?: LicenseKeyUncheckedUpdateManyWithoutActivatedByNestedInput
-  }
-
-  export type LicenseKeyUpsertWithoutActivationInput = {
-    update: XOR<LicenseKeyUpdateWithoutActivationInput, LicenseKeyUncheckedUpdateWithoutActivationInput>
-    create: XOR<LicenseKeyCreateWithoutActivationInput, LicenseKeyUncheckedCreateWithoutActivationInput>
-    where?: LicenseKeyWhereInput
-  }
-
-  export type LicenseKeyUpdateToOneWithWhereWithoutActivationInput = {
-    where?: LicenseKeyWhereInput
-    data: XOR<LicenseKeyUpdateWithoutActivationInput, LicenseKeyUncheckedUpdateWithoutActivationInput>
-  }
-
-  export type LicenseKeyUpdateWithoutActivationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    key?: StringFieldUpdateOperationsInput | string
-    status?: EnumLicenseStatusFieldUpdateOperationsInput | $Enums.LicenseStatus
-    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    canceledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    canceledReason?: NullableStringFieldUpdateOperationsInput | string | null
-    activatedBy?: EmployeeUpdateOneWithoutActivatedKeysNestedInput
-    software?: SoftwareUpdateOneRequiredWithoutLicenseKeysNestedInput
-    vendor?: VendorUpdateOneRequiredWithoutLicenseKeysNestedInput
-  }
-
-  export type LicenseKeyUncheckedUpdateWithoutActivationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    key?: StringFieldUpdateOperationsInput | string
-    status?: EnumLicenseStatusFieldUpdateOperationsInput | $Enums.LicenseStatus
-    vendorId?: StringFieldUpdateOperationsInput | string
-    softwareId?: StringFieldUpdateOperationsInput | string
-    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    activatedById?: NullableStringFieldUpdateOperationsInput | string | null
-    canceledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    canceledReason?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type SoftwareUpsertWithoutActivationsInput = {
-    update: XOR<SoftwareUpdateWithoutActivationsInput, SoftwareUncheckedUpdateWithoutActivationsInput>
-    create: XOR<SoftwareCreateWithoutActivationsInput, SoftwareUncheckedCreateWithoutActivationsInput>
-    where?: SoftwareWhereInput
-  }
-
-  export type SoftwareUpdateToOneWithWhereWithoutActivationsInput = {
-    where?: SoftwareWhereInput
-    data: XOR<SoftwareUpdateWithoutActivationsInput, SoftwareUncheckedUpdateWithoutActivationsInput>
-  }
-
-  export type SoftwareUpdateWithoutActivationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
-    pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
-    monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    licenseKeys?: LicenseKeyUpdateManyWithoutSoftwareNestedInput
-    monthlyUsage?: MonthlyUsageUpdateManyWithoutSoftwareNestedInput
-    vendor?: VendorUpdateOneRequiredWithoutSoftwareNestedInput
-  }
-
-  export type SoftwareUncheckedUpdateWithoutActivationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    vendorId?: StringFieldUpdateOperationsInput | string
-    pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
-    pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
-    monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    licenseKeys?: LicenseKeyUncheckedUpdateManyWithoutSoftwareNestedInput
-    monthlyUsage?: MonthlyUsageUncheckedUpdateManyWithoutSoftwareNestedInput
-  }
-
-  export type VendorUpsertWithoutActivationsInput = {
-    update: XOR<VendorUpdateWithoutActivationsInput, VendorUncheckedUpdateWithoutActivationsInput>
-    create: XOR<VendorCreateWithoutActivationsInput, VendorUncheckedCreateWithoutActivationsInput>
-    where?: VendorWhereInput
-  }
-
-  export type VendorUpdateToOneWithWhereWithoutActivationsInput = {
-    where?: VendorWhereInput
-    data: XOR<VendorUpdateWithoutActivationsInput, VendorUncheckedUpdateWithoutActivationsInput>
-  }
-
-  export type VendorUpdateWithoutActivationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    contactEmail?: StringFieldUpdateOperationsInput | string
-    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-    licenseKeys?: LicenseKeyUpdateManyWithoutVendorNestedInput
-    monthlyUsage?: MonthlyUsageUpdateManyWithoutVendorNestedInput
-    software?: SoftwareUpdateManyWithoutVendorNestedInput
-  }
-
-  export type VendorUncheckedUpdateWithoutActivationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    contactEmail?: StringFieldUpdateOperationsInput | string
-    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
-    licenseKeys?: LicenseKeyUncheckedUpdateManyWithoutVendorNestedInput
-    monthlyUsage?: MonthlyUsageUncheckedUpdateManyWithoutVendorNestedInput
-    software?: SoftwareUncheckedUpdateManyWithoutVendorNestedInput
   }
 
   export type ActivationCreateWithoutActivatedByInput = {
@@ -12280,9 +11560,770 @@ export namespace Prisma {
     data: XOR<LicenseKeyUpdateManyMutationInput, LicenseKeyUncheckedUpdateManyWithoutActivatedByInput>
   }
 
+  export type ActivationCreateWithoutSoftwareInput = {
+    id?: string
+    headsetSerialNumber?: string | null
+    activatedAt?: Date | string
+    createdAt?: Date | string
+    activatedBy: EmployeeCreateNestedOneWithoutPerformedActivationsInput
+    licenseKey: LicenseKeyCreateNestedOneWithoutActivationInput
+    vendor: VendorCreateNestedOneWithoutActivationsInput
+  }
+
+  export type ActivationUncheckedCreateWithoutSoftwareInput = {
+    id?: string
+    licenseKeyId: string
+    activatedById: string
+    vendorId: string
+    headsetSerialNumber?: string | null
+    activatedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type ActivationCreateOrConnectWithoutSoftwareInput = {
+    where: ActivationWhereUniqueInput
+    create: XOR<ActivationCreateWithoutSoftwareInput, ActivationUncheckedCreateWithoutSoftwareInput>
+  }
+
+  export type ActivationCreateManySoftwareInputEnvelope = {
+    data: ActivationCreateManySoftwareInput | ActivationCreateManySoftwareInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LicenseKeyCreateWithoutSoftwareInput = {
+    id?: string
+    key: string
+    status?: $Enums.LicenseStatus
+    expiresAt?: Date | string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    activatedAt?: Date | string | null
+    canceledAt?: Date | string | null
+    canceledReason?: string | null
+    activation?: ActivationCreateNestedOneWithoutLicenseKeyInput
+    activatedBy?: EmployeeCreateNestedOneWithoutActivatedKeysInput
+    vendor: VendorCreateNestedOneWithoutLicenseKeysInput
+  }
+
+  export type LicenseKeyUncheckedCreateWithoutSoftwareInput = {
+    id?: string
+    key: string
+    status?: $Enums.LicenseStatus
+    vendorId: string
+    expiresAt?: Date | string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    activatedAt?: Date | string | null
+    activatedById?: string | null
+    canceledAt?: Date | string | null
+    canceledReason?: string | null
+    activation?: ActivationUncheckedCreateNestedOneWithoutLicenseKeyInput
+  }
+
+  export type LicenseKeyCreateOrConnectWithoutSoftwareInput = {
+    where: LicenseKeyWhereUniqueInput
+    create: XOR<LicenseKeyCreateWithoutSoftwareInput, LicenseKeyUncheckedCreateWithoutSoftwareInput>
+  }
+
+  export type LicenseKeyCreateManySoftwareInputEnvelope = {
+    data: LicenseKeyCreateManySoftwareInput | LicenseKeyCreateManySoftwareInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MonthlyUsageCreateWithoutSoftwareInput = {
+    id?: string
+    month: Date | string
+    usageCount: number
+    totalOwed: number
+    calculatedAt?: Date | string
+    vendor: VendorCreateNestedOneWithoutMonthlyUsageInput
+  }
+
+  export type MonthlyUsageUncheckedCreateWithoutSoftwareInput = {
+    id?: string
+    vendorId: string
+    month: Date | string
+    usageCount: number
+    totalOwed: number
+    calculatedAt?: Date | string
+  }
+
+  export type MonthlyUsageCreateOrConnectWithoutSoftwareInput = {
+    where: MonthlyUsageWhereUniqueInput
+    create: XOR<MonthlyUsageCreateWithoutSoftwareInput, MonthlyUsageUncheckedCreateWithoutSoftwareInput>
+  }
+
+  export type MonthlyUsageCreateManySoftwareInputEnvelope = {
+    data: MonthlyUsageCreateManySoftwareInput | MonthlyUsageCreateManySoftwareInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type VendorCreateWithoutSoftwareInput = {
+    id?: string
+    supabaseUserId?: string | null
+    contactEmail?: string | null
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    role?: $Enums.EmployeeRole
+    activations?: ActivationCreateNestedManyWithoutVendorInput
+    licenseKeys?: LicenseKeyCreateNestedManyWithoutVendorInput
+    monthlyUsage?: MonthlyUsageCreateNestedManyWithoutVendorInput
+  }
+
+  export type VendorUncheckedCreateWithoutSoftwareInput = {
+    id?: string
+    supabaseUserId?: string | null
+    contactEmail?: string | null
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    role?: $Enums.EmployeeRole
+    activations?: ActivationUncheckedCreateNestedManyWithoutVendorInput
+    licenseKeys?: LicenseKeyUncheckedCreateNestedManyWithoutVendorInput
+    monthlyUsage?: MonthlyUsageUncheckedCreateNestedManyWithoutVendorInput
+  }
+
+  export type VendorCreateOrConnectWithoutSoftwareInput = {
+    where: VendorWhereUniqueInput
+    create: XOR<VendorCreateWithoutSoftwareInput, VendorUncheckedCreateWithoutSoftwareInput>
+  }
+
+  export type ActivationUpsertWithWhereUniqueWithoutSoftwareInput = {
+    where: ActivationWhereUniqueInput
+    update: XOR<ActivationUpdateWithoutSoftwareInput, ActivationUncheckedUpdateWithoutSoftwareInput>
+    create: XOR<ActivationCreateWithoutSoftwareInput, ActivationUncheckedCreateWithoutSoftwareInput>
+  }
+
+  export type ActivationUpdateWithWhereUniqueWithoutSoftwareInput = {
+    where: ActivationWhereUniqueInput
+    data: XOR<ActivationUpdateWithoutSoftwareInput, ActivationUncheckedUpdateWithoutSoftwareInput>
+  }
+
+  export type ActivationUpdateManyWithWhereWithoutSoftwareInput = {
+    where: ActivationScalarWhereInput
+    data: XOR<ActivationUpdateManyMutationInput, ActivationUncheckedUpdateManyWithoutSoftwareInput>
+  }
+
+  export type LicenseKeyUpsertWithWhereUniqueWithoutSoftwareInput = {
+    where: LicenseKeyWhereUniqueInput
+    update: XOR<LicenseKeyUpdateWithoutSoftwareInput, LicenseKeyUncheckedUpdateWithoutSoftwareInput>
+    create: XOR<LicenseKeyCreateWithoutSoftwareInput, LicenseKeyUncheckedCreateWithoutSoftwareInput>
+  }
+
+  export type LicenseKeyUpdateWithWhereUniqueWithoutSoftwareInput = {
+    where: LicenseKeyWhereUniqueInput
+    data: XOR<LicenseKeyUpdateWithoutSoftwareInput, LicenseKeyUncheckedUpdateWithoutSoftwareInput>
+  }
+
+  export type LicenseKeyUpdateManyWithWhereWithoutSoftwareInput = {
+    where: LicenseKeyScalarWhereInput
+    data: XOR<LicenseKeyUpdateManyMutationInput, LicenseKeyUncheckedUpdateManyWithoutSoftwareInput>
+  }
+
+  export type MonthlyUsageUpsertWithWhereUniqueWithoutSoftwareInput = {
+    where: MonthlyUsageWhereUniqueInput
+    update: XOR<MonthlyUsageUpdateWithoutSoftwareInput, MonthlyUsageUncheckedUpdateWithoutSoftwareInput>
+    create: XOR<MonthlyUsageCreateWithoutSoftwareInput, MonthlyUsageUncheckedCreateWithoutSoftwareInput>
+  }
+
+  export type MonthlyUsageUpdateWithWhereUniqueWithoutSoftwareInput = {
+    where: MonthlyUsageWhereUniqueInput
+    data: XOR<MonthlyUsageUpdateWithoutSoftwareInput, MonthlyUsageUncheckedUpdateWithoutSoftwareInput>
+  }
+
+  export type MonthlyUsageUpdateManyWithWhereWithoutSoftwareInput = {
+    where: MonthlyUsageScalarWhereInput
+    data: XOR<MonthlyUsageUpdateManyMutationInput, MonthlyUsageUncheckedUpdateManyWithoutSoftwareInput>
+  }
+
+  export type VendorUpsertWithoutSoftwareInput = {
+    update: XOR<VendorUpdateWithoutSoftwareInput, VendorUncheckedUpdateWithoutSoftwareInput>
+    create: XOR<VendorCreateWithoutSoftwareInput, VendorUncheckedCreateWithoutSoftwareInput>
+    where?: VendorWhereInput
+  }
+
+  export type VendorUpdateToOneWithWhereWithoutSoftwareInput = {
+    where?: VendorWhereInput
+    data: XOR<VendorUpdateWithoutSoftwareInput, VendorUncheckedUpdateWithoutSoftwareInput>
+  }
+
+  export type VendorUpdateWithoutSoftwareInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
+    activations?: ActivationUpdateManyWithoutVendorNestedInput
+    licenseKeys?: LicenseKeyUpdateManyWithoutVendorNestedInput
+    monthlyUsage?: MonthlyUsageUpdateManyWithoutVendorNestedInput
+  }
+
+  export type VendorUncheckedUpdateWithoutSoftwareInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
+    activations?: ActivationUncheckedUpdateManyWithoutVendorNestedInput
+    licenseKeys?: LicenseKeyUncheckedUpdateManyWithoutVendorNestedInput
+    monthlyUsage?: MonthlyUsageUncheckedUpdateManyWithoutVendorNestedInput
+  }
+
+  export type ActivationCreateWithoutLicenseKeyInput = {
+    id?: string
+    headsetSerialNumber?: string | null
+    activatedAt?: Date | string
+    createdAt?: Date | string
+    activatedBy: EmployeeCreateNestedOneWithoutPerformedActivationsInput
+    software: SoftwareCreateNestedOneWithoutActivationsInput
+    vendor: VendorCreateNestedOneWithoutActivationsInput
+  }
+
+  export type ActivationUncheckedCreateWithoutLicenseKeyInput = {
+    id?: string
+    activatedById: string
+    softwareId: string
+    vendorId: string
+    headsetSerialNumber?: string | null
+    activatedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type ActivationCreateOrConnectWithoutLicenseKeyInput = {
+    where: ActivationWhereUniqueInput
+    create: XOR<ActivationCreateWithoutLicenseKeyInput, ActivationUncheckedCreateWithoutLicenseKeyInput>
+  }
+
+  export type EmployeeCreateWithoutActivatedKeysInput = {
+    id?: string
+    supabaseUserId?: string | null
+    companyName?: string | null
+    name: string
+    email: string
+    role?: $Enums.EmployeeRole
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    performedActivations?: ActivationCreateNestedManyWithoutActivatedByInput
+  }
+
+  export type EmployeeUncheckedCreateWithoutActivatedKeysInput = {
+    id?: string
+    supabaseUserId?: string | null
+    companyName?: string | null
+    name: string
+    email: string
+    role?: $Enums.EmployeeRole
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    performedActivations?: ActivationUncheckedCreateNestedManyWithoutActivatedByInput
+  }
+
+  export type EmployeeCreateOrConnectWithoutActivatedKeysInput = {
+    where: EmployeeWhereUniqueInput
+    create: XOR<EmployeeCreateWithoutActivatedKeysInput, EmployeeUncheckedCreateWithoutActivatedKeysInput>
+  }
+
+  export type SoftwareCreateWithoutLicenseKeysInput = {
+    id?: string
+    name: string
+    description?: string | null
+    pricingModel: $Enums.PricingModel
+    pricePerUse?: number | null
+    monthlyRate?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    activations?: ActivationCreateNestedManyWithoutSoftwareInput
+    monthlyUsage?: MonthlyUsageCreateNestedManyWithoutSoftwareInput
+    vendor: VendorCreateNestedOneWithoutSoftwareInput
+  }
+
+  export type SoftwareUncheckedCreateWithoutLicenseKeysInput = {
+    id?: string
+    name: string
+    description?: string | null
+    vendorId: string
+    pricingModel: $Enums.PricingModel
+    pricePerUse?: number | null
+    monthlyRate?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    activations?: ActivationUncheckedCreateNestedManyWithoutSoftwareInput
+    monthlyUsage?: MonthlyUsageUncheckedCreateNestedManyWithoutSoftwareInput
+  }
+
+  export type SoftwareCreateOrConnectWithoutLicenseKeysInput = {
+    where: SoftwareWhereUniqueInput
+    create: XOR<SoftwareCreateWithoutLicenseKeysInput, SoftwareUncheckedCreateWithoutLicenseKeysInput>
+  }
+
+  export type VendorCreateWithoutLicenseKeysInput = {
+    id?: string
+    supabaseUserId?: string | null
+    contactEmail?: string | null
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    role?: $Enums.EmployeeRole
+    activations?: ActivationCreateNestedManyWithoutVendorInput
+    monthlyUsage?: MonthlyUsageCreateNestedManyWithoutVendorInput
+    software?: SoftwareCreateNestedManyWithoutVendorInput
+  }
+
+  export type VendorUncheckedCreateWithoutLicenseKeysInput = {
+    id?: string
+    supabaseUserId?: string | null
+    contactEmail?: string | null
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    role?: $Enums.EmployeeRole
+    activations?: ActivationUncheckedCreateNestedManyWithoutVendorInput
+    monthlyUsage?: MonthlyUsageUncheckedCreateNestedManyWithoutVendorInput
+    software?: SoftwareUncheckedCreateNestedManyWithoutVendorInput
+  }
+
+  export type VendorCreateOrConnectWithoutLicenseKeysInput = {
+    where: VendorWhereUniqueInput
+    create: XOR<VendorCreateWithoutLicenseKeysInput, VendorUncheckedCreateWithoutLicenseKeysInput>
+  }
+
+  export type ActivationUpsertWithoutLicenseKeyInput = {
+    update: XOR<ActivationUpdateWithoutLicenseKeyInput, ActivationUncheckedUpdateWithoutLicenseKeyInput>
+    create: XOR<ActivationCreateWithoutLicenseKeyInput, ActivationUncheckedCreateWithoutLicenseKeyInput>
+    where?: ActivationWhereInput
+  }
+
+  export type ActivationUpdateToOneWithWhereWithoutLicenseKeyInput = {
+    where?: ActivationWhereInput
+    data: XOR<ActivationUpdateWithoutLicenseKeyInput, ActivationUncheckedUpdateWithoutLicenseKeyInput>
+  }
+
+  export type ActivationUpdateWithoutLicenseKeyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    activatedBy?: EmployeeUpdateOneRequiredWithoutPerformedActivationsNestedInput
+    software?: SoftwareUpdateOneRequiredWithoutActivationsNestedInput
+    vendor?: VendorUpdateOneRequiredWithoutActivationsNestedInput
+  }
+
+  export type ActivationUncheckedUpdateWithoutLicenseKeyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    activatedById?: StringFieldUpdateOperationsInput | string
+    softwareId?: StringFieldUpdateOperationsInput | string
+    vendorId?: StringFieldUpdateOperationsInput | string
+    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmployeeUpsertWithoutActivatedKeysInput = {
+    update: XOR<EmployeeUpdateWithoutActivatedKeysInput, EmployeeUncheckedUpdateWithoutActivatedKeysInput>
+    create: XOR<EmployeeCreateWithoutActivatedKeysInput, EmployeeUncheckedCreateWithoutActivatedKeysInput>
+    where?: EmployeeWhereInput
+  }
+
+  export type EmployeeUpdateToOneWithWhereWithoutActivatedKeysInput = {
+    where?: EmployeeWhereInput
+    data: XOR<EmployeeUpdateWithoutActivatedKeysInput, EmployeeUncheckedUpdateWithoutActivatedKeysInput>
+  }
+
+  export type EmployeeUpdateWithoutActivatedKeysInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    performedActivations?: ActivationUpdateManyWithoutActivatedByNestedInput
+  }
+
+  export type EmployeeUncheckedUpdateWithoutActivatedKeysInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    performedActivations?: ActivationUncheckedUpdateManyWithoutActivatedByNestedInput
+  }
+
+  export type SoftwareUpsertWithoutLicenseKeysInput = {
+    update: XOR<SoftwareUpdateWithoutLicenseKeysInput, SoftwareUncheckedUpdateWithoutLicenseKeysInput>
+    create: XOR<SoftwareCreateWithoutLicenseKeysInput, SoftwareUncheckedCreateWithoutLicenseKeysInput>
+    where?: SoftwareWhereInput
+  }
+
+  export type SoftwareUpdateToOneWithWhereWithoutLicenseKeysInput = {
+    where?: SoftwareWhereInput
+    data: XOR<SoftwareUpdateWithoutLicenseKeysInput, SoftwareUncheckedUpdateWithoutLicenseKeysInput>
+  }
+
+  export type SoftwareUpdateWithoutLicenseKeysInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
+    pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
+    monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    activations?: ActivationUpdateManyWithoutSoftwareNestedInput
+    monthlyUsage?: MonthlyUsageUpdateManyWithoutSoftwareNestedInput
+    vendor?: VendorUpdateOneRequiredWithoutSoftwareNestedInput
+  }
+
+  export type SoftwareUncheckedUpdateWithoutLicenseKeysInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    vendorId?: StringFieldUpdateOperationsInput | string
+    pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
+    pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
+    monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    activations?: ActivationUncheckedUpdateManyWithoutSoftwareNestedInput
+    monthlyUsage?: MonthlyUsageUncheckedUpdateManyWithoutSoftwareNestedInput
+  }
+
+  export type VendorUpsertWithoutLicenseKeysInput = {
+    update: XOR<VendorUpdateWithoutLicenseKeysInput, VendorUncheckedUpdateWithoutLicenseKeysInput>
+    create: XOR<VendorCreateWithoutLicenseKeysInput, VendorUncheckedCreateWithoutLicenseKeysInput>
+    where?: VendorWhereInput
+  }
+
+  export type VendorUpdateToOneWithWhereWithoutLicenseKeysInput = {
+    where?: VendorWhereInput
+    data: XOR<VendorUpdateWithoutLicenseKeysInput, VendorUncheckedUpdateWithoutLicenseKeysInput>
+  }
+
+  export type VendorUpdateWithoutLicenseKeysInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
+    activations?: ActivationUpdateManyWithoutVendorNestedInput
+    monthlyUsage?: MonthlyUsageUpdateManyWithoutVendorNestedInput
+    software?: SoftwareUpdateManyWithoutVendorNestedInput
+  }
+
+  export type VendorUncheckedUpdateWithoutLicenseKeysInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
+    activations?: ActivationUncheckedUpdateManyWithoutVendorNestedInput
+    monthlyUsage?: MonthlyUsageUncheckedUpdateManyWithoutVendorNestedInput
+    software?: SoftwareUncheckedUpdateManyWithoutVendorNestedInput
+  }
+
+  export type EmployeeCreateWithoutPerformedActivationsInput = {
+    id?: string
+    supabaseUserId?: string | null
+    companyName?: string | null
+    name: string
+    email: string
+    role?: $Enums.EmployeeRole
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    activatedKeys?: LicenseKeyCreateNestedManyWithoutActivatedByInput
+  }
+
+  export type EmployeeUncheckedCreateWithoutPerformedActivationsInput = {
+    id?: string
+    supabaseUserId?: string | null
+    companyName?: string | null
+    name: string
+    email: string
+    role?: $Enums.EmployeeRole
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    activatedKeys?: LicenseKeyUncheckedCreateNestedManyWithoutActivatedByInput
+  }
+
+  export type EmployeeCreateOrConnectWithoutPerformedActivationsInput = {
+    where: EmployeeWhereUniqueInput
+    create: XOR<EmployeeCreateWithoutPerformedActivationsInput, EmployeeUncheckedCreateWithoutPerformedActivationsInput>
+  }
+
+  export type LicenseKeyCreateWithoutActivationInput = {
+    id?: string
+    key: string
+    status?: $Enums.LicenseStatus
+    expiresAt?: Date | string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    activatedAt?: Date | string | null
+    canceledAt?: Date | string | null
+    canceledReason?: string | null
+    activatedBy?: EmployeeCreateNestedOneWithoutActivatedKeysInput
+    software: SoftwareCreateNestedOneWithoutLicenseKeysInput
+    vendor: VendorCreateNestedOneWithoutLicenseKeysInput
+  }
+
+  export type LicenseKeyUncheckedCreateWithoutActivationInput = {
+    id?: string
+    key: string
+    status?: $Enums.LicenseStatus
+    vendorId: string
+    softwareId: string
+    expiresAt?: Date | string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    activatedAt?: Date | string | null
+    activatedById?: string | null
+    canceledAt?: Date | string | null
+    canceledReason?: string | null
+  }
+
+  export type LicenseKeyCreateOrConnectWithoutActivationInput = {
+    where: LicenseKeyWhereUniqueInput
+    create: XOR<LicenseKeyCreateWithoutActivationInput, LicenseKeyUncheckedCreateWithoutActivationInput>
+  }
+
+  export type SoftwareCreateWithoutActivationsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    pricingModel: $Enums.PricingModel
+    pricePerUse?: number | null
+    monthlyRate?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    licenseKeys?: LicenseKeyCreateNestedManyWithoutSoftwareInput
+    monthlyUsage?: MonthlyUsageCreateNestedManyWithoutSoftwareInput
+    vendor: VendorCreateNestedOneWithoutSoftwareInput
+  }
+
+  export type SoftwareUncheckedCreateWithoutActivationsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    vendorId: string
+    pricingModel: $Enums.PricingModel
+    pricePerUse?: number | null
+    monthlyRate?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    licenseKeys?: LicenseKeyUncheckedCreateNestedManyWithoutSoftwareInput
+    monthlyUsage?: MonthlyUsageUncheckedCreateNestedManyWithoutSoftwareInput
+  }
+
+  export type SoftwareCreateOrConnectWithoutActivationsInput = {
+    where: SoftwareWhereUniqueInput
+    create: XOR<SoftwareCreateWithoutActivationsInput, SoftwareUncheckedCreateWithoutActivationsInput>
+  }
+
+  export type VendorCreateWithoutActivationsInput = {
+    id?: string
+    supabaseUserId?: string | null
+    contactEmail?: string | null
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    role?: $Enums.EmployeeRole
+    licenseKeys?: LicenseKeyCreateNestedManyWithoutVendorInput
+    monthlyUsage?: MonthlyUsageCreateNestedManyWithoutVendorInput
+    software?: SoftwareCreateNestedManyWithoutVendorInput
+  }
+
+  export type VendorUncheckedCreateWithoutActivationsInput = {
+    id?: string
+    supabaseUserId?: string | null
+    contactEmail?: string | null
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    role?: $Enums.EmployeeRole
+    licenseKeys?: LicenseKeyUncheckedCreateNestedManyWithoutVendorInput
+    monthlyUsage?: MonthlyUsageUncheckedCreateNestedManyWithoutVendorInput
+    software?: SoftwareUncheckedCreateNestedManyWithoutVendorInput
+  }
+
+  export type VendorCreateOrConnectWithoutActivationsInput = {
+    where: VendorWhereUniqueInput
+    create: XOR<VendorCreateWithoutActivationsInput, VendorUncheckedCreateWithoutActivationsInput>
+  }
+
+  export type EmployeeUpsertWithoutPerformedActivationsInput = {
+    update: XOR<EmployeeUpdateWithoutPerformedActivationsInput, EmployeeUncheckedUpdateWithoutPerformedActivationsInput>
+    create: XOR<EmployeeCreateWithoutPerformedActivationsInput, EmployeeUncheckedCreateWithoutPerformedActivationsInput>
+    where?: EmployeeWhereInput
+  }
+
+  export type EmployeeUpdateToOneWithWhereWithoutPerformedActivationsInput = {
+    where?: EmployeeWhereInput
+    data: XOR<EmployeeUpdateWithoutPerformedActivationsInput, EmployeeUncheckedUpdateWithoutPerformedActivationsInput>
+  }
+
+  export type EmployeeUpdateWithoutPerformedActivationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    activatedKeys?: LicenseKeyUpdateManyWithoutActivatedByNestedInput
+  }
+
+  export type EmployeeUncheckedUpdateWithoutPerformedActivationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    activatedKeys?: LicenseKeyUncheckedUpdateManyWithoutActivatedByNestedInput
+  }
+
+  export type LicenseKeyUpsertWithoutActivationInput = {
+    update: XOR<LicenseKeyUpdateWithoutActivationInput, LicenseKeyUncheckedUpdateWithoutActivationInput>
+    create: XOR<LicenseKeyCreateWithoutActivationInput, LicenseKeyUncheckedCreateWithoutActivationInput>
+    where?: LicenseKeyWhereInput
+  }
+
+  export type LicenseKeyUpdateToOneWithWhereWithoutActivationInput = {
+    where?: LicenseKeyWhereInput
+    data: XOR<LicenseKeyUpdateWithoutActivationInput, LicenseKeyUncheckedUpdateWithoutActivationInput>
+  }
+
+  export type LicenseKeyUpdateWithoutActivationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    status?: EnumLicenseStatusFieldUpdateOperationsInput | $Enums.LicenseStatus
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    canceledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    canceledReason?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedBy?: EmployeeUpdateOneWithoutActivatedKeysNestedInput
+    software?: SoftwareUpdateOneRequiredWithoutLicenseKeysNestedInput
+    vendor?: VendorUpdateOneRequiredWithoutLicenseKeysNestedInput
+  }
+
+  export type LicenseKeyUncheckedUpdateWithoutActivationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    status?: EnumLicenseStatusFieldUpdateOperationsInput | $Enums.LicenseStatus
+    vendorId?: StringFieldUpdateOperationsInput | string
+    softwareId?: StringFieldUpdateOperationsInput | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    canceledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    canceledReason?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SoftwareUpsertWithoutActivationsInput = {
+    update: XOR<SoftwareUpdateWithoutActivationsInput, SoftwareUncheckedUpdateWithoutActivationsInput>
+    create: XOR<SoftwareCreateWithoutActivationsInput, SoftwareUncheckedCreateWithoutActivationsInput>
+    where?: SoftwareWhereInput
+  }
+
+  export type SoftwareUpdateToOneWithWhereWithoutActivationsInput = {
+    where?: SoftwareWhereInput
+    data: XOR<SoftwareUpdateWithoutActivationsInput, SoftwareUncheckedUpdateWithoutActivationsInput>
+  }
+
+  export type SoftwareUpdateWithoutActivationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
+    pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
+    monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    licenseKeys?: LicenseKeyUpdateManyWithoutSoftwareNestedInput
+    monthlyUsage?: MonthlyUsageUpdateManyWithoutSoftwareNestedInput
+    vendor?: VendorUpdateOneRequiredWithoutSoftwareNestedInput
+  }
+
+  export type SoftwareUncheckedUpdateWithoutActivationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    vendorId?: StringFieldUpdateOperationsInput | string
+    pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
+    pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
+    monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    licenseKeys?: LicenseKeyUncheckedUpdateManyWithoutSoftwareNestedInput
+    monthlyUsage?: MonthlyUsageUncheckedUpdateManyWithoutSoftwareNestedInput
+  }
+
+  export type VendorUpsertWithoutActivationsInput = {
+    update: XOR<VendorUpdateWithoutActivationsInput, VendorUncheckedUpdateWithoutActivationsInput>
+    create: XOR<VendorCreateWithoutActivationsInput, VendorUncheckedCreateWithoutActivationsInput>
+    where?: VendorWhereInput
+  }
+
+  export type VendorUpdateToOneWithWhereWithoutActivationsInput = {
+    where?: VendorWhereInput
+    data: XOR<VendorUpdateWithoutActivationsInput, VendorUncheckedUpdateWithoutActivationsInput>
+  }
+
+  export type VendorUpdateWithoutActivationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
+    licenseKeys?: LicenseKeyUpdateManyWithoutVendorNestedInput
+    monthlyUsage?: MonthlyUsageUpdateManyWithoutVendorNestedInput
+    software?: SoftwareUpdateManyWithoutVendorNestedInput
+  }
+
+  export type VendorUncheckedUpdateWithoutActivationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
+    licenseKeys?: LicenseKeyUncheckedUpdateManyWithoutVendorNestedInput
+    monthlyUsage?: MonthlyUsageUncheckedUpdateManyWithoutVendorNestedInput
+    software?: SoftwareUncheckedUpdateManyWithoutVendorNestedInput
+  }
+
   export type SoftwareCreateWithoutMonthlyUsageInput = {
     id?: string
     name: string
+    description?: string | null
     pricingModel: $Enums.PricingModel
     pricePerUse?: number | null
     monthlyRate?: number | null
@@ -12296,6 +12337,7 @@ export namespace Prisma {
   export type SoftwareUncheckedCreateWithoutMonthlyUsageInput = {
     id?: string
     name: string
+    description?: string | null
     vendorId: string
     pricingModel: $Enums.PricingModel
     pricePerUse?: number | null
@@ -12313,12 +12355,12 @@ export namespace Prisma {
 
   export type VendorCreateWithoutMonthlyUsageInput = {
     id?: string
+    supabaseUserId?: string | null
+    contactEmail?: string | null
     name: string
-    contactEmail: string
-    billingAddress?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    supabaseUserId?: string | null
+    role?: $Enums.EmployeeRole
     activations?: ActivationCreateNestedManyWithoutVendorInput
     licenseKeys?: LicenseKeyCreateNestedManyWithoutVendorInput
     software?: SoftwareCreateNestedManyWithoutVendorInput
@@ -12326,12 +12368,12 @@ export namespace Prisma {
 
   export type VendorUncheckedCreateWithoutMonthlyUsageInput = {
     id?: string
+    supabaseUserId?: string | null
+    contactEmail?: string | null
     name: string
-    contactEmail: string
-    billingAddress?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    supabaseUserId?: string | null
+    role?: $Enums.EmployeeRole
     activations?: ActivationUncheckedCreateNestedManyWithoutVendorInput
     licenseKeys?: LicenseKeyUncheckedCreateNestedManyWithoutVendorInput
     software?: SoftwareUncheckedCreateNestedManyWithoutVendorInput
@@ -12356,6 +12398,7 @@ export namespace Prisma {
   export type SoftwareUpdateWithoutMonthlyUsageInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
     pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
     monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -12369,6 +12412,7 @@ export namespace Prisma {
   export type SoftwareUncheckedUpdateWithoutMonthlyUsageInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     vendorId?: StringFieldUpdateOperationsInput | string
     pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
     pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -12392,12 +12436,12 @@ export namespace Prisma {
 
   export type VendorUpdateWithoutMonthlyUsageInput = {
     id?: StringFieldUpdateOperationsInput | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    contactEmail?: StringFieldUpdateOperationsInput | string
-    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
     activations?: ActivationUpdateManyWithoutVendorNestedInput
     licenseKeys?: LicenseKeyUpdateManyWithoutVendorNestedInput
     software?: SoftwareUpdateManyWithoutVendorNestedInput
@@ -12405,12 +12449,12 @@ export namespace Prisma {
 
   export type VendorUncheckedUpdateWithoutMonthlyUsageInput = {
     id?: StringFieldUpdateOperationsInput | string
+    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    contactEmail?: StringFieldUpdateOperationsInput | string
-    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    supabaseUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumEmployeeRoleFieldUpdateOperationsInput | $Enums.EmployeeRole
     activations?: ActivationUncheckedUpdateManyWithoutVendorNestedInput
     licenseKeys?: LicenseKeyUncheckedUpdateManyWithoutVendorNestedInput
     software?: SoftwareUncheckedUpdateManyWithoutVendorNestedInput
@@ -12453,6 +12497,7 @@ export namespace Prisma {
   export type SoftwareCreateManyVendorInput = {
     id?: string
     name: string
+    description?: string | null
     pricingModel: $Enums.PricingModel
     pricePerUse?: number | null
     monthlyRate?: number | null
@@ -12567,6 +12612,7 @@ export namespace Prisma {
   export type SoftwareUpdateWithoutVendorInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
     pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
     monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -12580,6 +12626,7 @@ export namespace Prisma {
   export type SoftwareUncheckedUpdateWithoutVendorInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
     pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
     monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -12593,11 +12640,114 @@ export namespace Prisma {
   export type SoftwareUncheckedUpdateManyWithoutVendorInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     pricingModel?: EnumPricingModelFieldUpdateOperationsInput | $Enums.PricingModel
     pricePerUse?: NullableFloatFieldUpdateOperationsInput | number | null
     monthlyRate?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivationCreateManyActivatedByInput = {
+    id?: string
+    licenseKeyId: string
+    softwareId: string
+    vendorId: string
+    headsetSerialNumber?: string | null
+    activatedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type LicenseKeyCreateManyActivatedByInput = {
+    id?: string
+    key: string
+    status?: $Enums.LicenseStatus
+    vendorId: string
+    softwareId: string
+    expiresAt?: Date | string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    activatedAt?: Date | string | null
+    canceledAt?: Date | string | null
+    canceledReason?: string | null
+  }
+
+  export type ActivationUpdateWithoutActivatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    licenseKey?: LicenseKeyUpdateOneRequiredWithoutActivationNestedInput
+    software?: SoftwareUpdateOneRequiredWithoutActivationsNestedInput
+    vendor?: VendorUpdateOneRequiredWithoutActivationsNestedInput
+  }
+
+  export type ActivationUncheckedUpdateWithoutActivatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    licenseKeyId?: StringFieldUpdateOperationsInput | string
+    softwareId?: StringFieldUpdateOperationsInput | string
+    vendorId?: StringFieldUpdateOperationsInput | string
+    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivationUncheckedUpdateManyWithoutActivatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    licenseKeyId?: StringFieldUpdateOperationsInput | string
+    softwareId?: StringFieldUpdateOperationsInput | string
+    vendorId?: StringFieldUpdateOperationsInput | string
+    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LicenseKeyUpdateWithoutActivatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    status?: EnumLicenseStatusFieldUpdateOperationsInput | $Enums.LicenseStatus
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    canceledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    canceledReason?: NullableStringFieldUpdateOperationsInput | string | null
+    activation?: ActivationUpdateOneWithoutLicenseKeyNestedInput
+    software?: SoftwareUpdateOneRequiredWithoutLicenseKeysNestedInput
+    vendor?: VendorUpdateOneRequiredWithoutLicenseKeysNestedInput
+  }
+
+  export type LicenseKeyUncheckedUpdateWithoutActivatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    status?: EnumLicenseStatusFieldUpdateOperationsInput | $Enums.LicenseStatus
+    vendorId?: StringFieldUpdateOperationsInput | string
+    softwareId?: StringFieldUpdateOperationsInput | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    canceledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    canceledReason?: NullableStringFieldUpdateOperationsInput | string | null
+    activation?: ActivationUncheckedUpdateOneWithoutLicenseKeyNestedInput
+  }
+
+  export type LicenseKeyUncheckedUpdateManyWithoutActivatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    status?: EnumLicenseStatusFieldUpdateOperationsInput | $Enums.LicenseStatus
+    vendorId?: StringFieldUpdateOperationsInput | string
+    softwareId?: StringFieldUpdateOperationsInput | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    canceledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    canceledReason?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ActivationCreateManySoftwareInput = {
@@ -12736,108 +12886,6 @@ export namespace Prisma {
     usageCount?: IntFieldUpdateOperationsInput | number
     totalOwed?: FloatFieldUpdateOperationsInput | number
     calculatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ActivationCreateManyActivatedByInput = {
-    id?: string
-    licenseKeyId: string
-    softwareId: string
-    vendorId: string
-    headsetSerialNumber?: string | null
-    activatedAt?: Date | string
-    createdAt?: Date | string
-  }
-
-  export type LicenseKeyCreateManyActivatedByInput = {
-    id?: string
-    key: string
-    status?: $Enums.LicenseStatus
-    vendorId: string
-    softwareId: string
-    expiresAt?: Date | string | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    activatedAt?: Date | string | null
-    canceledAt?: Date | string | null
-    canceledReason?: string | null
-  }
-
-  export type ActivationUpdateWithoutActivatedByInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    licenseKey?: LicenseKeyUpdateOneRequiredWithoutActivationNestedInput
-    software?: SoftwareUpdateOneRequiredWithoutActivationsNestedInput
-    vendor?: VendorUpdateOneRequiredWithoutActivationsNestedInput
-  }
-
-  export type ActivationUncheckedUpdateWithoutActivatedByInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    licenseKeyId?: StringFieldUpdateOperationsInput | string
-    softwareId?: StringFieldUpdateOperationsInput | string
-    vendorId?: StringFieldUpdateOperationsInput | string
-    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ActivationUncheckedUpdateManyWithoutActivatedByInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    licenseKeyId?: StringFieldUpdateOperationsInput | string
-    softwareId?: StringFieldUpdateOperationsInput | string
-    vendorId?: StringFieldUpdateOperationsInput | string
-    headsetSerialNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    activatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type LicenseKeyUpdateWithoutActivatedByInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    key?: StringFieldUpdateOperationsInput | string
-    status?: EnumLicenseStatusFieldUpdateOperationsInput | $Enums.LicenseStatus
-    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    canceledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    canceledReason?: NullableStringFieldUpdateOperationsInput | string | null
-    activation?: ActivationUpdateOneWithoutLicenseKeyNestedInput
-    software?: SoftwareUpdateOneRequiredWithoutLicenseKeysNestedInput
-    vendor?: VendorUpdateOneRequiredWithoutLicenseKeysNestedInput
-  }
-
-  export type LicenseKeyUncheckedUpdateWithoutActivatedByInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    key?: StringFieldUpdateOperationsInput | string
-    status?: EnumLicenseStatusFieldUpdateOperationsInput | $Enums.LicenseStatus
-    vendorId?: StringFieldUpdateOperationsInput | string
-    softwareId?: StringFieldUpdateOperationsInput | string
-    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    canceledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    canceledReason?: NullableStringFieldUpdateOperationsInput | string | null
-    activation?: ActivationUncheckedUpdateOneWithoutLicenseKeyNestedInput
-  }
-
-  export type LicenseKeyUncheckedUpdateManyWithoutActivatedByInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    key?: StringFieldUpdateOperationsInput | string
-    status?: EnumLicenseStatusFieldUpdateOperationsInput | $Enums.LicenseStatus
-    vendorId?: StringFieldUpdateOperationsInput | string
-    softwareId?: StringFieldUpdateOperationsInput | string
-    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    canceledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    canceledReason?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 

@@ -122,17 +122,29 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.VendorScalarFieldEnum = {
   id: 'id',
-  name: 'name',
+  supabaseUserId: 'supabaseUserId',
   contactEmail: 'contactEmail',
-  billingAddress: 'billingAddress',
+  name: 'name',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  supabaseUserId: 'supabaseUserId'
+  role: 'role'
+};
+
+exports.Prisma.EmployeeScalarFieldEnum = {
+  id: 'id',
+  supabaseUserId: 'supabaseUserId',
+  companyName: 'companyName',
+  name: 'name',
+  email: 'email',
+  role: 'role',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SoftwareScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  description: 'description',
   vendorId: 'vendorId',
   pricingModel: 'pricingModel',
   pricePerUse: 'pricePerUse',
@@ -168,17 +180,6 @@ exports.Prisma.ActivationScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
-exports.Prisma.EmployeeScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  email: 'email',
-  role: 'role',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  companyName: 'companyName',
-  supabaseUserId: 'supabaseUserId'
-};
-
 exports.Prisma.MonthlyUsageScalarFieldEnum = {
   id: 'id',
   vendorId: 'vendorId',
@@ -203,6 +204,12 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.EmployeeRole = exports.$Enums.EmployeeRole = {
+  EMPLOYEE: 'EMPLOYEE',
+  ADMIN: 'ADMIN',
+  VENDOR: 'VENDOR'
+};
+
 exports.PricingModel = exports.$Enums.PricingModel = {
   FLAT: 'FLAT',
   PER_USE: 'PER_USE',
@@ -215,18 +222,12 @@ exports.LicenseStatus = exports.$Enums.LicenseStatus = {
   CANCELED: 'CANCELED'
 };
 
-exports.EmployeeRole = exports.$Enums.EmployeeRole = {
-  EMPLOYEE: 'EMPLOYEE',
-  ADMIN: 'ADMIN',
-  VENDOR: 'VENDOR'
-};
-
 exports.Prisma.ModelName = {
   Vendor: 'Vendor',
+  Employee: 'Employee',
   Software: 'Software',
   LicenseKey: 'LicenseKey',
   Activation: 'Activation',
-  Employee: 'Employee',
   MonthlyUsage: 'MonthlyUsage'
 };
 

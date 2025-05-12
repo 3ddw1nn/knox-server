@@ -39,7 +39,7 @@ export class UsersService {
       name: employee.name,
       role: employee.role,
       supabaseUserId: employee.supabaseUserId,
-      companyName: employee.companyName ?? undefined,
+      companyName: (employee.companyName ?? '') as string,
     };
   }
 
@@ -89,10 +89,10 @@ export class UsersService {
   private mapVendorToProfile(vendor: Vendor): UserProfileResponse {
     return {
       id: vendor.id,
-      email: vendor.contactEmail,
+      email: (vendor.contactEmail ?? '') as string,
       name: vendor.name,
       role: 'vendor',
-      supabaseUserId: vendor.supabaseUserId as string | null,
+      supabaseUserId: vendor.supabaseUserId,
       // companyName is not applicable here
     };
   }

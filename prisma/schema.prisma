@@ -8,38 +8,108 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum EmployeeRole {
+  EMPLOYEE
+  ADMIN
+  VENDOR
+}
+
+// * UPDATES NEEDED
+// * - merge vendor and employee models into one User model
+// * - simplify product pricing to only have pricing model (FLAT, PER_USE, MONTHLY_SUBSCRIPTION) and price
+
 model Vendor {
   id             String         @id @default(uuid())
+  supabaseUserId String?        @unique //? why is this unique?
+  contactEmail   String?
   name           String
-  contactEmail   String         @unique
-  billingAddress String?
   createdAt      DateTime       @default(now()) @db.Timestamp(6)
   updatedAt      DateTime       @updatedAt @db.Timestamp(6)
-  supabaseUserId String?        @unique
+  role           EmployeeRole   @default(VENDOR)
   activations    Activation[]
   licenseKeys    LicenseKey[]
   monthlyUsage   MonthlyUsage[]
   software       Software[]
+  Product        Product[]
 
   @@index([createdAt])
   @@index([supabaseUserId])
 }
 
-model Software {
-  id           String         @id @default(uuid())
+// ! Rename this to User
+model Employee {
+  id                   String       @id @default(uuid())
+  supabaseUserId       String?      @unique //? why is this unique?
+  companyName          String?
+  name                 String
+  email                String       @unique
+  role                 EmployeeRole @default(EMPLOYEE)
+  createdAt            DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt            DateTime     @updatedAt @db.Timestamp(6)
+  performedActivations Activation[] @relation("PerformedActivations")
+  activatedKeys        LicenseKey[] @relation("ActivatedKeys")
+
+  @@index([createdAt])
+  @@index([supabaseUserId])
+}
+
+// *** New schema, we need to update the schema.
+enum UserRole {
+  EMPLOYEE
+  VENDOR
+  ADMIN
+}
+
+enum PricingModel {
+  FLAT
+  PER_USE
+  MONTHLY_SUBSCRIPTION
+}
+
+enum LicenseStatus {
+  AVAILABLE
+  ACTIVATED
+  CANCELED
+}
+
+model User {
+  // ? We need to replace the Employee model with this User model.
+  // ? Auth also needs to be updated to use this User model.
+  id             String       @id @default(uuid())
+  supabaseUserId String       @unique
+  name           String
+  email          String       @unique
+  role           UserRole     @default(EMPLOYEE)
+  createdAt      DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime     @updatedAt @db.Timestamp(6)
+  Company        Company      @relation(fields: [companyId], references: [id])
+  companyId      String
+  activations    Activation[]
+}
+
+model Company {
+  id        String    @id @default(uuid())
+  name      String
+  createdAt DateTime  @default(now()) @db.Timestamp(6)
+  updatedAt DateTime  @updatedAt @db.Timestamp(6)
+  users     User[]
+  products  Product[]
+}
+
+model Product {
+  id           String       @id @default(uuid())
   name         String
+  description  String?
+  createdAt    DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt    DateTime     @updatedAt @db.Timestamp(6)
   vendorId     String
+  vendor       Vendor       @relation(fields: [vendorId], references: [id])
   pricingModel PricingModel
-  pricePerUse  Float?
-  monthlyRate  Float?
-  createdAt    DateTime       @default(now()) @db.Timestamp(6)
-  updatedAt    DateTime       @updatedAt @db.Timestamp(6)
+  price        Float
   activations  Activation[]
   licenseKeys  LicenseKey[]
-  monthlyUsage MonthlyUsage[]
-  vendor       Vendor         @relation(fields: [vendorId], references: [id])
-
-  @@index([vendorId, createdAt, id])
+  Company      Company      @relation(fields: [companyId], references: [id])
+  companyId    String
 }
 
 model LicenseKey {
@@ -60,43 +130,55 @@ model LicenseKey {
   activatedBy    Employee?     @relation("ActivatedKeys", fields: [activatedById], references: [id])
   software       Software      @relation(fields: [softwareId], references: [id])
   vendor         Vendor        @relation(fields: [vendorId], references: [id])
+  Product        Product?      @relation(fields: [productId], references: [id])
+  productId      String?
 
   @@index([vendorId, softwareId, createdAt, id])
   @@index([activatedAt])
 }
 
 model Activation {
-  id                  String     @id @default(uuid())
-  licenseKeyId        String     @unique
+  id                  String   @id @default(uuid())
+  licenseKeyId        String   @unique
   activatedById       String
   softwareId          String
   vendorId            String
   headsetSerialNumber String?
-  activatedAt         DateTime   @default(now()) @db.Timestamp(6)
-  createdAt           DateTime   @default(now()) @db.Timestamp(6)
-  activatedBy         Employee   @relation("PerformedActivations", fields: [activatedById], references: [id])
-  licenseKey          LicenseKey @relation(fields: [licenseKeyId], references: [id])
-  software            Software   @relation(fields: [softwareId], references: [id])
-  vendor              Vendor     @relation(fields: [vendorId], references: [id])
+  activatedAt         DateTime @default(now()) @db.Timestamp(6)
+  createdAt           DateTime @default(now()) @db.Timestamp(6)
+
+  // Relationships
+  activatedBy Employee   @relation("PerformedActivations", fields: [activatedById], references: [id])
+  licenseKey  LicenseKey @relation(fields: [licenseKeyId], references: [id])
+  software    Software   @relation(fields: [softwareId], references: [id])
+  vendor      Vendor     @relation(fields: [vendorId], references: [id])
+  Product     Product?   @relation(fields: [productId], references: [id])
+  productId   String?
+  User        User?      @relation(fields: [userId], references: [id])
+  userId      String?
 
   @@index([vendorId, activatedAt, id])
   @@index([createdAt])
 }
 
-model Employee {
-  id                   String       @id @default(uuid())
-  name                 String
-  email                String       @unique
-  role                 EmployeeRole @default(EMPLOYEE)
-  createdAt            DateTime     @default(now()) @db.Timestamp(6)
-  updatedAt            DateTime     @updatedAt @db.Timestamp(6)
-  companyName          String?
-  supabaseUserId       String?      @unique
-  performedActivations Activation[] @relation("PerformedActivations")
-  activatedKeys        LicenseKey[] @relation("ActivatedKeys")
+// *** End of new section
 
-  @@index([createdAt])
-  @@index([supabaseUserId])
+model Software {
+  id           String         @id @default(uuid())
+  name         String
+  description  String?
+  vendorId     String
+  pricingModel PricingModel
+  pricePerUse  Float?
+  monthlyRate  Float?
+  createdAt    DateTime       @default(now()) @db.Timestamp(6)
+  updatedAt    DateTime       @updatedAt @db.Timestamp(6)
+  activations  Activation[]
+  licenseKeys  LicenseKey[]
+  monthlyUsage MonthlyUsage[]
+  vendor       Vendor         @relation(fields: [vendorId], references: [id])
+
+  @@index([vendorId, createdAt, id])
 }
 
 model MonthlyUsage {
@@ -112,22 +194,4 @@ model MonthlyUsage {
 
   @@unique([vendorId, softwareId, month])
   @@index([vendorId, softwareId, month])
-}
-
-enum PricingModel {
-  FLAT
-  PER_USE
-  MONTHLY_SUBSCRIPTION
-}
-
-enum LicenseStatus {
-  AVAILABLE
-  ACTIVATED
-  CANCELED
-}
-
-enum EmployeeRole {
-  EMPLOYEE
-  ADMIN
-  VENDOR
 }

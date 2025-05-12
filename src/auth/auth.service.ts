@@ -36,7 +36,7 @@ export class AuthService {
   private mapVendorToUserProfileResponse(vendor: Vendor): UserProfileResponse {
     return {
       id: vendor.id,
-      email: vendor.contactEmail, // Assuming contactEmail is the primary email for a vendor user
+      email: (vendor.contactEmail ?? '') as string,
       name: vendor.name,
       role: 'VENDOR', // Explicitly set role
       supabaseUserId: vendor.supabaseUserId,
@@ -158,7 +158,7 @@ export class AuthService {
 
         const newVendor = await this.prisma.vendor.create({
           data: {
-            contactEmail: email,
+            // contactEmail: email,
             supabaseUserId,
             name: vendorName,
           },
@@ -181,9 +181,9 @@ export class AuthService {
               this.logger.log(
                 `Attempting to link OAuth user ${supabaseUserId} to existing vendor with email ${email}`,
               );
-              const existingVendorByEmail = await this.prisma.vendor.findUnique(
-                { where: { contactEmail: email } },
-              );
+              const existingVendorByEmail = await this.prisma.vendor.findFirst({
+                where: { contactEmail: email },
+              });
 
               if (
                 existingVendorByEmail &&

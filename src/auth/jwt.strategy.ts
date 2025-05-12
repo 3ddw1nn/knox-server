@@ -75,8 +75,8 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     this.logger.log('JwtStrategy initialized successfully.');
   }
 
-  async validate(payload: JwtPayload): Promise<AuthenticatedUser> {
-    this.logger.debug('JWT Payload received for validation:', payload);
+  validate(payload: JwtPayload): AuthenticatedUser {
+    // this.logger.debug('JWT Payload received for validation:', payload);
 
     if (payload.aud && payload.aud !== 'authenticated') {
       this.logger.warn(
@@ -96,7 +96,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
       originalPayload: payload,
     };
 
-    this.logger.debug('Authenticated user object prepared:', authenticatedUser);
+    // this.logger.debug('Authenticated user object prepared:', authenticatedUser);
     return authenticatedUser;
   }
 }

@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module';
 // import { VendorsModule } from './vendors/vendors.module';
 // import { SoftwareModule } from './software/software.module';
 // import { LicensesModule } from './licenses/licenses.module';
+import { VendorModule } from './vendor/vendor.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { UsersModule } from './users/users.module';
     PrismaModule,
     AuthModule,
     UsersModule,
+    VendorModule,
     // VendorsModule,
     // SoftwareModule,
     // LicensesModule,
